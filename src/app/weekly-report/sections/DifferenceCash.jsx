@@ -101,7 +101,7 @@ export default function DifferenceCash({ data }) {
         }}
       >
         <TableRow>
-          <TableTitleCell title="項次" rowSpan={3} textAlign="center" minWidth="50px" />
+          <TableTitleCell title="項次" rowSpan={3} textAlign="center" width="30px" />
           <TableTitleCell title="工程款期間" sx={{ minWidth: '80px' }} rowSpan={2} />
           <TableTitleCell
             title="計價項目"

@@ -31,8 +31,9 @@ import ControversialCases from './sections/ControversialCases'
 export default function WeeklyReport() {
   const { selectedDate, handleDateChange, setDefaultDate } = useWeeklyReportDate()
   const ordNo = useGetOrdNo()
+  console.log(ordNo)
   const { data, loading, error } = useDB(ordNo, selectedDate)
-
+  console.log(data)
   useEffect(() => {
     if (data.wkWeeklyDate.length > 0 && !selectedDate) {
       setDefaultDate(data.wkWeeklyDate)

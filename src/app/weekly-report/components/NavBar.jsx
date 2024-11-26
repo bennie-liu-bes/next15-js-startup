@@ -65,7 +65,7 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
       onMouseLeave={() => setShowButtons(false)}
     >
       <Toolbar variant="dense" sx={{ display: 'flex', alignItems: 'center' }}>
-        <Image src="/bes_logo.png" alt="logo" height={40} width={40} />
+        <Image src="/logo.png" alt="logo" height={40} width={40} />
         <Stack
           direction="row"
           spacing={1}
