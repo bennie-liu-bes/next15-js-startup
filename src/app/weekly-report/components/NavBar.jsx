@@ -9,6 +9,7 @@ import AppBar from '@mui/material/AppBar'
 import Tooltip from '@mui/material/Tooltip'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
+import DownloadIcon from '@mui/icons-material/Download'
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp'
 
 import DateDropDown from './DateDropDown'
@@ -181,6 +182,11 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
             handleScroll: handleScrollToComControl,
             tooltip: '完工階段管控 - 小包合約結算辦理情形',
           })}
+          <Tooltip title={'畫面下載'} placement="top" arrow followCursor>
+            <Button variant="text" size="small" color="default" sx={{ py: 0 }}>
+              {<DownloadIcon />}
+            </Button>
+          </Tooltip>
         </Stack>
       </Toolbar>
     )
