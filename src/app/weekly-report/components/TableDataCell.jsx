@@ -1,6 +1,6 @@
 import { SIZE, COLOR, BORDER_STYLE } from '@/config-global.js'
 
-import { TableCell, Typography } from '@mui/material'
+import { Tooltip, TableCell, Typography } from '@mui/material'
 
 export default function TableDataCell({
   value,
@@ -9,22 +9,38 @@ export default function TableDataCell({
   textAlign = 'left',
   borderRight = true,
   isChanged,
+  tooltip,
   sx,
 }) {
-  return (
-    <TableCell
-      size="small"
-      colSpan={colSpan}
-      rowSpan={rowSpan}
-      sx={{
-        whiteSpace: 'pre-wrap',
-        textAlign: textAlign,
-        borderRight: borderRight && BORDER_STYLE,
-        bgcolor: isChanged === 'true' && COLOR.CHANGE,
-        ...sx,
-      }}
+  return tooltip ? (
+    <Tooltip
+      title={<Typography variant="body1">{tooltip}</Typography>}
+      placement="top"
+      arrow
+      followCursor
     >
-      <Typography variant={SIZE.TEXT}>{value}</Typography>
-    </TableCell>
+      {tableCell()}
+    </Tooltip>
+  ) : (
+    tableCell()
   )
+
+  function tableCell() {
+    return (
+      <TableCell
+        size="small"
+        colSpan={colSpan}
+        rowSpan={rowSpan}
+        sx={{
+          whiteSpace: 'pre-wrap',
+          textAlign: textAlign,
+          borderRight: borderRight && BORDER_STYLE,
+          bgcolor: isChanged === 'true' && COLOR.CHANGE,
+          ...sx,
+        }}
+      >
+        <Typography variant={SIZE.TEXT}>{value}</Typography>
+      </TableCell>
+    )
+  }
 }

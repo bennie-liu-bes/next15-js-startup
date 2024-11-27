@@ -35,6 +35,7 @@ export function useDB(ordNo, selectedDate) {
       }
 
       setLoading(true)
+      await new Promise(resolve => setTimeout(resolve, 3000))
       setError(null)
 
       try {

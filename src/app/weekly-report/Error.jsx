@@ -1,11 +1,11 @@
 import { ICCC_URL } from '@/config-global'
 
-import Alert from '@mui/material/Alert'
-import Button from '@mui/material/Button'
-export default function Home() {
+import { Alert, Button } from '@mui/material'
+
+export default function Error({ message }) {
   return (
     <>
-      <Alert severity="error">{'頁面不存在'}</Alert>
+      <Alert severity="error">{message}</Alert>
       <Button
         href={ICCC_URL}
         variant="contained"

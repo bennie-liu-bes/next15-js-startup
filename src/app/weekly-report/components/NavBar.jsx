@@ -1,7 +1,9 @@
 'use client'
 
+import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
+import { ICCC_URL } from '@/config-global'
 
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
@@ -9,7 +11,6 @@ import AppBar from '@mui/material/AppBar'
 import Tooltip from '@mui/material/Tooltip'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
-import DownloadIcon from '@mui/icons-material/Download'
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp'
 
 import DateDropDown from './DateDropDown'
@@ -30,7 +31,6 @@ const scrollToSection = sectionId => {
 
 export default function NavBar({ data, selectedDate, handleDateChange }) {
   if (data.wkMain.length === 0) return null
-
   const handleScrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -66,7 +66,9 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
       onMouseLeave={() => setShowButtons(false)}
     >
       <Toolbar variant="dense" sx={{ display: 'flex', alignItems: 'center' }}>
-        <Image src="/logo.png" alt="logo" height={40} width={40} />
+        <Link href={ICCC_URL}>
+          <Image src="/logo.png" alt="logo" height={40} width={40} />
+        </Link>
         <Stack
           direction="row"
           spacing={1}
@@ -182,11 +184,6 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
             handleScroll: handleScrollToComControl,
             tooltip: '完工階段管控 - 小包合約結算辦理情形',
           })}
-          <Tooltip title={'畫面不下載'} placement="top" arrow followCursor>
-            <Button variant="text" size="small" color="default" sx={{ py: 0 }}>
-              {<DownloadIcon />}
-            </Button>
-          </Tooltip>
         </Stack>
       </Toolbar>
     )
@@ -194,7 +191,7 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
 
   function navButton({ value, handleScroll, tooltip }) {
     return (
-      <Tooltip title={<h1>{tooltip}</h1>} placement="top" arrow followCursor>
+      <Tooltip title={<h1>{tooltip}</h1>} placement="top" arrow>
         <Button
           variant="text"
           size="small"

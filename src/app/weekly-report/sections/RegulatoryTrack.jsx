@@ -38,6 +38,13 @@ export default function RegulatoryTrack({ data }) {
               <TableDataCell value={item.CONTRACK_LEVEL} />
               <TableDataCell
                 value={toTWDate(item.RESERVE_DATE)}
+                tooltip={
+                  item.CHECK_1 === 'TRUE'
+                    ? '❗未提送警示❗已超過管制提送日期'
+                    : item.CHECK_2 === 'TRUE'
+                      ? `❗提送警示❗離管制提送日期尚有${Math.floor((new Date(item.RESERVE_DATE) - new Date()) / (1000 * 60 * 60 * 24))}天`
+                      : undefined
+                }
                 sx={{
                   bgcolor:
                     item.CHECK_1 === 'TRUE'
@@ -50,12 +57,14 @@ export default function RegulatoryTrack({ data }) {
               />
               <TableDataCell
                 value={toTWDate2(item.ACTUAL_DATE_COMB)}
+                tooltip={item.CHECK_3 === 'TRUE' ? '❗實際提送日期晚於管制提送日期' : undefined}
                 sx={{
                   color: item.CHECK_3 === 'TRUE' && WARN_COLOR1,
                 }}
               />
               <TableDataCell
                 value={toTWDate(item.TERM_DATE)}
+                tooltip={item.CHECK_41 === 'TRUE' && '❗未決標警示❗已超過預定廠商確認日期'}
                 sx={{
                   bgcolor: item.CHECK_41 === 'TRUE' && WARN_COLOR1,
                   color: item.CHECK_41 === 'TRUE' && '#FFF',
@@ -64,6 +73,7 @@ export default function RegulatoryTrack({ data }) {
               <TableDataCell
                 value={toTWDate(item.CONSTRUCTION_DATE)}
                 borderRight={false}
+                tooltip={item.CHECK_42 === 'TRUE' && '❗未決標警示❗已超過預定開工日期'}
                 sx={{
                   bgcolor: item.CHECK_42 === 'TRUE' && WARN_COLOR1,
                   color: item.CHECK_42 === 'TRUE' && '#FFF',

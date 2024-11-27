@@ -2,12 +2,13 @@
 
 import { useEffect } from 'react'
 
-import { Box, Alert, Stack, Container } from '@mui/material'
+import { Stack, Container } from '@mui/material'
 
 import { useDB } from '@/hooks/useDB'
 import { useGetOrdNo } from '@/hooks/useGetOrdNo'
 import { useWeeklyReportDate } from '@/hooks/useWeeklyReportDate'
 
+import Error from './Error'
 import Main from './sections/Main'
 import File from './sections/File'
 import Todo from './sections/Todo'
@@ -31,9 +32,8 @@ import ControversialCases from './sections/ControversialCases'
 export default function WeeklyReport() {
   const { selectedDate, handleDateChange, setDefaultDate } = useWeeklyReportDate()
   const ordNo = useGetOrdNo()
-  console.log(ordNo)
   const { data, loading, error } = useDB(ordNo, selectedDate)
-  console.log(data)
+
   useEffect(() => {
     if (data.wkWeeklyDate.length > 0 && !selectedDate) {
       setDefaultDate(data.wkWeeklyDate)
@@ -45,11 +45,15 @@ export default function WeeklyReport() {
   }
 
   if (error) {
-    return <Alert severity="error">{error}</Alert>
+    return <Error message={error} />
+  }
+
+  if (data.message) {
+    return <Error message={data.message} />
   }
 
   return (
-    <Box>
+    <>
       <NavBar data={data} selectedDate={selectedDate} handleDateChange={handleDateChange} />
       <Container sx={{ my: 2 }}>
         <Stack spacing={2}>
@@ -72,6 +76,6 @@ export default function WeeklyReport() {
           <Footer />
         </Stack>
       </Container>
-    </Box>
+    </>
   )
 }
