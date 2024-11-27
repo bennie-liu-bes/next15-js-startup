@@ -81,7 +81,7 @@ export default function Milestone({ data }) {
     return (
       <TableHead sx={{ bgcolor: COLOR.HEADER }}>
         <TableRow>
-          <TableTitleCell title="項次" minWidth="50px" rowSpan={3} textAlign="center" />
+          <TableTitleCell title="項次" width="50px" rowSpan={3} textAlign="center" />
           <TableTitleCell title="里程碑序號" minWidth="140px" />
           <TableTitleCell title="原契約完工日" minWidth="160px" />
           <TableTitleCell title="展延後完工日" minWidth="160px" />
