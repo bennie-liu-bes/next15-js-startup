@@ -61,7 +61,7 @@ export default function TodoB({ data }) {
       <TableHead sx={{ bgcolor: COLOR.HEADER }}>
         <TableRow>
           <TableTitleCell title="項次" width="50px" rowSpan={2} />
-          <TableTitleCell title="編號" width="80px" />
+          <TableTitleCell title="編號" width="80px" minWidth="80px" />
           <TableTitleCell title="項目" minWidth="100px" />
           <TableTitleCell title="預訂提送時間" minWidth="180px" />
           <TableTitleCell title="主辦單位(人員)" minWidth="180px" />

@@ -57,11 +57,11 @@ export default function ComControl({ data }) {
     return (
       <TableHead sx={{ bgcolor: COLOR.HEADER }}>
         <TableRow>
-          <TableTitleCell title="應辦理小包結算數量(件)" sx={{ minWidth: '260px' }} />
-          <TableTitleCell title="成控處已核備(件)" sx={{ minWidth: '200px' }} />
-          <TableTitleCell title="成控處審核中(件)" sx={{ minWidth: '200px' }} />
-          <TableTitleCell title="工務所結算中(件)" sx={{ minWidth: '200px' }} />
-          <TableTitleCell title="備註" sx={{ minWidth: '200px' }} borderRight={false} />
+          <TableTitleCell title="應辦理小包結算數量(件)" minWidth="260px" />
+          <TableTitleCell title="成控處已核備(件)" minWidth="200px" />
+          <TableTitleCell title="成控處審核中(件)" minWidth="200px" />
+          <TableTitleCell title="工務所結算中(件)" minWidth="200px" />
+          <TableTitleCell title="備註" minWidth="200px" borderRight={false} />
         </TableRow>
       </TableHead>
     )

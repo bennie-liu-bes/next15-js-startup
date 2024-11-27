@@ -87,7 +87,7 @@ export default function Weekly({ data }) {
     return (
       <TableHead sx={{ bgcolor: COLOR.HEADER }}>
         <TableRow>
-          <TableTitleCell title="日期" sx={{ minWidth: '120px' }} />
+          <TableTitleCell title="日期" minWidth="120px" />
           <TableTitleCell
             title={toTWDate(data.WORK_DATE1)}
             sx={{ minWidth: '160px' }}

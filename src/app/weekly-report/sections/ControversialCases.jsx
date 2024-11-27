@@ -61,14 +61,10 @@ export default function ControversialCases({ data }) {
       <TableHead sx={{ bgcolor: COLOR.HEADER }}>
         <TableRow>
           <TableTitleCell title="項次" width="50px" rowSpan={3} textAlign="center" />
-          <TableTitleCell title="狀態" width="120px" />
+          <TableTitleCell title="狀態" minWidth="120px" />
           <TableTitleCell title="爭議項目(包含業主、廠商及其他關係人)" minWidth="200px" />
           <TableTitleCell title="原由及說明(包含人事時地物)" minWidth="200px" />
-          <TableTitleCell
-            title="爭議標的(工期或金額)"
-            sx={{ minWidth: '200px' }}
-            borderRight={false}
-          />
+          <TableTitleCell title="爭議標的(工期或金額)" minWidth="200px" borderRight={false} />
         </TableRow>
         <TableRow>
           <TableTitleCell title="辦況說明" colSpan={4} borderRight={false} />

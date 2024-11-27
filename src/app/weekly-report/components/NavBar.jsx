@@ -67,24 +67,43 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
     >
       <Toolbar variant="dense" sx={{ display: 'flex', alignItems: 'center' }}>
         <Link href={ICCC_URL}>
-          <Image src="/logo.png" alt="logo" height={40} width={40} />
+          <Image
+            src="/logo.png"
+            alt="logo"
+            height={40}
+            width={40}
+            style={{ minWidth: 40, minHeight: 40 }}
+          />
         </Link>
         <Stack
           direction="row"
           spacing={1}
           sx={{
             flexGrow: 1,
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
             alignItems: 'end',
             display: 'flex',
             ml: 2,
+            overflow: 'hidden',
           }}
         >
-          <Typography variant="h5" fontWeight="bold" color="inherit" noWrap sx={{ lineHeight: 1 }}>
+          <Typography
+            variant="h5"
+            fontWeight="bold"
+            color="inherit"
+            sx={{ lineHeight: 1, whiteSpace: 'nowrap' }}
+          >
             {SITE_CNAME}
           </Typography>
-          <Typography variant="h6" color="inherit" noWrap sx={{ lineHeight: 1 }}>
+          <Typography
+            variant="h6"
+            color="inherit"
+            sx={{
+              lineHeight: 1,
+              whiteSpace: 'nowrap',
+              textOverflow: 'ellipsis',
+              overflow: 'hidden',
+            }}
+          >
             {ORD_CH}
           </Typography>
         </Stack>

@@ -86,7 +86,7 @@ export default function Milestone({ data }) {
           <TableTitleCell title="原契約完工日" minWidth="160px" />
           <TableTitleCell title="展延後完工日" minWidth="160px" />
           <TableTitleCell title="實際完工日" minWidth="160px" />
-          <TableTitleCell title="完成交付項目" />
+          <TableTitleCell title="完成交付項目" minWidth="200px" />
           <TableTitleCell title="預估逾期罰款" minWidth="160px" borderRight={false} />
         </TableRow>
         <TableRow>

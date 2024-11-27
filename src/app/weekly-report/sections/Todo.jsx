@@ -61,7 +61,7 @@ export default function Todo({ data }) {
       <TableHead sx={{ bgcolor: COLOR.HEADER }}>
         <TableRow>
           <TableTitleCell title="項次" width="50px" rowSpan={3} textAlign="center" />
-          <TableTitleCell title="編號" minWidth="100px" />
+          <TableTitleCell title="編號" width="200px" minWidth="200px" />
           <TableTitleCell title="事由" minWidth="100px" borderRight={false} />
         </TableRow>
         <TableRow>
