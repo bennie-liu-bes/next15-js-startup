@@ -124,7 +124,6 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
       <Toolbar
         variant="dense"
         sx={{
-          height: '35px',
           minHeight: '35px',
           // 使用 transition 讓顯示/隱藏有動畫效果
           transition: 'opacity 0.3s ease-in-out',
@@ -133,7 +132,18 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
           pointerEvents: showButtons ? 'auto' : 'none',
         }}
       >
-        <Stack direction="row" spacing={1} sx={{ width: '100%', justifyContent: 'space-evenly' }}>
+        <Stack
+          direction="row"
+          spacing={1}
+          sx={{
+            width: '100%',
+            justifyContent: 'space-evenly',
+            overflow: 'hidden',
+            flexWrap: 'wrap', // 允許按鈕斷行
+            gap: '4px', // 設定按鈕之間的間距
+            mb: 1,
+          }}
+        >
           <Tooltip title={'回到頂端'} placement="top" arrow followCursor>
             <Button
               variant="text"
