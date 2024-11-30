@@ -8,6 +8,7 @@ import { ICCC_URL } from '@/config-global'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
 import AppBar from '@mui/material/AppBar'
+import { IconButton } from '@mui/material'
 import Tooltip from '@mui/material/Tooltip'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
@@ -132,6 +133,16 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
           pointerEvents: showButtons ? 'auto' : 'none',
         }}
       >
+        <Tooltip
+          title={<Typography variant="body1">回到頂端</Typography>}
+          placement="top"
+          arrow
+          followCursor
+        >
+          <IconButton size="medium" color="default" onClick={handleScrollToTop} sx={{ mb: 1 }}>
+            {<KeyboardDoubleArrowUpIcon />}
+          </IconButton>
+        </Tooltip>
         <Stack
           direction="row"
           spacing={1}
@@ -144,17 +155,6 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
             mb: 1,
           }}
         >
-          <Tooltip title={'回到頂端'} placement="top" arrow followCursor>
-            <Button
-              variant="text"
-              size="small"
-              color="default"
-              onClick={handleScrollToTop}
-              sx={{ py: 0 }}
-            >
-              {<KeyboardDoubleArrowUpIcon />}
-            </Button>
-          </Tooltip>
           {navButton({
             value: '壹',
             handleScroll: handleScrollToWeekly,
@@ -220,13 +220,13 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
 
   function navButton({ value, handleScroll, tooltip }) {
     return (
-      <Tooltip title={<h1>{tooltip}</h1>} placement="top" arrow>
+      <Tooltip title={<Typography variant="body1">{tooltip}</Typography>} placement="top" arrow>
         <Button
           variant="text"
-          size="small"
+          size="medium"
           color="default"
           onClick={handleScroll}
-          sx={{ border: '1px solid #E0E0E0', py: 0 }}
+          sx={{ border: '1px solid #E0E0E0', py: 0.5 }}
         >
           {value}
         </Button>

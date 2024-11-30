@@ -5,7 +5,9 @@ export default function TableFooter({ wkDate, colSpan }) {
   return (
     <TableRow>
       <TableCell colSpan={colSpan} sx={{ textAlign: 'right' }}>
-        <Typography variant="body1">📅 週報日期：{toTWDate(wkDate)}</Typography>
+        <Typography variant="body1" sx={{ pr: !wkDate || wkDate === '' ? 9 : 0 }}>
+          📅 週報日期：{wkDate && toTWDate(wkDate)}
+        </Typography>
       </TableCell>
     </TableRow>
   )

@@ -1,3 +1,5 @@
+'use client'
+
 import { ICCC_URL } from '@/config-global'
 
 import Alert from '@mui/material/Alert'

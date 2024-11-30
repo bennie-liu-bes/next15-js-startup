@@ -48,8 +48,10 @@ export default function WeeklyReport() {
     return <Error message={error} />
   }
 
-  if (data.message) {
+  if (data.message === '沒有找到相關資料') {
     return <Error message={data.message} />
+  } else if (!data.message === '初始化空資料' || !data || !data.wkMain[0]) {
+    return
   }
 
   return (

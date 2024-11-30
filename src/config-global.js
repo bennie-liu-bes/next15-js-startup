@@ -20,6 +20,6 @@ export const SIZE = {
 }
 
 export const BORDER_STYLE = '1px solid #E0E0E0'
-export const BORDER_RADIUS = 4
+export const BORDER_RADIUS = 2
 export const OFFSET = '-40px'
 export const ICCC_URL = 'http://spf.bes.com.tw:8080/webroot/decision#?activeTab=dec-tabs-homepage'

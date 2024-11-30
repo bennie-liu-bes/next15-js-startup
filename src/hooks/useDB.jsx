@@ -7,6 +7,7 @@ export function useDB(ordNo, selectedDate) {
 
   // 初始化空資料結構
   const emptyData = {
+    message: '初始化空資料',
     wkWeeklyDate: [],
     wkMain: [],
     wkMainHelp: [],

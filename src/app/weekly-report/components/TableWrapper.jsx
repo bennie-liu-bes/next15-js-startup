@@ -6,7 +6,10 @@ import TableTitle from './TableTitle'
 
 export default function TableWrapper({ title, colSpan, children }) {
   return (
-    <TableContainer component={Paper} sx={{ borderRadius: BORDER_RADIUS }}>
+    <TableContainer
+      component={Paper}
+      sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50' }}
+    >
       <Table sx={{ minWidth: 'md' }} size="small" aria-label="customized table">
         <TableTitle title={title} colSpan={colSpan} />
         {children}
