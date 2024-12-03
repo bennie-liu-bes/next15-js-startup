@@ -1,7 +1,10 @@
 import { toTWDate } from '@/utils/fm'
 
 import { TableRow, TableCell, Typography } from '@mui/material'
-export default function TableFooter({ wkDate, colSpan }) {
+export default function TableFooter({ wkDate, colSpan, show = false }) {
+  if (!show) {
+    return null
+  }
   return (
     <TableRow>
       <TableCell colSpan={colSpan} sx={{ textAlign: 'right' }}>

@@ -13,36 +13,37 @@ import TableBodyNodata from '../components/TableBodyNodata'
 export default function RegulatoryTrack({ data }) {
   const WARN_COLOR1 = '#AD2D37'
   const WARN_COLOR2 = '#FB6F92'
+  const fontSize = '90%'
   return (
     <>
       <div
         id="regulatory-track-section"
         style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }}
       />
-      <TableWrapper title="✨ 柒-3、未來三個月採發提送管制追蹤" colSpan={8}>
+      <TableWrapper title="✨ 柒-3、未來三個月採發提送管制追蹤" colSpan={10}>
         {tableHead()}
-        {data.length > 0 ? tableBody() : <TableBodyNodata colSpan={8} />}
+        {data.length > 0 ? tableBody() : <TableBodyNodata colSpan={10} />}
       </TableWrapper>
     </>
   )
 
   function tableBody() {
     return (
-      <TableBody>
+      <TableBody sx={{ '& .MuiTypography-root': { fontSize } }}>
         {data.map((item, index) => (
           <Fragment key={index}>
-            <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR, height: '120px' }}>
-              <TableDataCell value={index + 1} rowSpan={3} textAlign="center" />
+            <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }} height="60px">
+              <TableDataCell value={index + 1} textAlign="center" />
               <TableDataCell value={item.CONTRACK_NO} />
               <TableDataCell value={item.CONTRACK_NANE} />
               <TableDataCell value={item.CONTRACK_LEVEL} />
               <TableDataCell
-                value={toTWDate(item.RESERVE_DATE)}
+                value={item.RESERVE_DATE && toTWDate(item.RESERVE_DATE)}
                 tooltip={
                   item.CHECK_1 === 'TRUE'
-                    ? '❗未提送警示❗已超過管制提送日期'
+                    ? '⚠️未提送警示\n已超過管制提送日期'
                     : item.CHECK_2 === 'TRUE'
-                      ? `❗提送警示❗離管制提送日期尚有${Math.floor((new Date(item.RESERVE_DATE) - new Date()) / (1000 * 60 * 60 * 24))}天`
+                      ? `⚠️提送警示\n離管制提送日期尚有${Math.floor((new Date(item.RESERVE_DATE) - new Date()) / (1000 * 60 * 60 * 24))}天`
                       : undefined
                 }
                 sx={{
@@ -56,39 +57,37 @@ export default function RegulatoryTrack({ data }) {
                 }}
               />
               <TableDataCell
-                value={toTWDate2(item.ACTUAL_DATE_COMB)}
+                value={item.ACTUAL_DATE_COMB && toTWDate2(item.ACTUAL_DATE_COMB)}
                 tooltip={item.CHECK_3 === 'TRUE' ? '❗實際提送日期晚於管制提送日期' : undefined}
                 sx={{
                   color: item.CHECK_3 === 'TRUE' && WARN_COLOR1,
                 }}
               />
               <TableDataCell
-                value={toTWDate(item.TERM_DATE)}
-                tooltip={item.CHECK_41 === 'TRUE' && '❗未決標警示❗已超過預定廠商確認日期'}
+                value={item.TERM_DATE && toTWDate(item.TERM_DATE)}
+                tooltip={item.CHECK_41 === 'TRUE' && '⚠️未決標警示\n已超過預定廠商確認日期'}
                 sx={{
                   bgcolor: item.CHECK_41 === 'TRUE' && WARN_COLOR1,
                   color: item.CHECK_41 === 'TRUE' && '#FFF',
                 }}
               />
               <TableDataCell
-                value={toTWDate(item.CONSTRUCTION_DATE)}
-                borderRight={false}
-                tooltip={item.CHECK_42 === 'TRUE' && '❗未決標警示❗已超過預定開工日期'}
+                value={item.CONSTRUCTION_DATE && toTWDate(item.CONSTRUCTION_DATE)}
+                tooltip={item.CHECK_42 === 'TRUE' && '⚠️未決標警示\n已超過預定開工日期'}
                 sx={{
                   bgcolor: item.CHECK_42 === 'TRUE' && WARN_COLOR1,
                   color: item.CHECK_42 === 'TRUE' && '#FFF',
                 }}
               />
-            </TableRow>
-            <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
               <TableDataCell
-                colSpan={9}
-                value={`📢 辦理情形：\n${item.REMARK}`}
-                borderRight={false}
+                value={item.REMARK && `📢 辦理情形：\n${item.REMARK}`}
+                sx={{ verticalAlign: 'top' }}
               />
-            </TableRow>
-            <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
-              <TableDataCell colSpan={9} value={`📄 備註：\n${item.REMARKR}`} borderRight={false} />
+              <TableDataCell
+                value={item.REMARKR && `📄 備註：\n${item.REMARKR}`}
+                borderRight={false}
+                sx={{ verticalAlign: 'top' }}
+              />
             </TableRow>
           </Fragment>
         ))}
@@ -99,22 +98,18 @@ export default function RegulatoryTrack({ data }) {
 
   function tableHead() {
     return (
-      <TableHead sx={{ bgcolor: COLOR.HEADER }}>
+      <TableHead sx={{ bgcolor: COLOR.HEADER, '& .MuiTypography-root': { fontSize } }}>
         <TableRow>
-          <TableTitleCell title="項次" width="50px" rowSpan={3} textAlign="center" />
-          <TableTitleCell title="合約編號" minWidth="80px" />
-          <TableTitleCell title="案件名稱" minWidth="120px" />
-          <TableTitleCell title="等級" width="50px" />
-          <TableTitleCell title="管制提送日期" minWidth="160px" />
-          <TableTitleCell title="實際提送日期(歷次修正)" minWidth="160px" />
-          <TableTitleCell title="預定廠商確認日期" minWidth="160px" />
-          <TableTitleCell title="預定開工日期" minWidth="160px" borderRight={false} />
-        </TableRow>
-        <TableRow>
-          <TableTitleCell title="辦理情形" colSpan={7} borderRight={false} />
-        </TableRow>
-        <TableRow>
-          <TableTitleCell title="備註" colSpan={7} borderRight={false} />
+          <TableTitleCell title="項次" width="50px" textAlign="center" />
+          <TableTitleCell title="合約編號" minWidth="110px" />
+          <TableTitleCell title="案件名稱" minWidth="160px" />
+          <TableTitleCell title="等級" width="60px" />
+          <TableTitleCell title="管制提送日期" minWidth="110px" />
+          <TableTitleCell title="實際提送日期(歷次修正)" minWidth="110px" />
+          <TableTitleCell title="預定廠商確認日期" minWidth="110px" />
+          <TableTitleCell title="預定開工日期" minWidth="110px" />
+          <TableTitleCell title="辦理情形" minWidth="140px" />
+          <TableTitleCell title="備註" borderRight={false} />
         </TableRow>
       </TableHead>
     )

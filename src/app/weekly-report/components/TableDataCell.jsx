@@ -14,7 +14,11 @@ export default function TableDataCell({
 }) {
   return tooltip ? (
     <Tooltip
-      title={<Typography variant="body1">{tooltip}</Typography>}
+      title={
+        <Typography variant="body1" sx={{ whiteSpace: 'pre-wrap' }}>
+          {tooltip}
+        </Typography>
+      }
       placement="top"
       arrow
       followCursor
