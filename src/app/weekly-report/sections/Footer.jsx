@@ -15,7 +15,7 @@ export default function Footer() {
   return (
     <Box sx={{ width: '100%', textAlign: 'center' }}>
       <Typography variant="body2" color="text.secondary">
-        中華工程 影音指揮中心開發
+        中華工程 影音即時指揮中心開發
       </Typography>
       <Chip
         label="安裝Chrome網頁長截圖擴充功能"
