@@ -18,6 +18,7 @@ export default function Main({ data }) {
       </TableWrapper>
     </Box>
   )
+
   function tableBody() {
     return (
       <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}>

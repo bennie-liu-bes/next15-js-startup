@@ -59,7 +59,9 @@ export default function WeeklyReport() {
       <NavBar data={data} selectedDate={selectedDate} handleDateChange={handleDateChange} />
       <Box sx={{ my: 2, mx: 4 }}>
         <Stack spacing={2}>
-          <Main data={data.wkMain[0]} />
+          <Box sx={{ mb: 2 }}>
+            <Main data={data.wkMain[0]} />
+          </Box>
           <MainHelp data={data.wkMainHelp} />
           <Weekly data={data.wkWeekly[0]} />
           <Monthly data={data.wkMonthly[0]} />
