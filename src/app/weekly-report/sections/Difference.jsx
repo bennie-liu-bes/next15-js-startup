@@ -51,7 +51,7 @@ export default function Difference({ data }) {
                 <Typography variant={SIZE.TEXT}>累計收入：</Typography>
                 <Typography variant={SIZE.TEXT}>➖ 累計支出：</Typography>
                 <Divider color="secondary" sx={{ borderBottomWidth: 2 }} />
-                <Typography variant={SIZE.TEXT}>🟰 現金差異：</Typography>
+                <Typography variant={SIZE.TEXT}>🟰 收支差異：</Typography>
               </Stack>
               <Stack direction="column" spacing={0} sx={{ textAlign: 'right' }}>
                 <Typography variant={SIZE.TEXT}>{fm(data.CASH_IN)}</Typography>
