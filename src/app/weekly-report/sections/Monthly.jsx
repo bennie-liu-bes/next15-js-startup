@@ -1,4 +1,4 @@
-import { fm2, toTWDate } from '@/utils/fm'
+import { fm2, fmNoUnit, toTWDate } from '@/utils/fm'
 import { SIZE, COLOR, OFFSET } from '@/config-global'
 
 import { Stack, TableRow, TableHead, TableBody, TableCell, Typography } from '@mui/material'
@@ -79,7 +79,7 @@ export default function Monthly({ data }) {
               <Typography variant={SIZE.TITLE}>📢 差異說明：</Typography>
               <Typography variant={SIZE.TEXT}>
                 🎯 計價進度-營收進度差異說明(至{toTWDate(data.YEAR_MONTHEND)})&nbsp;=&nbsp;
-                {fm2(data.VAL_SUM - data.REV_SUM)}％
+                {fm2(data.VAL_SUM - data.REV_SUM)}％， 金額：{fmNoUnit(data.TOT_NOPAY)}仟元(未稅)
               </Typography>
               <Typography variant={SIZE.TEXT} sx={{ whiteSpace: 'pre-wrap', pl: 4 }}>
                 {data.REMARK1}
