@@ -9,6 +9,7 @@ import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
+import TableDataCellDiff from '../components/TableDataCellDiff'
 export default function Weekly({ data }) {
   const { fontSize } = useFontSize()
 
@@ -18,7 +19,7 @@ export default function Weekly({ data }) {
         id="weekly-section"
         style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }}
       />
-      <TableWrapper title="✨ 壹、週進度(單位：％)" colSpan={5}>
+      <TableWrapper title="壹、週進度(單位：％)" colSpan={5}>
         {data && tableHead()}
         {data ? tableBody() : <TableBodyNodata colSpan={5} />}
       </TableWrapper>
@@ -65,19 +66,21 @@ export default function Weekly({ data }) {
           />
         </TableRow>
         <TableRow>
-          <TableDataCell
+          <TableDataCellDiff
+            title="📢 差異說明："
+            originalText={data.REMARK_D_PRE}
+            modifiedText={data.REMARK_D}
             colSpan={5}
-            value={`📢 差異說明：\n${data.REMARK_D}`}
             isChanged={data.REMARK_D_CHANGE}
-            borderRight={false}
           />
         </TableRow>
         <TableRow>
-          <TableDataCell
+          <TableDataCellDiff
+            title="📄 備註："
+            originalText={data.REMARK_PRE}
+            modifiedText={data.REMARK}
             colSpan={5}
-            value={`📄 備註：\n${data.REMARK}`}
             isChanged={data.REMARK_CHANGE}
-            borderRight={false}
           />
         </TableRow>
         <TableFooter wkDate={data.CALENDAR_DATE} colSpan={5} />

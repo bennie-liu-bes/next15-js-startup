@@ -20,7 +20,7 @@ export default function Milestone({ data }) {
         id="milestone-section"
         style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }}
       />
-      <TableWrapper title="✨ 伍-1、里程碑" colSpan={7}>
+      <TableWrapper title="伍-1、里程碑" colSpan={7}>
         {tableHead()}
         {data.length > 0 ? tableBody() : <TableBodyNodata colSpan={7} />}
       </TableWrapper>

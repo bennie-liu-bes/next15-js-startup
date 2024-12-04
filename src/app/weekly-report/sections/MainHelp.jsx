@@ -9,11 +9,12 @@ import { useFontSize } from '../context/useFontSize'
 import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableBodyNodata from '../components/TableBodyNodata'
+import TableDataCellDiff from '../components/TableDataCellDiff'
 export default function MainHelp({ data }) {
   const { fontSize } = useFontSize()
 
   return (
-    <TableWrapper title="✨ 需公司援助事項" colSpan={2}>
+    <TableWrapper title="需公司援助事項" colSpan={2}>
       {data.length > 0 ? tableBody() : <TableBodyNodata colSpan={2} />}
     </TableWrapper>
   )
@@ -24,16 +25,19 @@ export default function MainHelp({ data }) {
         {data.map((item, index) => (
           <Fragment key={index}>
             <TableRow>
-              <TableDataCell
-                value={`📢 請求協助事項：\n${item.HELP_ITEM}`}
+              <TableDataCellDiff
+                title="📢 請求協助事項："
+                originalText={item.HELP_ITEM_PRE}
+                modifiedText={item.HELP_ITEM}
                 colSpan={2}
                 isChanged={item.HELP_ITEM_CHANGE}
-                borderRight={false}
               />
             </TableRow>
             <TableRow>
-              <TableDataCell
-                value={`📄 備註：\n${item.REMARK}`}
+              <TableDataCellDiff
+                title="📄 備註："
+                originalText={item.REMARK_PRE}
+                modifiedText={item.REMARK}
                 colSpan={2}
                 isChanged={item.REMARK_CHANGE}
                 borderRight={false}

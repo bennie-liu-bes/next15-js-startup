@@ -16,7 +16,7 @@ export default function Track({ data }) {
   return (
     <>
       <div id="track-section" style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }} />
-      <TableWrapper title="✨ 柒-2、追蹤管制事項" colSpan={6}>
+      <TableWrapper title="柒-2、追蹤管制事項" colSpan={6}>
         {tableHead()}
         {data.length > 0 ? tableBody() : <TableBodyNodata colSpan={6} />}
       </TableWrapper>

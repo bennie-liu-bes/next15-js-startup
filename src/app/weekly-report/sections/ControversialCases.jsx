@@ -19,7 +19,7 @@ export default function ControversialCases({ data }) {
         id="controversial-cases-section"
         style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }}
       />
-      <TableWrapper title="✨ 柒-4、爭議案件(含可能發生及衍生)" colSpan={7}>
+      <TableWrapper title="柒-4、爭議案件(含可能發生及衍生)" colSpan={7}>
         {tableHead()}
         {data.length > 0 ? tableBody() : <TableBodyNodata colSpan={7} />}
       </TableWrapper>

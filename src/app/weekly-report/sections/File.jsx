@@ -12,7 +12,7 @@ export default function File({ data }) {
   return (
     <>
       <div id="file-section" style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }} />
-      <TableWrapper title="✨ 伍-2、施工現況">
+      <TableWrapper title="伍-2、施工現況">
         {data.length > 0 ? tableBody() : <TableBodyNodata />}
       </TableWrapper>
     </>

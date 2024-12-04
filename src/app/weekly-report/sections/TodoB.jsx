@@ -9,6 +9,7 @@ import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
+import TableDataCellDiff from '../components/TableDataCellDiff'
 export default function TodoB({ data }) {
   const { fontSize } = useFontSize()
 
@@ -18,7 +19,7 @@ export default function TodoB({ data }) {
         id="todo-b-section"
         style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }}
       />
-      <TableWrapper title="✨ 柒-1(B)、應辦事項-契約規定應辦事項" colSpan={7}>
+      <TableWrapper title="柒-1(B)、應辦事項-契約規定應辦事項" colSpan={7}>
         {tableHead()}
         {data.length > 0 ? tableBody() : <TableBodyNodata colSpan={7} />}
       </TableWrapper>
@@ -44,11 +45,12 @@ export default function TodoB({ data }) {
               />
             </TableRow>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
-              <TableDataCell
-                colSpan={7}
-                value={`📢 目前辦理狀況：\n${item.STATUS}`}
+              <TableDataCellDiff
+                title="📢 目前辦理狀況："
+                originalText={item.STATUS_PRE}
+                modifiedText={item.STATUS}
                 isChanged={item.STATUS_CHANGE}
-                borderRight={false}
+                colSpan={7}
               />
             </TableRow>
           </Fragment>
@@ -72,14 +74,6 @@ export default function TodoB({ data }) {
           <TableTitleCell title="列管情形" minWidth="180px" />
           <TableTitleCell title="備註" minWidth="180px" borderRight={false} />
         </TableRow>
-        {/* <TableRow>
-          <TableTitleCell
-            title="目前辦理狀況"
-            sx={{ minWidth: '180px' }}
-            colSpan={7}
-            borderRight={false}
-          />
-        </TableRow> */}
       </TableHead>
     )
   }

@@ -15,7 +15,7 @@ export default function Todo({ data }) {
   return (
     <>
       <div id="todo-section" style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }} />
-      <TableWrapper title="✨ 柒-1(A)、應辦事項-困難解決需求" colSpan={3}>
+      <TableWrapper title="柒-1(A)、應辦事項-困難解決需求" colSpan={3}>
         {tableHead()}
         {data.length > 0 ? tableBody() : <TableBodyNodata colSpan={3} />}
       </TableWrapper>

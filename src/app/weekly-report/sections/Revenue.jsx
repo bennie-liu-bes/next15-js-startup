@@ -18,7 +18,7 @@ export default function Revenue({ data }) {
         id="revenue-section"
         style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }}
       />
-      <TableWrapper title="✨ 肆、營收管控(含物調)" colSpan={6}>
+      <TableWrapper title="肆、營收管控(含物調)" colSpan={6}>
         {data && tableHead()}
         {data ? tableBody() : <TableBodyNodata colSpan={6} />}
       </TableWrapper>

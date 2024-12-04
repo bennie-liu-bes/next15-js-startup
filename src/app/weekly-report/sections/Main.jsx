@@ -1,6 +1,6 @@
 import { fm, toTWDate } from '@/utils/fm'
 
-import { TableRow, TableBody } from '@mui/material'
+import { Box, TableRow, TableBody } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
 import { useFontSize } from '../context/useFontSize'
@@ -12,9 +12,11 @@ export default function Main({ data }) {
   const { fontSize } = useFontSize()
 
   return (
-    <TableWrapper title="✨ 基本資料" colSpan={2}>
-      {data ? tableBody() : <TableBodyNodata colSpan={2} />}
-    </TableWrapper>
+    <Box sx={{ mb: 2 }}>
+      <TableWrapper title={'基本資料'} colSpan={2}>
+        {data ? tableBody() : <TableBodyNodata colSpan={2} />}
+      </TableWrapper>
+    </Box>
   )
   function tableBody() {
     return (

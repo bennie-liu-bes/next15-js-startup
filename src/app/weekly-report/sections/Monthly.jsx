@@ -1,7 +1,8 @@
+import { diffWords } from 'diff'
 import { fm2, fmNoUnit, toTWDate } from '@/utils/fm'
 import { SIZE, COLOR, OFFSET } from '@/config-global'
 
-import { Stack, TableRow, TableHead, TableBody, TableCell, Typography } from '@mui/material'
+import { Box, TableRow, TableHead, TableBody, TableCell, Typography } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
 import { useFontSize } from '../context/useFontSize'
@@ -9,7 +10,7 @@ import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
-
+import TableDataCellDiff from '../components/TableDataCellDiff'
 export default function Monthly({ data }) {
   const { fontSize } = useFontSize()
 
@@ -19,7 +20,7 @@ export default function Monthly({ data }) {
         id="monthly-section"
         style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }}
       />
-      <TableWrapper title="✨ 貳、月進度差異值(單位：％，營收及計價進度計算不含物調款)" colSpan={4}>
+      <TableWrapper title="貳、月進度差異值(單位：％，營收及計價進度計算不含物調款)" colSpan={4}>
         {data && tableHead()}
         {data ? tableBody() : <TableBodyNodata colSpan={4} />}
       </TableWrapper>
@@ -74,33 +75,75 @@ export default function Monthly({ data }) {
           />
         </TableRow>
         <TableRow>
-          <TableCell colSpan={4} sx={{ bgcolor: data.REMARK1_CHANGE === 'true' && COLOR.CHANGE }}>
-            <Stack direction="column" spacing={0}>
-              <Typography variant={SIZE.TITLE}>📢 差異說明：</Typography>
-              <Typography variant={SIZE.TEXT}>
-                🎯 計價進度-營收進度差異說明(至{toTWDate(data.YEAR_MONTHEND)})&nbsp;=&nbsp;
-                {fm2(data.VAL_SUM - data.REV_SUM)}％， 金額：{fmNoUnit(data.TOT_NOPAY)}仟元(未稅)
-              </Typography>
-              <Typography variant={SIZE.TEXT} sx={{ whiteSpace: 'pre-wrap', pl: 4 }}>
+          <TableCell
+            colSpan={4}
+            sx={{ bgcolor: data.REMARK1_CHANGE === 'true' && COLOR.CHANGE, whiteSpace: 'pre-wrap' }}
+          >
+            <Typography variant={SIZE.TITLE}>📢 差異說明：</Typography>
+            <Typography variant={SIZE.TEXT}>
+              🎯 計價進度-營收進度差異說明(至{toTWDate(data.YEAR_MONTHEND)})&nbsp;=&nbsp;
+              {fm2(data.VAL_SUM - data.REV_SUM)}％， 金額：{fmNoUnit(data.TOT_NOPAY)}仟元(未稅)
+            </Typography>
+            <Box sx={{ pl: 4 }}>
+              {diffWords(data.REMARK1_PRE || '', data.REMARK1 || '').map((part, index) => (
+                <Typography
+                  key={index}
+                  component="span"
+                  variant={SIZE.TEXT}
+                  style={{
+                    color: part.added ? 'black' : part.removed ? 'red' : 'black',
+                    textDecoration: part.removed
+                      ? 'line-through'
+                      : part.added
+                        ? 'underline solid #ab47bc 3px'
+                        : 'none',
+                    display: part.removed && 'none',
+                  }}
+                >
+                  {part.value}
+                </Typography>
+              ))}
+            </Box>
+            {/* <Typography variant={SIZE.TEXT} sx={{ whiteSpace: 'pre-wrap', pl: 4 }}>
                 {data.REMARK1}
-              </Typography>
-              <Typography variant={SIZE.TEXT}>
-                🎯 日報進度-營收進度差異說明(至{toTWDate(data.YEAR_MONTHEND)})&nbsp;= &nbsp;
-                {fm2(data.ACT_SUM)}％&nbsp;-&nbsp;{fm2(data.REV_SUM)}％&nbsp;=&nbsp;
-                {fm2(data.ACT_SUM - data.REV_SUM)}％
-              </Typography>
-              <Typography variant={SIZE.TEXT} sx={{ whiteSpace: 'pre-wrap', pl: 4 }}>
-                {data.REMARK2}
-              </Typography>
-            </Stack>
+              </Typography> */}
+            <Typography variant={SIZE.TEXT}>
+              🎯 日報進度-營收進度差異說明(至{toTWDate(data.YEAR_MONTHEND)})&nbsp;= &nbsp;
+              {fm2(data.ACT_SUM)}％&nbsp;-&nbsp;{fm2(data.REV_SUM)}％&nbsp;=&nbsp;
+              {fm2(data.ACT_SUM - data.REV_SUM)}％
+            </Typography>
+            <Box sx={{ pl: 4 }}>
+              {diffWords(data.REMARK2_PRE || '', data.REMARK2 || '').map((part, index) => (
+                <Typography
+                  key={index}
+                  component="span"
+                  variant={SIZE.TEXT}
+                  style={{
+                    color: part.added ? 'black' : part.removed ? 'red' : 'black',
+                    textDecoration: part.removed
+                      ? 'line-through'
+                      : part.added
+                        ? 'underline solid #ab47bc 3px'
+                        : 'none',
+                    display: part.removed && 'none',
+                  }}
+                >
+                  {part.value}
+                </Typography>
+              ))}
+            </Box>
+            {/* <Typography variant={SIZE.TEXT} sx={{ whiteSpace: 'pre-wrap', pl: 4 }}>
+              {data.REMARK2}
+            </Typography> */}
           </TableCell>
         </TableRow>
         <TableRow>
-          <TableDataCell
+          <TableDataCellDiff
+            title="📄 備註："
+            originalText={data.REMARK_PRE}
+            modifiedText={data.REMARK}
             colSpan={5}
-            value={`📄 備註：\n${data.REMARK}`}
             isChanged={data.REMARK_CHANGE}
-            borderRight={false}
           />
         </TableRow>
         <TableFooter wkDate={data.CALENDAR_DATE} colSpan={5} />

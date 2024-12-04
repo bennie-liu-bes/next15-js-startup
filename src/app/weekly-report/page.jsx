@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 
-import { Stack, Container } from '@mui/material'
+import { Box, Stack } from '@mui/material'
 
 import { useDB } from '@/hooks/useDB'
 import { useGetOrdNo } from '@/hooks/useGetOrdNo'
@@ -57,7 +57,7 @@ export default function WeeklyReport() {
   return (
     <>
       <NavBar data={data} selectedDate={selectedDate} handleDateChange={handleDateChange} />
-      <Container sx={{ my: 2 }}>
+      <Box sx={{ my: 2, mx: 4 }}>
         <Stack spacing={2}>
           <Main data={data.wkMain[0]} />
           <MainHelp data={data.wkMainHelp} />
@@ -77,7 +77,7 @@ export default function WeeklyReport() {
           <ComControl data={data.wkComControl[0]} />
           <Footer />
         </Stack>
-      </Container>
+      </Box>
     </>
   )
 }

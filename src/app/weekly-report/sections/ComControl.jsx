@@ -17,7 +17,7 @@ export default function ComControl({ data }) {
         id="com-control-section"
         style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }}
       />
-      <TableWrapper title="✨ 捌、完工階段管控 - 小包合約結算辦理情形" colSpan={5}>
+      <TableWrapper title="捌、完工階段管控 - 小包合約結算辦理情形" colSpan={5}>
         {tableHead()}
         {data ? tableBody() : <TableBodyNodata colSpan={5} />}
       </TableWrapper>

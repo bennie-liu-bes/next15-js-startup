@@ -20,7 +20,7 @@ export default function CriticalpathCco({ data }) {
         id="criticalpath-cco-section"
         style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }}
       />
-      <TableWrapper title="✨ 陸、契約變更" colSpan={6}>
+      <TableWrapper title="陸、契約變更" colSpan={6}>
         {tableHead()}
         {data.length > 0 ? tableBody() : <TableBodyNodata colSpan={6} />}
       </TableWrapper>
