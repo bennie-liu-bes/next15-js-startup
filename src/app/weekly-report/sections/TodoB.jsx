@@ -4,12 +4,14 @@ import { COLOR, OFFSET } from '@/config-global'
 import { TableRow, TableHead, TableBody } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
+import { useFontSize } from '../context/useFontSize'
 import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
-
 export default function TodoB({ data }) {
+  const { fontSize } = useFontSize()
+
   return (
     <>
       <div
@@ -25,11 +27,11 @@ export default function TodoB({ data }) {
 
   function tableBody() {
     return (
-      <TableBody>
+      <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}>
         {data.map((item, index) => (
           <Fragment key={index}>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
-              <TableDataCell value={index + 1} rowSpan={2} />
+              <TableDataCell value={index + 1} rowSpan={2} textAlign="center" />
               <TableDataCell value={item.TODOB_NUM} isChanged={item.TODOB_NUM_CHANGE} />
               <TableDataCell value={item.TODOB_NO} isChanged={item.TODOB_NO_CHANGE} />
               <TableDataCell value={item.DELIVER_DATE} isChanged={item.DELIVER_DATE_CHANGE} />
@@ -58,9 +60,11 @@ export default function TodoB({ data }) {
 
   function tableHead() {
     return (
-      <TableHead sx={{ bgcolor: COLOR.HEADER }}>
+      <TableHead
+        sx={{ bgcolor: COLOR.HEADER, '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}
+      >
         <TableRow>
-          <TableTitleCell title="項次" width="50px" rowSpan={2} />
+          <TableTitleCell title="項次" width="80px" rowSpan={2} textAlign="center" />
           <TableTitleCell title="編號" width="80px" minWidth="80px" />
           <TableTitleCell title="項目" minWidth="100px" />
           <TableTitleCell title="預訂提送時間" minWidth="180px" />
@@ -68,14 +72,14 @@ export default function TodoB({ data }) {
           <TableTitleCell title="列管情形" minWidth="180px" />
           <TableTitleCell title="備註" minWidth="180px" borderRight={false} />
         </TableRow>
-        <TableRow>
+        {/* <TableRow>
           <TableTitleCell
             title="目前辦理狀況"
             sx={{ minWidth: '180px' }}
             colSpan={7}
             borderRight={false}
           />
-        </TableRow>
+        </TableRow> */}
       </TableHead>
     )
   }

@@ -4,12 +4,14 @@ import { COLOR, OFFSET } from '@/config-global'
 import { TableRow, TableHead, TableBody } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
+import { useFontSize } from '../context/useFontSize'
 import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
-
 export default function Weekly({ data }) {
+  const { fontSize } = useFontSize()
+
   return (
     <>
       <div
@@ -25,7 +27,7 @@ export default function Weekly({ data }) {
 
   function tableBody() {
     return (
-      <TableBody>
+      <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}>
         <TableRow>
           <TableDataCell value="預定累計" />
           <TableDataCell value={fm2(data.EXP_PERCENT1)} textAlign="right" />
@@ -85,7 +87,9 @@ export default function Weekly({ data }) {
 
   function tableHead() {
     return (
-      <TableHead sx={{ bgcolor: COLOR.HEADER }}>
+      <TableHead
+        sx={{ bgcolor: COLOR.HEADER, '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}
+      >
         <TableRow>
           <TableTitleCell title="日期" minWidth="120px" />
           <TableTitleCell

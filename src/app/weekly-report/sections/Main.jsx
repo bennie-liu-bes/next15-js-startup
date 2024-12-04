@@ -3,11 +3,14 @@ import { fm, toTWDate } from '@/utils/fm'
 import { TableRow, TableBody } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
+import { useFontSize } from '../context/useFontSize'
 import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableBodyNodata from '../components/TableBodyNodata'
 
 export default function Main({ data }) {
+  const { fontSize } = useFontSize()
+
   return (
     <TableWrapper title="✨ 基本資料" colSpan={2}>
       {data ? tableBody() : <TableBodyNodata colSpan={2} />}
@@ -15,7 +18,7 @@ export default function Main({ data }) {
   )
   function tableBody() {
     return (
-      <TableBody>
+      <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}>
         <TableRow>
           <TableDataCell value={'📅 實際開工日'} sx={{ width: '50%' }} />
           <TableDataCell

@@ -5,13 +5,14 @@ import { fmNoUnit, toTWDate } from '@/utils/fm'
 import { TableRow, TableHead, TableBody } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
+import { useFontSize } from '../context/useFontSize'
 import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
 
 export default function DifferenceCash({ data }) {
-  const fontSize = '90%'
+  const { fontSizeAlt } = useFontSize()
   return (
     <>
       <div
@@ -27,7 +28,7 @@ export default function DifferenceCash({ data }) {
 
   function tableBody() {
     return (
-      <TableBody sx={{ '& .MuiTypography-root': { fontSize } }}>
+      <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSizeAlt}%` } }}>
         {data.map((item, index) => (
           <Fragment key={index}>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
@@ -80,7 +81,7 @@ export default function DifferenceCash({ data }) {
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
               <TableDataCell
                 colSpan={11}
-                value={`📄 備註：\n${item.REMARK}`}
+                value={`📄 備註：${item.REMARK}`}
                 isChanged={item.REMARK_CHANGE}
                 borderRight={false}
               />
@@ -97,11 +98,11 @@ export default function DifferenceCash({ data }) {
       <TableHead
         sx={{
           bgcolor: COLOR.HEADER,
-          '& .MuiTypography-root': { fontSize },
+          '& .MuiTypography-root': { fontSize: `${fontSizeAlt}%` },
         }}
       >
         <TableRow>
-          <TableTitleCell title="項次" rowSpan={3} textAlign="center" width="30px" />
+          <TableTitleCell title="項次" rowSpan={3} textAlign="center" width="60px" />
           <TableTitleCell title="工程款期間" sx={{ minWidth: '80px' }} rowSpan={2} />
           <TableTitleCell
             title="計價項目"
@@ -109,7 +110,7 @@ export default function DifferenceCash({ data }) {
             rowSpan={2}
             minWidth="100px"
           />
-          <TableTitleCell title="期別" sx={{ minWidth: '40px' }} rowSpan={2} minWidth="50px" />
+          <TableTitleCell title="期別" sx={{ minWidth: '40px' }} rowSpan={2} minWidth="60px" />
           <TableTitleCell
             title="預估"
             colSpan={4}
@@ -149,9 +150,9 @@ export default function DifferenceCash({ data }) {
             borderRight={false}
           />
         </TableRow>
-        <TableRow>
+        {/* <TableRow>
           <TableTitleCell title="備註" colSpan={11} borderRight={false} />
-        </TableRow>
+        </TableRow> */}
       </TableHead>
     )
   }

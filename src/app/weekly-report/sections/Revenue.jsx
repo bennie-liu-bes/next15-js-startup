@@ -4,11 +4,14 @@ import { COLOR, OFFSET } from '@/config-global'
 import { TableRow, TableHead, TableBody } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
+import { useFontSize } from '../context/useFontSize'
 import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
 export default function Revenue({ data }) {
+  const { fontSize } = useFontSize()
+
   return (
     <>
       <div
@@ -24,7 +27,7 @@ export default function Revenue({ data }) {
 
   function tableBody() {
     return (
-      <TableBody>
+      <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}>
         <TableRow>
           <TableDataCell value="修正營收" />
           <TableDataCell
@@ -97,7 +100,9 @@ export default function Revenue({ data }) {
 
   function tableHead() {
     return (
-      <TableHead sx={{ bgcolor: COLOR.HEADER }}>
+      <TableHead
+        sx={{ bgcolor: COLOR.HEADER, '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}
+      >
         <TableRow>
           <TableTitleCell title="" minWidth="120px" />
           <TableTitleCell title={data.PREPER_TITLE_A} minWidth="180px" textAlign="right" />

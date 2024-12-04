@@ -8,13 +8,17 @@ import { ICCC_URL } from '@/config-global'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
 import AppBar from '@mui/material/AppBar'
+import Slider from '@mui/material/Slider'
 import { IconButton } from '@mui/material'
 import Tooltip from '@mui/material/Tooltip'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
+import SettingsIcon from '@mui/icons-material/Settings'
+import FormatSizeIcon from '@mui/icons-material/FormatSize'
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp'
 
 import DateDropDown from './DateDropDown'
+import { useFontSize } from '../context/useFontSize'
 
 // 抽取共用的滾動邏輯
 const scrollToSection = sectionId => {
@@ -32,6 +36,7 @@ const scrollToSection = sectionId => {
 
 export default function NavBar({ data, selectedDate, handleDateChange }) {
   if (data.wkMain.length === 0) return null
+
   const handleScrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -58,13 +63,22 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
   const { SITE_CNAME, ORD_CH } = data.wkMain[0]
 
   const [showButtons, setShowButtons] = useState(false)
+  const [showSettings, setShowSettings] = useState(false)
+  const { fontSize, setFontSize } = useFontSize()
+
+  const handleChange = (event, newValue) => {
+    setFontSize(newValue)
+  }
 
   return (
     <AppBar
       position="sticky"
       color="default"
       onMouseEnter={() => setShowButtons(true)}
-      onMouseLeave={() => setShowButtons(false)}
+      onMouseLeave={() => {
+        setShowButtons(false)
+        setShowSettings(false)
+      }}
     >
       <Toolbar variant="dense" sx={{ display: 'flex', alignItems: 'center' }}>
         <Link href={ICCC_URL}>
@@ -117,6 +131,7 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
         </Stack>
       </Toolbar>
       {showButtons && secondToolbar()}
+      {showSettings && settingsToolbar()}
     </AppBar>
   )
 
@@ -133,12 +148,7 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
           pointerEvents: showButtons ? 'auto' : 'none',
         }}
       >
-        <Tooltip
-          title={<Typography variant="body1">回到頂端</Typography>}
-          placement="top"
-          arrow
-          followCursor
-        >
+        <Tooltip title={<Typography variant="body1">回到頂端</Typography>} placement="top" arrow>
           <IconButton size="medium" color="default" onClick={handleScrollToTop} sx={{ mb: 1 }}>
             {<KeyboardDoubleArrowUpIcon />}
           </IconButton>
@@ -213,6 +223,44 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
             handleScroll: handleScrollToComControl,
             tooltip: '完工階段管控 - 小包合約結算辦理情形',
           })}
+        </Stack>
+        <Tooltip title={<Typography variant="body1">設定</Typography>} placement="top" arrow>
+          <IconButton
+            size="medium"
+            color="default"
+            onClick={() => setShowSettings(!showSettings)}
+            sx={{ mb: 1 }}
+          >
+            {<SettingsIcon />}
+          </IconButton>
+        </Tooltip>
+      </Toolbar>
+    )
+  }
+
+  function settingsToolbar() {
+    return (
+      <Toolbar
+        variant="dense"
+        sx={{
+          minHeight: '35px',
+          transition: 'opacity 0.3s ease-in-out',
+          mb: 1,
+        }}
+      >
+        <Stack spacing={2} direction="row" sx={{ width: '200px' }}>
+          <FormatSizeIcon />
+          <Slider
+            aria-label="Font Size"
+            value={fontSize}
+            min={0.5}
+            max={2}
+            step={0.05}
+            marks={[{ value: 1.25, label: undefined }]}
+            valueLabelDisplay="auto"
+            valueLabelFormat={value => (value === 1.25 ? '預設1.25倍' : `${value}倍`)}
+            onChange={handleChange}
+          />
         </Stack>
       </Toolbar>
     )

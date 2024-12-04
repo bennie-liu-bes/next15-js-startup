@@ -5,6 +5,7 @@ import { toTWDate, toTWDate2 } from '@/utils/fm'
 import { TableRow, TableHead, TableBody } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
+import { useFontSize } from '../context/useFontSize'
 import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
@@ -13,7 +14,8 @@ import TableBodyNodata from '../components/TableBodyNodata'
 export default function RegulatoryTrack({ data }) {
   const WARN_COLOR1 = '#AD2D37'
   const WARN_COLOR2 = '#FB6F92'
-  const fontSize = '90%'
+  const { fontSizeAlt } = useFontSize()
+
   return (
     <>
       <div
@@ -29,7 +31,7 @@ export default function RegulatoryTrack({ data }) {
 
   function tableBody() {
     return (
-      <TableBody sx={{ '& .MuiTypography-root': { fontSize } }}>
+      <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSizeAlt}%` } }}>
         {data.map((item, index) => (
           <Fragment key={index}>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }} height="60px">
@@ -98,9 +100,11 @@ export default function RegulatoryTrack({ data }) {
 
   function tableHead() {
     return (
-      <TableHead sx={{ bgcolor: COLOR.HEADER, '& .MuiTypography-root': { fontSize } }}>
+      <TableHead
+        sx={{ bgcolor: COLOR.HEADER, '& .MuiTypography-root': { fontSize: `${fontSizeAlt}%` } }}
+      >
         <TableRow>
-          <TableTitleCell title="項次" width="50px" textAlign="center" />
+          <TableTitleCell title="項次" width="60px" textAlign="center" />
           <TableTitleCell title="合約編號" minWidth="110px" />
           <TableTitleCell title="案件名稱" minWidth="160px" />
           <TableTitleCell title="等級" width="60px" />

@@ -4,12 +4,15 @@ import { COLOR, OFFSET } from '@/config-global'
 import { TableRow, TableHead, TableBody } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
+import { useFontSize } from '../context/useFontSize'
 import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
 
 export default function Track({ data }) {
+  const { fontSize } = useFontSize()
+
   return (
     <>
       <div id="track-section" style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }} />
@@ -22,7 +25,7 @@ export default function Track({ data }) {
 
   function tableBody() {
     return (
-      <TableBody>
+      <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}>
         {data.map((item, index) => (
           <Fragment key={index}>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
@@ -46,14 +49,16 @@ export default function Track({ data }) {
 
   function tableHead() {
     return (
-      <TableHead sx={{ bgcolor: COLOR.HEADER }}>
+      <TableHead
+        sx={{ bgcolor: COLOR.HEADER, '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}
+      >
         <TableRow>
-          <TableTitleCell title="項次" width="50px" textAlign="center" />
+          <TableTitleCell title="項次" width="80px" textAlign="center" />
           <TableTitleCell title="編號" minWidth="80px" />
           <TableTitleCell title="項目" minWidth="80px" />
           <TableTitleCell title="事由" minWidth="80px" />
           <TableTitleCell title="辦理情形" minWidth="80px" />
-          <TableTitleCell title="備註" minWidth="80px" borderRight={false} />
+          <TableTitleCell title="備註" minWidth="100px" borderRight={false} />
         </TableRow>
       </TableHead>
     )

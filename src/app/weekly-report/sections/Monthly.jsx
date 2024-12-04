@@ -4,12 +4,15 @@ import { SIZE, COLOR, OFFSET } from '@/config-global'
 import { Stack, TableRow, TableHead, TableBody, TableCell, Typography } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
+import { useFontSize } from '../context/useFontSize'
 import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
 
 export default function Monthly({ data }) {
+  const { fontSize } = useFontSize()
+
   return (
     <>
       <div
@@ -25,7 +28,7 @@ export default function Monthly({ data }) {
 
   function tableBody() {
     return (
-      <TableBody>
+      <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}>
         <TableRow>
           <TableDataCell value="預定累計" />
           <TableDataCell
@@ -107,7 +110,9 @@ export default function Monthly({ data }) {
 
   function tableHead() {
     return (
-      <TableHead sx={{ bgcolor: COLOR.HEADER }}>
+      <TableHead
+        sx={{ bgcolor: COLOR.HEADER, '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}
+      >
         <TableRow>
           <TableTitleCell title={''} minWidth="120px" />
           <TableTitleCell

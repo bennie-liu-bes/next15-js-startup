@@ -5,12 +5,15 @@ import { COLOR, OFFSET } from '@/config-global.js'
 import { TableRow, TableHead, TableBody } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
+import { useFontSize } from '../context/useFontSize'
 import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
 
 export default function Milestone({ data }) {
+  const { fontSize } = useFontSize()
+
   return (
     <>
       <div
@@ -26,7 +29,7 @@ export default function Milestone({ data }) {
 
   function tableBody() {
     return (
-      <TableBody>
+      <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}>
         {data.map((item, index) => (
           <Fragment key={index}>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
@@ -79,9 +82,11 @@ export default function Milestone({ data }) {
 
   function tableHead() {
     return (
-      <TableHead sx={{ bgcolor: COLOR.HEADER }}>
+      <TableHead
+        sx={{ bgcolor: COLOR.HEADER, '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}
+      >
         <TableRow>
-          <TableTitleCell title="項次" width="50px" rowSpan={3} textAlign="center" />
+          <TableTitleCell title="項次" width="80px" rowSpan={3} textAlign="center" />
           <TableTitleCell title="里程碑序號" minWidth="140px" />
           <TableTitleCell title="原契約完工日" minWidth="160px" />
           <TableTitleCell title="展延後完工日" minWidth="160px" />
@@ -89,12 +94,12 @@ export default function Milestone({ data }) {
           <TableTitleCell title="完成交付項目" minWidth="200px" />
           <TableTitleCell title="預估逾期罰款" minWidth="160px" borderRight={false} />
         </TableRow>
-        <TableRow>
+        {/* <TableRow>
           <TableTitleCell title="逾期罰則" colSpan={6} borderRight={false} />
         </TableRow>
         <TableRow>
           <TableTitleCell title="備註" colSpan={6} borderRight={false} />
-        </TableRow>
+        </TableRow> */}
       </TableHead>
     )
   }

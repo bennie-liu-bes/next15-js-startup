@@ -4,11 +4,14 @@ import { COLOR, OFFSET } from '@/config-global'
 import { TableRow, TableHead, TableBody } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
+import { useFontSize } from '../context/useFontSize'
 import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
 export default function Todo({ data }) {
+  const { fontSize } = useFontSize()
+
   return (
     <>
       <div id="todo-section" style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }} />
@@ -21,7 +24,7 @@ export default function Todo({ data }) {
 
   function tableBody() {
     return (
-      <TableBody>
+      <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}>
         {data.map((item, index) => (
           <Fragment key={index}>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
@@ -58,18 +61,20 @@ export default function Todo({ data }) {
 
   function tableHead() {
     return (
-      <TableHead sx={{ bgcolor: COLOR.HEADER }}>
+      <TableHead
+        sx={{ bgcolor: COLOR.HEADER, '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}
+      >
         <TableRow>
-          <TableTitleCell title="項次" width="50px" rowSpan={3} textAlign="center" />
+          <TableTitleCell title="項次" width="80px" rowSpan={3} textAlign="center" />
           <TableTitleCell title="編號" width="200px" minWidth="200px" />
           <TableTitleCell title="事由" minWidth="100px" borderRight={false} />
         </TableRow>
-        <TableRow>
+        {/* <TableRow>
           <TableTitleCell title="辦理情形" colSpan={2} borderRight={false} />
         </TableRow>
         <TableRow>
           <TableTitleCell title="備註" colSpan={2} borderRight={false} />
-        </TableRow>
+        </TableRow> */}
       </TableHead>
     )
   }
