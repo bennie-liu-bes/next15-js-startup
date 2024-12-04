@@ -36,7 +36,7 @@ export function useDB(ordNo, selectedDate) {
       }
 
       setLoading(true)
-      await new Promise(resolve => setTimeout(resolve, 3000))
+      // await new Promise(resolve => setTimeout(resolve, 3000))
       setError(null)
 
       try {
@@ -55,7 +55,10 @@ export function useDB(ordNo, selectedDate) {
       } catch (err) {
         setError(err.message)
       } finally {
-        setLoading(false)
+        // 使用 setTimeout 確保狀態更新和動畫過渡更順暢
+        setTimeout(() => {
+          setLoading(false)
+        }, 100)
       }
     }
 

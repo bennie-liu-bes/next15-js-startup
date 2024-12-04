@@ -39,7 +39,7 @@ export default function Loading() {
           }}
           sx={{ display: 'inline-flex' }}
         >
-          <Image src="/logo.png" alt="logo" height={64} width={64} />
+          <Image src="/logo.png" alt="logo" height={64} width={64} priority />
         </Box>
 
         <Box
@@ -54,6 +54,7 @@ export default function Loading() {
             ease: 'easeInOut',
             duration: 2,
             repeat: Infinity,
+            repeatType: 'loop',
           }}
           sx={{
             position: 'absolute',
@@ -75,6 +76,7 @@ export default function Loading() {
             ease: 'easeInOut',
             duration: 2,
             repeat: Infinity,
+            repeatType: 'loop',
           }}
           sx={{
             width: '100%',
