@@ -12,6 +12,7 @@ import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
+import TableDataCellDiff from '../components/TableDataCellDiff'
 export default function Revenue({ data }) {
   const { fontSize } = useFontSize()
 
@@ -81,21 +82,23 @@ export default function Revenue({ data }) {
           />
         </TableRow>
         <TableRow>
-          <TableDataCell
+          <TableDataCellDiff
             icon={<CampaignIcon sx={{ color: red[400] }} />}
             colSpan={6}
             title="差異說明："
-            value={data.DIF_RMK}
+            originalText={data.DIF_RMK_PRE}
+            modifiedText={data.DIF_RMK}
             isChanged={data.DIF_RMK_CHANGE}
             borderRight={false}
           />
         </TableRow>
         <TableRow>
-          <TableDataCell
+          <TableDataCellDiff
             icon={<NoteAltIcon sx={{ color: grey[600] }} />}
             colSpan={6}
             title="備註："
-            value={data.REMARK}
+            originalText={data.REMARK_PRE}
+            modifiedText={data.REMARK}
             isChanged={data.REMARK_CHANGE}
             borderRight={false}
           />

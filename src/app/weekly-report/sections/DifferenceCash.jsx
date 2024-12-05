@@ -12,7 +12,8 @@ import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
-
+import TableDataCellDiff from '../components/TableDataCellDiff'
+import TableDataCellDiff2 from '../components/TableDataCellDiff2'
 export default function DifferenceCash({ data }) {
   const { fontSizeAlt } = useFontSize()
   return (
@@ -37,54 +38,64 @@ export default function DifferenceCash({ data }) {
               <TableDataCell value={index + 1} rowSpan={2} textAlign="center" />
               <TableDataCell value={`${toTWDate(item.ESTM_START)}~\n${toTWDate(item.ESTM_END)}`} />
               <TableDataCell value={item.CMP_ITEM_DESC} />
-              <TableDataCell value={item.ESTM_COUNT} />
-              <TableDataCell
-                value={toTWDate(item.PRE_VOI_DAY)}
+              <TableDataCell value={item.ESTM_COUNT} textAlign="center" />
+              <TableDataCellDiff2
+                originalText={toTWDate(item.PRE_VOI_DAY_PRE)}
+                modifiedText={toTWDate(item.PRE_VOI_DAY)}
                 isChanged={item.PRE_VOI_DAY_CHANGE}
                 textAlign="center"
               />
-              <TableDataCell
-                value={fmNoUnit(item.PRE_VOI_AMOUNT)}
+              <TableDataCellDiff2
+                originalText={fmNoUnit(item.PRE_VOI_AMOUNT_PRE)}
+                modifiedText={fmNoUnit(item.PRE_VOI_AMOUNT)}
                 isChanged={item.PRE_VOI_AMOUNT_CHANGE}
                 textAlign="right"
               />
-              <TableDataCell
-                value={toTWDate(item.PRE_RCVAMT_DAY)}
+              <TableDataCellDiff2
+                originalText={toTWDate(item.PRE_RCVAMT_DAY_PRE)}
+                modifiedText={toTWDate(item.PRE_RCVAMT_DAY)}
                 isChanged={item.PRE_RCVAMT_DAY_CHANGE}
                 textAlign="center"
               />
-              <TableDataCell
-                value={fmNoUnit(item.PRE_RCVAMT_AMOUNT)}
+              <TableDataCellDiff2
+                originalText={fmNoUnit(item.PRE_RCVAMT_AMOUNT_PRE)}
+                modifiedText={fmNoUnit(item.PRE_RCVAMT_AMOUNT)}
                 isChanged={item.PRE_RCVAMT_AMOUNT_CHANGE}
                 textAlign="right"
               />
-              <TableDataCell
-                value={toTWDate(item.VOI_DAY)}
+              <TableDataCellDiff2
+                originalText={toTWDate(item.VOI_DAY_PRE)}
+                modifiedText={toTWDate(item.VOI_DAY)}
                 isChanged={item.VOI_DAY_CHANGE}
                 textAlign="center"
               />
-              <TableDataCell
-                value={fmNoUnit(item.TOT_VOIAMT)}
+              <TableDataCellDiff2
+                originalText={fmNoUnit(item.TOT_VOIAMT_PRE)}
+                modifiedText={fmNoUnit(item.TOT_VOIAMT)}
                 isChanged={item.TOT_VOIAMT_CHANGE}
                 textAlign="right"
               />
-              <TableDataCell
-                value={toTWDate(item.RCVAMT_DAY)}
+              <TableDataCellDiff2
+                originalText={toTWDate(item.RCVAMT_DAY_PRE)}
+                modifiedText={toTWDate(item.RCVAMT_DAY)}
                 isChanged={item.RCVAMT_DAY_CHANGE}
                 textAlign="center"
               />
-              <TableDataCell
-                value={fmNoUnit(item.RCVAMT)}
+              <TableDataCellDiff2
+                originalText={fmNoUnit(item.RCVAMT_PRE)}
+                modifiedText={fmNoUnit(item.RCVAMT)}
                 isChanged={item.RCVAMT_CHANGE}
                 textAlign="right"
                 borderRight={false}
               />
             </TableRow>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
-              <TableDataCell
+              <TableDataCellDiff
+                originalText={item.REMARK_PRE}
+                modifiedText={item.REMARK}
                 icon={<NoteAltIcon sx={{ color: grey[600] }} />}
                 colSpan={11}
-                title={`${item.REMARK}`}
+                title="備註："
                 isChanged={item.REMARK_CHANGE}
                 borderRight={false}
               />
@@ -105,15 +116,10 @@ export default function DifferenceCash({ data }) {
         }}
       >
         <TableRow>
-          <TableTitleCell title="項次" rowSpan={3} textAlign="center" width="60px" />
-          <TableTitleCell title="工程款期間" sx={{ minWidth: '80px' }} rowSpan={2} />
-          <TableTitleCell
-            title="計價項目"
-            sx={{ minWidth: '100px' }}
-            rowSpan={2}
-            minWidth="100px"
-          />
-          <TableTitleCell title="期別" sx={{ minWidth: '40px' }} rowSpan={2} minWidth="60px" />
+          <TableTitleCell title="項次" rowSpan={3} textAlign="center" width="50px" />
+          <TableTitleCell title="工程款期間" minWidth="80px" rowSpan={2} />
+          <TableTitleCell title="計價項目" rowSpan={2} minWidth="130px" />
+          <TableTitleCell title="期別" rowSpan={2} minWidth="50px" textAlign="center" />
           <TableTitleCell
             title="預估"
             colSpan={4}
