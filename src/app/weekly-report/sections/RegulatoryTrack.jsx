@@ -31,7 +31,7 @@ export default function RegulatoryTrack({ data }) {
 
   function tableBody() {
     return (
-      <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSizeAlt}%` } }}>
+      <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSizeAlt}rem` } }}>
         {data.map((item, index) => (
           <Fragment key={index}>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }} height="60px">
@@ -101,19 +101,19 @@ export default function RegulatoryTrack({ data }) {
   function tableHead() {
     return (
       <TableHead
-        sx={{ bgcolor: COLOR.HEADER, '& .MuiTypography-root': { fontSize: `${fontSizeAlt}%` } }}
+        sx={{ bgcolor: COLOR.HEADER, '& .MuiTypography-root': { fontSize: `${fontSizeAlt}rem` } }}
       >
         <TableRow>
-          <TableTitleCell title="項次" width="60px" textAlign="center" />
-          <TableTitleCell title="合約編號" minWidth="110px" />
+          <TableTitleCell title="項次" width="40px" textAlign="center" />
+          <TableTitleCell title="合約編號" minWidth="100px" />
           <TableTitleCell title="案件名稱" minWidth="160px" />
-          <TableTitleCell title="等級" width="60px" />
-          <TableTitleCell title="管制提送日期" minWidth="110px" />
-          <TableTitleCell title="實際提送日期(歷次修正)" minWidth="110px" />
-          <TableTitleCell title="預定廠商確認日期" minWidth="110px" />
-          <TableTitleCell title="預定開工日期" minWidth="110px" />
-          <TableTitleCell title="辦理情形" minWidth="140px" />
-          <TableTitleCell title="備註" borderRight={false} />
+          <TableTitleCell title="等級" width="40px" />
+          <TableTitleCell title="管制提送日期" minWidth="120px" />
+          <TableTitleCell title="實際提送日期(歷次修正)" minWidth="120px" />
+          <TableTitleCell title="預定廠商確認日期" minWidth="120px" />
+          <TableTitleCell title="預定開工日期" minWidth="120px" />
+          <TableTitleCell title="辦理情形" minWidth="150px" />
+          <TableTitleCell title="備註" minWidth="150px" borderRight={false} />
         </TableRow>
       </TableHead>
     )

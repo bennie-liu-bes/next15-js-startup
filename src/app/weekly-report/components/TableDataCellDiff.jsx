@@ -1,8 +1,9 @@
 import { diffWords } from 'diff'
 import { SIZE, COLOR, BORDER_STYLE } from '@/config-global.js'
 
-import { Tooltip, TableCell, Typography } from '@mui/material'
+import { Stack, Tooltip, TableCell, Typography } from '@mui/material'
 export default function TableDataCellDiff({
+  icon,
   title,
   originalText,
   modifiedText,
@@ -45,7 +46,10 @@ export default function TableDataCellDiff({
           ...sx,
         }}
       >
-        <Typography variant={SIZE.TEXT}>{title}</Typography>
+        <Stack direction="row" spacing={1} alignItems="center">
+          {icon && icon}
+          <Typography variant={SIZE.TEXT}>{title}</Typography>
+        </Stack>
         {diffWords(originalText || '', modifiedText || '').map((part, index) => (
           <Typography
             component="span"

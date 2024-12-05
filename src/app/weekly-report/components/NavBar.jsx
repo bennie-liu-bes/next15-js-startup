@@ -64,10 +64,13 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
 
   const [showButtons, setShowButtons] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
-  const { fontSize, setFontSize } = useFontSize()
+  const { fontSize, setFontSize, fontSizeAlt, setFontSizeAlt } = useFontSize()
 
   const handleChange = (event, newValue) => {
     setFontSize(newValue)
+  }
+  const handleChangeAlt = (event, newValue) => {
+    setFontSizeAlt(newValue)
   }
 
   return (
@@ -246,20 +249,44 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
           minHeight: '35px',
           transition: 'opacity 0.3s ease-in-out',
           mb: 1,
+          justifyContent: 'flex-end',
         }}
       >
-        <Stack spacing={2} direction="row" sx={{ width: '200px' }}>
-          <FormatSizeIcon />
+        <Stack spacing={1} direction="row" sx={{ width: '200px', mr: 2 }}>
+          <Tooltip title={<Typography variant="body1">字體大小</Typography>} placement="top" arrow>
+            <FormatSizeIcon />
+          </Tooltip>
           <Slider
             aria-label="Font Size"
             value={fontSize}
-            min={0.5}
+            min={0.3}
             max={2}
             step={0.05}
             marks={[{ value: 1.25, label: undefined }]}
             valueLabelDisplay="auto"
             valueLabelFormat={value => (value === 1.25 ? '預設1.25倍' : `${value}倍`)}
             onChange={handleChange}
+          />
+        </Stack>
+        <Stack spacing={1} direction="row" sx={{ width: '200px' }}>
+          <Tooltip
+            title={<Typography variant="body1">參-2、柒-3 字體大小</Typography>}
+            placement="top"
+            arrow
+          >
+            <FormatSizeIcon />
+          </Tooltip>
+          <Slider
+            aria-label="Font Size Alt"
+            value={fontSizeAlt}
+            color="secondary"
+            min={0.3}
+            max={2}
+            step={0.05}
+            marks={[{ value: 0.9, label: undefined }]}
+            valueLabelDisplay="auto"
+            valueLabelFormat={value => (value === 0.9 ? '預設0.9倍' : `${value}倍`)}
+            onChange={handleChangeAlt}
           />
         </Stack>
       </Toolbar>

@@ -2,7 +2,10 @@ import { diffWords } from 'diff'
 import { fm2, fmNoUnit, toTWDate } from '@/utils/fm'
 import { SIZE, COLOR, OFFSET } from '@/config-global'
 
-import { Box, TableRow, TableHead, TableBody, TableCell, Typography } from '@mui/material'
+import { red, grey } from '@mui/material/colors'
+import NoteAltIcon from '@mui/icons-material/NoteAlt'
+import CampaignIcon from '@mui/icons-material/Campaign'
+import { Box, Stack, TableRow, TableHead, TableBody, TableCell, Typography } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
 import { useFontSize } from '../context/useFontSize'
@@ -79,7 +82,10 @@ export default function Monthly({ data }) {
             colSpan={4}
             sx={{ bgcolor: data.REMARK1_CHANGE === 'true' && COLOR.CHANGE, whiteSpace: 'pre-wrap' }}
           >
-            <Typography variant={SIZE.TITLE}>📢 差異說明：</Typography>
+            <Stack direction="row" spacing={1} alignItems="center">
+              <CampaignIcon sx={{ color: red[400] }} />
+              <Typography variant={SIZE.TITLE}>差異說明：</Typography>
+            </Stack>
             <Typography variant={SIZE.TEXT}>
               🎯 計價進度-營收進度差異說明(至{toTWDate(data.YEAR_MONTHEND)})&nbsp;=&nbsp;
               {fm2(data.VAL_SUM - data.REV_SUM)}％， 金額：{fmNoUnit(data.TOT_NOPAY)}仟元(未稅)
@@ -139,7 +145,8 @@ export default function Monthly({ data }) {
         </TableRow>
         <TableRow>
           <TableDataCellDiff
-            title="📄 備註："
+            icon={<NoteAltIcon sx={{ color: grey[600] }} />}
+            title="備註："
             originalText={data.REMARK_PRE}
             modifiedText={data.REMARK}
             colSpan={5}

@@ -1,6 +1,9 @@
 import { fmNoUnit } from '@/utils/fm'
 import { COLOR, OFFSET } from '@/config-global'
 
+import { red, grey } from '@mui/material/colors'
+import NoteAltIcon from '@mui/icons-material/NoteAlt'
+import CampaignIcon from '@mui/icons-material/Campaign'
 import { TableRow, TableHead, TableBody } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
@@ -79,16 +82,20 @@ export default function Revenue({ data }) {
         </TableRow>
         <TableRow>
           <TableDataCell
+            icon={<CampaignIcon sx={{ color: red[400] }} />}
             colSpan={6}
-            value={`📢 差異說明：\n${data.DIF_RMK}`}
+            title="差異說明："
+            value={data.DIF_RMK}
             isChanged={data.DIF_RMK_CHANGE}
             borderRight={false}
           />
         </TableRow>
         <TableRow>
           <TableDataCell
+            icon={<NoteAltIcon sx={{ color: grey[600] }} />}
             colSpan={6}
-            value={`📄 備註：\n${data.REMARK}`}
+            title="備註："
+            value={data.REMARK}
             isChanged={data.REMARK_CHANGE}
             borderRight={false}
           />

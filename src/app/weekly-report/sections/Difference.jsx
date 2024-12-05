@@ -1,6 +1,9 @@
 import { fm, toTWDate } from '@/utils/fm'
 import { SIZE, COLOR, OFFSET } from '@/config-global'
 
+import { red, grey } from '@mui/material/colors'
+import NoteAltIcon from '@mui/icons-material/NoteAlt'
+import CampaignIcon from '@mui/icons-material/Campaign'
 import DragHandleRoundedIcon from '@mui/icons-material/DragHandleRounded'
 import HorizontalRuleRoundedIcon from '@mui/icons-material/HorizontalRuleRounded'
 import { Box, Stack, Divider, TableRow, TableBody, TableCell, Typography } from '@mui/material'
@@ -53,11 +56,13 @@ export default function Difference({ data }) {
               <Stack direction="column" spacing={0} sx={{ textAlign: 'right' }}>
                 <Typography variant={SIZE.TEXT}>累計收入：</Typography>
                 <Typography variant={SIZE.TEXT}>
-                  <HorizontalRuleRoundedIcon sx={{ color: COLOR_ }} /> 累計支出：
+                  <HorizontalRuleRoundedIcon sx={{ color: COLOR_, fontSize: `${fontSize}rem` }} />
+                  累計支出：
                 </Typography>
                 <Divider color="secondary" sx={{ borderBottomWidth: 2, bgcolor: COLOR_ }} />
                 <Typography variant={SIZE.TEXT}>
-                  <DragHandleRoundedIcon sx={{ color: COLOR_ }} /> 收支差異：
+                  <DragHandleRoundedIcon sx={{ color: COLOR_, fontSize: `${fontSize}rem` }} />
+                  收支差異：
                 </Typography>
               </Stack>
               <Stack direction="column" spacing={0} sx={{ textAlign: 'right' }}>
@@ -71,7 +76,8 @@ export default function Difference({ data }) {
         </TableRow>
         <TableRow>
           <TableDataCellDiff
-            title="📢 差異說明："
+            icon={<CampaignIcon sx={{ color: red[400] }} />}
+            title="差異說明："
             originalText={data.ILLUSTRATE_PRE}
             modifiedText={data.ILLUSTRATE}
             isChanged={data.ILLUSTRATE_CHANGE}
@@ -80,7 +86,8 @@ export default function Difference({ data }) {
         </TableRow>
         <TableRow>
           <TableDataCellDiff
-            title="📄 備註："
+            icon={<NoteAltIcon sx={{ color: grey[600] }} />}
+            title="備註："
             originalText={data.REMARK_PRE}
             modifiedText={data.REMARK}
             isChanged={data.REMARK_CHANGE}

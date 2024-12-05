@@ -1,8 +1,10 @@
 import { SIZE, COLOR, BORDER_STYLE } from '@/config-global.js'
 
-import { Tooltip, TableCell, Typography } from '@mui/material'
+import { Stack, Tooltip, TableCell, Typography } from '@mui/material'
 
 export default function TableDataCell({
+  icon,
+  title,
   value,
   colSpan = 1,
   rowSpan = 1,
@@ -37,13 +39,20 @@ export default function TableDataCell({
         rowSpan={rowSpan}
         sx={{
           whiteSpace: 'pre-wrap',
-          textAlign: textAlign,
           borderRight: borderRight && BORDER_STYLE,
           bgcolor: isChanged === 'true' && COLOR.CHANGE,
           ...sx,
         }}
       >
-        <Typography variant={SIZE.TEXT}>{value}</Typography>
+        <Stack direction="column">
+          <Stack direction="row" spacing={1} alignItems="center">
+            {icon && icon}
+            <Typography variant={SIZE.TEXT}>{title}</Typography>
+          </Stack>
+          <Typography variant={SIZE.TEXT} sx={{ textAlign }}>
+            {value}
+          </Typography>
+        </Stack>
       </TableCell>
     )
   }

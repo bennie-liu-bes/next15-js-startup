@@ -2,6 +2,9 @@ import { Fragment } from 'react'
 import { toTWDate } from '@/utils/fm'
 import { COLOR } from '@/config-global'
 
+import { red, grey } from '@mui/material/colors'
+import NoteAltIcon from '@mui/icons-material/NoteAlt'
+import CampaignIcon from '@mui/icons-material/Campaign'
 import { TableRow, TableBody, TableCell } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
@@ -26,7 +29,8 @@ export default function MainHelp({ data }) {
           <Fragment key={index}>
             <TableRow>
               <TableDataCellDiff
-                title="📢 請求協助事項："
+                icon={<CampaignIcon sx={{ color: red[400] }} />}
+                title="請求協助事項："
                 originalText={item.HELP_ITEM_PRE}
                 modifiedText={item.HELP_ITEM}
                 colSpan={2}
@@ -35,7 +39,8 @@ export default function MainHelp({ data }) {
             </TableRow>
             <TableRow>
               <TableDataCellDiff
-                title="📄 備註："
+                icon={<NoteAltIcon sx={{ color: grey[600] }} />}
+                title="備註："
                 originalText={item.REMARK_PRE}
                 modifiedText={item.REMARK}
                 colSpan={2}

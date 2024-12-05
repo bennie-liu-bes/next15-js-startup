@@ -7,6 +7,8 @@ const FontSizeContext = createContext()
 // 定義常數
 const DEFAULT_FONT_SIZE = 1.25
 const FONT_SIZE_KEY = 'weeklyReport_fontSize'
+const DEFAULT_FONT_SIZE_ALT = 0.9
+const FONT_SIZE_ALT_KEY = 'weeklyReport_fontSizeAlt'
 
 export function FontSizeProvider({ children }) {
   // 從 localStorage 讀取儲存的值，如果沒有則使用預設值
@@ -19,12 +21,23 @@ export function FontSizeProvider({ children }) {
     return DEFAULT_FONT_SIZE
   })
 
-  const [fontSizeAlt, setFontSizeAlt] = useState(90)
+  const [fontSizeAlt, setFontSizeAlt] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const savedSize = localStorage.getItem(FONT_SIZE_ALT_KEY)
+      return savedSize ? parseFloat(savedSize) : DEFAULT_FONT_SIZE_ALT
+    }
+    return DEFAULT_FONT_SIZE_ALT
+  })
 
   // 當 fontSize 改變時，儲存到 localStorage
   useEffect(() => {
     localStorage.setItem(FONT_SIZE_KEY, fontSize.toString())
   }, [fontSize])
+
+  // 當 fontSizeAlt 改變時，儲存到 localStorage
+  useEffect(() => {
+    localStorage.setItem(FONT_SIZE_ALT_KEY, fontSizeAlt.toString())
+  }, [fontSizeAlt])
 
   return (
     <FontSizeContext.Provider value={{ fontSize, setFontSize, fontSizeAlt, setFontSizeAlt }}>

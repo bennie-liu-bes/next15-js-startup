@@ -1,6 +1,9 @@
 import { fm2, toTWDate } from '@/utils/fm'
 import { COLOR, OFFSET } from '@/config-global'
 
+import { red, grey } from '@mui/material/colors'
+import NoteAltIcon from '@mui/icons-material/NoteAlt'
+import CampaignIcon from '@mui/icons-material/Campaign'
 import { TableRow, TableHead, TableBody } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
@@ -67,7 +70,8 @@ export default function Weekly({ data }) {
         </TableRow>
         <TableRow>
           <TableDataCellDiff
-            title="📢 差異說明："
+            icon={<CampaignIcon sx={{ color: red[400] }} />}
+            title="差異說明："
             originalText={data.REMARK_D_PRE}
             modifiedText={data.REMARK_D}
             colSpan={5}
@@ -76,7 +80,8 @@ export default function Weekly({ data }) {
         </TableRow>
         <TableRow>
           <TableDataCellDiff
-            title="📄 備註："
+            icon={<NoteAltIcon sx={{ color: grey[600] }} />}
+            title="備註："
             originalText={data.REMARK_PRE}
             modifiedText={data.REMARK}
             colSpan={5}

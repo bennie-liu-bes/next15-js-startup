@@ -2,6 +2,8 @@ import { Fragment } from 'react'
 import { COLOR, OFFSET } from '@/config-global'
 import { fmNoUnit, toTWDate } from '@/utils/fm'
 
+import { grey } from '@mui/material/colors'
+import NoteAltIcon from '@mui/icons-material/NoteAlt'
 import { TableRow, TableHead, TableBody } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
@@ -28,7 +30,7 @@ export default function DifferenceCash({ data }) {
 
   function tableBody() {
     return (
-      <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSizeAlt}%` } }}>
+      <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSizeAlt}rem` } }}>
         {data.map((item, index) => (
           <Fragment key={index}>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
@@ -80,8 +82,9 @@ export default function DifferenceCash({ data }) {
             </TableRow>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
               <TableDataCell
+                icon={<NoteAltIcon sx={{ color: grey[600] }} />}
                 colSpan={11}
-                value={`📄 備註：${item.REMARK}`}
+                title={`${item.REMARK}`}
                 isChanged={item.REMARK_CHANGE}
                 borderRight={false}
               />
@@ -98,7 +101,7 @@ export default function DifferenceCash({ data }) {
       <TableHead
         sx={{
           bgcolor: COLOR.HEADER,
-          '& .MuiTypography-root': { fontSize: `${fontSizeAlt}%` },
+          '& .MuiTypography-root': { fontSize: `${fontSizeAlt}rem` },
         }}
       >
         <TableRow>

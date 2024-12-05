@@ -2,6 +2,9 @@ import { Fragment } from 'react'
 import { toTWDate } from '@/utils/fm'
 import { COLOR, OFFSET } from '@/config-global.js'
 
+import { grey, purple } from '@mui/material/colors'
+import NoteAltIcon from '@mui/icons-material/NoteAlt'
+import CrisisAlertIcon from '@mui/icons-material/CrisisAlert'
 import { TableRow, TableHead, TableBody } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
@@ -59,16 +62,20 @@ export default function Milestone({ data }) {
             </TableRow>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
               <TableDataCell
+                icon={<CrisisAlertIcon sx={{ color: purple[400] }} />}
+                title="逾期罰則："
+                value={item.OVERDUE_FINE}
                 colSpan={6}
-                value={`🎯 逾期罰則：\n${item.OVERDUE_FINE}`}
                 isChanged={item.OVERDUE_FINE_CHANGE}
                 borderRight={false}
               />
             </TableRow>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
               <TableDataCell
+                icon={<NoteAltIcon sx={{ color: grey[600] }} />}
+                title="備註："
+                value={item.REMARK}
                 colSpan={6}
-                value={`📄 備註：\n${item.REMARK}`}
                 isChanged={item.REMARK_CHANGE}
                 borderRight={false}
               />
