@@ -13,6 +13,7 @@ import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
+import TableDataCellDiff from '../components/TableDataCellDiff'
 
 export default function Milestone({ data }) {
   const { fontSize } = useFontSize()
@@ -61,20 +62,22 @@ export default function Milestone({ data }) {
               />
             </TableRow>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
-              <TableDataCell
+              <TableDataCellDiff
                 icon={<CrisisAlertIcon sx={{ color: purple[400] }} />}
                 title="逾期罰則："
-                value={item.OVERDUE_FINE}
+                originalText={item.OVERDUE_FINE_PRE}
+                modifiedText={item.OVERDUE_FINE}
                 colSpan={6}
                 isChanged={item.OVERDUE_FINE_CHANGE}
                 borderRight={false}
               />
             </TableRow>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
-              <TableDataCell
+              <TableDataCellDiff
                 icon={<NoteAltIcon sx={{ color: grey[600] }} />}
                 title="備註："
-                value={item.REMARK}
+                originalText={item.REMARK_PRE}
+                modifiedText={item.REMARK}
                 colSpan={6}
                 isChanged={item.REMARK_CHANGE}
                 borderRight={false}
