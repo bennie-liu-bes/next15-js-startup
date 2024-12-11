@@ -15,6 +15,8 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import SettingsIcon from '@mui/icons-material/Settings'
 import FormatSizeIcon from '@mui/icons-material/FormatSize'
+import FullscreenIcon from '@mui/icons-material/Fullscreen'
+import FullscreenExitIcon from '@mui/icons-material/FullscreenExit'
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp'
 
 import DateDropDown from './DateDropDown'
@@ -36,6 +38,8 @@ const scrollToSection = sectionId => {
 
 export default function NavBar({ data, selectedDate, handleDateChange }) {
   if (data.wkMain.length === 0) return null
+
+  const [isFullscreen, setIsFullscreen] = useState(false)
 
   const handleScrollToTop = () => {
     window.scrollTo({
@@ -71,6 +75,15 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
   }
   const handleChangeAlt = (event, newValue) => {
     setFontSizeAlt(newValue)
+  }
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen()
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen()
+    }
+    setIsFullscreen(!isFullscreen)
   }
 
   return (
@@ -163,7 +176,7 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
             width: '100%',
             justifyContent: 'space-evenly',
             overflow: 'hidden',
-            flexWrap: 'wrap', // 允許按鈕斷行
+            flexWrap: 'wrap', // 允許按��斷行
             gap: '4px', // 設定按鈕之間的間距
             mb: 1,
           }}
@@ -235,6 +248,15 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
             sx={{ mb: 1 }}
           >
             {<SettingsIcon />}
+          </IconButton>
+        </Tooltip>
+        <Tooltip
+          title={<Typography variant="body1">{isFullscreen ? '離開全螢幕' : '全螢幕'}</Typography>}
+          placement="top"
+          arrow
+        >
+          <IconButton size="medium" color="default" onClick={toggleFullscreen} sx={{ mb: 1 }}>
+            {isFullscreen ? <FullscreenExitIcon /> : <FullscreenIcon />}
           </IconButton>
         </Tooltip>
       </Toolbar>
