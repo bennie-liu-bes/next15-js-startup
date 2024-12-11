@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import { fm2, toTWDate } from '@/utils/fm'
 import { COLOR, OFFSET } from '@/config-global'
 
@@ -13,7 +14,7 @@ import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
 import TableDataCellDiff from '../components/TableDataCellDiff'
-export default function Weekly({ data }) {
+export default function Weekly({ data, data2 }) {
   const { fontSize } = useFontSize()
 
   return (
@@ -88,6 +89,76 @@ export default function Weekly({ data }) {
             isChanged={data.REMARK_CHANGE}
           />
         </TableRow>
+        {data2 &&
+          data2.map((item, index) => {
+            return (
+              <Fragment key={index}>
+                <TableRow sx={{ bgcolor: COLOR.HEADER }}>
+                  <TableTitleCell
+                    title={`其他週進度：${item.WEEKLY_TITLE}`}
+                    borderRight={false}
+                    colSpan={5}
+                  />
+                </TableRow>
+                <TableRow sx={{ bgcolor: COLOR.HEADER }}>
+                  <TableTitleCell title="日期" />
+                  <TableTitleCell title={toTWDate(item.WORK_DATE1)} textAlign="right" />
+                  <TableTitleCell title={toTWDate(item.WORK_DATE2)} textAlign="right" />
+                  <TableTitleCell title={toTWDate(item.WORK_DATE3)} textAlign="right" />
+                  <TableTitleCell
+                    title={toTWDate(item.WORK_DATE4)}
+                    textAlign="right"
+                    borderRight={false}
+                  />
+                </TableRow>
+                <TableRow>
+                  <TableDataCell value="預定累計" />
+                  <TableDataCell value={fm2(item.EXP_PERCENT1)} textAlign="right" />
+                  <TableDataCell value={fm2(item.EXP_PERCENT2)} textAlign="right" />
+                  <TableDataCell value={fm2(item.EXP_PERCENT3)} textAlign="right" />
+                  <TableDataCell
+                    value={fm2(item.EXP_PERCENT4)}
+                    textAlign="right"
+                    borderRight={false}
+                  />
+                </TableRow>
+                <TableRow>
+                  <TableDataCell value="實際累計" />
+                  <TableDataCell value={fm2(item.ACT_SUM1)} textAlign="right" />
+                  <TableDataCell value={fm2(item.ACT_SUM2)} textAlign="right" />
+                  <TableDataCell value={fm2(item.ACT_SUM3)} textAlign="right" />
+                  <TableDataCell value={fm2(item.ACT_SUM4)} textAlign="right" borderRight={false} />
+                </TableRow>
+                <TableRow>
+                  <TableDataCell value="差異" />
+                  <TableDataCell value={fm2(item.ACT_SUM1 - item.EXP_PERCENT1)} textAlign="right" />
+                  <TableDataCell value={fm2(item.ACT_SUM2 - item.EXP_PERCENT2)} textAlign="right" />
+                  <TableDataCell value={fm2(item.ACT_SUM3 - item.EXP_PERCENT3)} textAlign="right" />
+                  <TableDataCell
+                    value={fm2(item.ACT_SUM4 - item.EXP_PERCENT4)}
+                    textAlign="right"
+                    borderRight={false}
+                  />
+                </TableRow>
+                <TableRow>
+                  <TableDataCell
+                    icon={<CampaignIcon sx={{ color: red[400] }} />}
+                    title="差異說明："
+                    value={item.REMARK_D}
+                    colSpan={5}
+                  />
+                </TableRow>
+                <TableRow>
+                  <TableDataCell
+                    icon={<NoteAltIcon sx={{ color: grey[600] }} />}
+                    title="備註："
+                    value={item.REMARK}
+                    colSpan={5}
+                  />
+                </TableRow>
+              </Fragment>
+            )
+          })}
         <TableFooter wkDate={data.CALENDAR_DATE} colSpan={5} />
       </TableBody>
     )
