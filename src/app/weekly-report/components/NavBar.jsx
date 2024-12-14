@@ -11,12 +11,14 @@ import Button from '@mui/material/Button'
 import AppBar from '@mui/material/AppBar'
 import Slider from '@mui/material/Slider'
 import { IconButton } from '@mui/material'
+import Divider from '@mui/material/Divider'
 import Tooltip from '@mui/material/Tooltip'
 import Toolbar from '@mui/material/Toolbar'
 import Checkbox from '@mui/material/Checkbox'
 import FormGroup from '@mui/material/FormGroup'
 import Typography from '@mui/material/Typography'
 import SettingsIcon from '@mui/icons-material/Settings'
+import EditNoteIcon from '@mui/icons-material/EditNote'
 import FormatSizeIcon from '@mui/icons-material/FormatSize'
 import FullscreenIcon from '@mui/icons-material/Fullscreen'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -296,7 +298,14 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
         }}
       >
         <Stack direction="row" spacing={1} sx={{ mr: 2, display: 'flex', alignItems: 'center' }}>
-          <Typography variant="body1">差異文字註記: </Typography>
+          <Tooltip
+            title={<Typography variant="body1">差異文字註記</Typography>}
+            placement="top"
+            arrow
+          >
+            <EditNoteIcon fontSize="large" />
+          </Tooltip>
+          {/* <Typography variant="body1">差異文字註記: </Typography> */}
           <FormGroup row>
             <FormControlLabel
               control={
@@ -324,9 +333,10 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
             />
           </FormGroup>
         </Stack>
+        <Divider orientation="vertical" flexItem sx={{ mr: 2 }} />
         <Stack spacing={1} direction="row" sx={{ width: '200px', mr: 2 }}>
           <Tooltip title={<Typography variant="body1">字體大小</Typography>} placement="top" arrow>
-            <FormatSizeIcon />
+            <FormatSizeIcon fontSize="medium" />
           </Tooltip>
           <Slider
             aria-label="Font Size"
@@ -340,13 +350,14 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
             onChange={handleChange}
           />
         </Stack>
+        <Divider orientation="vertical" flexItem sx={{ mr: 2 }} />
         <Stack spacing={1} direction="row" sx={{ width: '200px' }}>
           <Tooltip
             title={<Typography variant="body1">參-2、柒-3 字體大小</Typography>}
             placement="top"
             arrow
           >
-            <FormatSizeIcon />
+            <FormatSizeIcon fontSize="medium" />
           </Tooltip>
           <Slider
             aria-label="Font Size Alt"
