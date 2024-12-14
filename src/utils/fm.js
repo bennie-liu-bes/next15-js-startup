@@ -50,6 +50,7 @@ export const toTWDate = dateStr => {
     return '-'
   }
 }
+
 export const toTWDate2 = dateStr => {
   // 檢查是否有斷行符號
   if (dateStr.includes('\n')) {
@@ -59,4 +60,41 @@ export const toTWDate2 = dateStr => {
       .map(date => toTWDate(date))
       .join('\n')
   }
+}
+
+export const toTWDate3 = dateStr => {
+  if (!dateStr) return '-'
+  const ifTrans = true
+
+  try {
+    // 檢查是否符合 yyyyMM 格式
+    const datePattern = /^\d{4}\d{2}$/
+    if (!datePattern.test(dateStr)) return dateStr
+
+    const year = dateStr.substring(0, 4)
+    const month = dateStr.substring(4, 6)
+
+    if (ifTrans) {
+      const twYear = parseInt(year) - 1911
+      return `${twYear}年${month}月`
+    }
+
+    return dateStr
+    // eslint-disable-next-line unused-imports/no-unused-vars
+  } catch (error) {
+    return '-'
+  }
+}
+
+// 格式化數字函數
+export const formatNumber = value => {
+  const absValue = Math.abs(value)
+  if (absValue >= 100000000) {
+    return (value / 100000000).toFixed(1) + '億'
+  } else if (absValue >= 10000000) {
+    return (value / 10000000).toFixed(0) + '千萬'
+  } else if (absValue >= 1000000) {
+    return (value / 1000000).toFixed(0) + '百萬'
+  }
+  return value.toString()
 }

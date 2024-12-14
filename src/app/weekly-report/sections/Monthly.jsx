@@ -14,7 +14,8 @@ import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
 import TableDataCellDiff from '../components/TableDataCellDiff'
-export default function Monthly({ data }) {
+
+export default function Monthly({ data, plotData1, plotData2 }) {
   const { fontSize } = useFontSize()
 
   return (
@@ -27,6 +28,12 @@ export default function Monthly({ data }) {
         {data && tableHead()}
         {data ? tableBody() : <TableBodyNodata colSpan={4} />}
       </TableWrapper>
+      {/* <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
+        <MonthlyPlot1 data={plotData1} />
+      </Paper>
+      <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
+        <MonthlyPlot2 data={plotData2} />
+      </Paper> */}
     </>
   )
 

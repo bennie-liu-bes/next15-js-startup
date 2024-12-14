@@ -1,27 +1,15 @@
 'use client'
-import { fm } from '@/utils/fm'
+
 import ReactECharts from 'echarts-for-react'
+import { fm, toTWDate3, formatNumber } from '@/utils/fm'
 
 export default function RevenuePlot({ data }) {
   // 準備圖表數據
-  const xAxisData = data.map(item => item.YM)
+  const xAxisData = data.map(item => toTWDate3(item.YM))
   const aagbamtData = data.map(item => item.AAGBAMT)
   const bagbamtData = data.map(item => item.BAGBAMT)
   const aayamtData = data.map(item => item.AAYAMT)
   const bayamtData = data.map(item => item.BAYAMT)
-
-  // 格式化數字函數
-  const formatNumber = value => {
-    const absValue = Math.abs(value)
-    if (absValue >= 100000000) {
-      return (value / 100000000).toFixed(1) + '億'
-    } else if (absValue >= 10000000) {
-      return (value / 10000000).toFixed(0) + '千萬'
-    } else if (absValue >= 1000000) {
-      return (value / 1000000).toFixed(0) + '百萬'
-    }
-    return value.toString()
-  }
 
   // 圖表配置
   const option = {
@@ -39,7 +27,7 @@ export default function RevenuePlot({ data }) {
       },
       formatter: function (params) {
         // 取得年月標籤
-        let result = params[0].axisValueLabel.replace(/(\d{4})(\d{2})/, '$1年$2月') + '<br/>'
+        let result = params[0].axisValueLabel + '<br/>'
 
         // 找出對應的數值
         const monthlyBudget = params.find(p => p.seriesName === '單月預定').value || 0
@@ -113,6 +101,7 @@ export default function RevenuePlot({ data }) {
       data: xAxisData,
       axisLabel: {
         rotate: 0,
+        fontSize: 14,
       },
     },
     yAxis: [
@@ -125,6 +114,7 @@ export default function RevenuePlot({ data }) {
         },
         axisLabel: {
           formatter: value => formatNumber(value),
+          fontSize: 14,
         },
       },
       {
@@ -136,6 +126,7 @@ export default function RevenuePlot({ data }) {
         },
         axisLabel: {
           formatter: value => formatNumber(value),
+          fontSize: 14,
         },
       },
     ],
@@ -196,7 +187,7 @@ export default function RevenuePlot({ data }) {
       left: '3%',
       right: '3%',
       bottom: '10%',
-      top: '15%',
+      top: '16%',
     },
     dataZoom: [
       {
