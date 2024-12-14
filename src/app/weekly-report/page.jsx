@@ -57,7 +57,16 @@ export default function WeeklyReport() {
   return (
     <>
       <NavBar data={data} selectedDate={selectedDate} handleDateChange={handleDateChange} />
-      <Box sx={{ my: 2, mx: 4 }}>
+      <Box
+        sx={{
+          my: 2,
+          mx: {
+            xs: 1, // 在 xs 螢幕時 margin-left 和 margin-right 為 8px
+            sm: 2, // 在 sm 螢幕時 margin-left 和 margin-right 為 16px
+            md: 4, // 在 md 以上螢幕時保持原本的 margin 32px
+          },
+        }}
+      >
         <Stack spacing={2}>
           <Box sx={{ mb: 2 }}>
             <Main data={data.wkMain[0]} />
@@ -67,7 +76,7 @@ export default function WeeklyReport() {
           <Monthly data={data.wkMonthly[0]} />
           <Difference data={data.wkDifference[0]} />
           <DifferenceCash data={data.wkDifferenceCash} />
-          <Revenue data={data.wkRevenue[0]} />
+          <Revenue data={data.wkRevenue[0]} frProjectIncome={data.frProjectIncome} />
           <Milestone data={data.wkMilestone} />
           <File data={data.wkFile} />
           <CriticalpathCco data={data.wkCriticalpathCco} />

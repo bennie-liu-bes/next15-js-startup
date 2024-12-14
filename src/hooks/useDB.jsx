@@ -26,6 +26,7 @@ export function useDB(ordNo, selectedDate) {
     wkRegulatoryTrack: [],
     wkControversialCases: [],
     wkComControl: [],
+    frProjectIncome: [],
   }
 
   useEffect(() => {
@@ -98,6 +99,7 @@ export function useDB(ordNo, selectedDate) {
         item => item.CALENDAR_DATE === selectedDate
       ),
       wkComControl: rawData.wkComControl.filter(item => item.CALENDAR_DATE === selectedDate),
+      frProjectIncome: rawData.frProjectIncome,
     }
   }, [rawData, selectedDate])
 

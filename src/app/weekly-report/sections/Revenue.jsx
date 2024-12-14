@@ -1,19 +1,22 @@
 import { fmNoUnit } from '@/utils/fm'
 import { COLOR, OFFSET } from '@/config-global'
+import { BORDER_RADIUS } from '@/config-global.js'
 
 import { red, grey } from '@mui/material/colors'
 import NoteAltIcon from '@mui/icons-material/NoteAlt'
 import CampaignIcon from '@mui/icons-material/Campaign'
-import { TableRow, TableHead, TableBody } from '@mui/material'
+import { Paper, TableRow, TableHead, TableBody } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
+import RevenuePlot from '../components/RevenuePlot'
 import { useFontSize } from '../context/useFontSize'
 import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
 import TableDataCellDiff from '../components/TableDataCellDiff'
-export default function Revenue({ data }) {
+
+export default function Revenue({ data, frProjectIncome }) {
   const { fontSize } = useFontSize()
 
   return (
@@ -26,6 +29,9 @@ export default function Revenue({ data }) {
         {data && tableHead()}
         {data ? tableBody() : <TableBodyNodata colSpan={6} />}
       </TableWrapper>
+      <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
+        <RevenuePlot data={frProjectIncome} />
+      </Paper>
     </>
   )
 

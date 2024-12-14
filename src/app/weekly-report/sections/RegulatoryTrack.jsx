@@ -82,11 +82,11 @@ export default function RegulatoryTrack({ data }) {
                 }}
               />
               <TableDataCell
-                value={item.REMARK && `📢 辦理情形：\n${item.REMARK}`}
+                value={item.REMARK && `${item.REMARK}`}
                 sx={{ verticalAlign: 'top' }}
               />
               <TableDataCell
-                value={item.REMARKR && `📄 備註：\n${item.REMARKR}`}
+                value={item.REMARKR && `${item.REMARKR}`}
                 borderRight={false}
                 sx={{ verticalAlign: 'top' }}
               />

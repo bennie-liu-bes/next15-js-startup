@@ -242,4 +242,10 @@ export const tables = {
       return await db.query(query, { ordNo })
     },
   },
+  frProjectIncome: {
+    getData: async ordNo => {
+      const query = `SELECT * FROM FR_PROJECT_INCOME WHERE GBMCU = @ordNo`
+      return await db.query(query, { ordNo })
+    },
+  },
 }

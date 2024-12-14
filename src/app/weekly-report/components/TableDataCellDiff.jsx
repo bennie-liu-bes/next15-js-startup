@@ -2,6 +2,8 @@ import { diffWords } from 'diff'
 import { SIZE, COLOR, BORDER_STYLE } from '@/config-global.js'
 
 import { Stack, Tooltip, TableCell, Typography } from '@mui/material'
+
+import { useFontSize } from '../context/useFontSize'
 export default function TableDataCellDiff({
   icon,
   title,
@@ -15,6 +17,7 @@ export default function TableDataCellDiff({
   tooltip,
   sx,
 }) {
+  const { bottomLine, bgColor } = useFontSize()
   return tooltip ? (
     <Tooltip
       title={
@@ -56,13 +59,17 @@ export default function TableDataCellDiff({
             key={index}
             variant={SIZE.TEXT}
             style={{
+              textDecorationSkipInk: 'none',
               color: part.added ? 'black' : part.removed ? 'red' : 'black',
               textDecoration: part.removed
                 ? 'line-through'
                 : part.added
-                  ? 'underline solid #ab47bc 3px'
+                  ? bottomLine
+                    ? 'underline solid #ab47bc 3px'
+                    : 'none'
                   : 'none',
               display: part.removed && 'none',
+              backgroundColor: part.added && bgColor ? COLOR.BGCOLOR : 'transparent',
             }}
           >
             {part.value}

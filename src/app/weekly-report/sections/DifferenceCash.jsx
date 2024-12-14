@@ -47,7 +47,8 @@ export default function DifferenceCash({ data }) {
               />
               <TableDataCellDiff2
                 originalText={fmNoUnit(item.PRE_VOI_AMOUNT_PRE)}
-                modifiedText={fmNoUnit(item.PRE_VOI_AMOUNT)}
+                // modifiedText={fmNoUnit(item.PRE_VOI_AMOUNT)}
+                modifiedText={'99,999,999'}
                 isChanged={item.PRE_VOI_AMOUNT_CHANGE}
                 textAlign="right"
               />

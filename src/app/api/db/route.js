@@ -27,6 +27,7 @@ export async function GET(request) {
     let wkRegulatoryTrackData = []
     let wkControversialCasesData = []
     let wkComControlData = []
+    let frProjectIncomeData = []
     try {
       wkWeeklyDateData = await tables.wkWeeklyDate.getData(ordNo)
       wkMainData = await tables.wkMain.getData(ordNo)
@@ -46,6 +47,7 @@ export async function GET(request) {
       wkRegulatoryTrackData = await tables.wkRegulatoryTrack.getData(ordNo)
       wkControversialCasesData = await tables.wkControversialCases.getData(ordNo)
       wkComControlData = await tables.wkComControl.getData(ordNo)
+      frProjectIncomeData = await tables.frProjectIncome.getData(ordNo)
     } catch (err) {
       console.error(err)
     }
@@ -68,7 +70,8 @@ export async function GET(request) {
       !wkTrackData.length &&
       !wkRegulatoryTrackData.length &&
       !wkControversialCasesData.length &&
-      !wkComControlData.length
+      !wkComControlData.length &&
+      !frProjectIncomeData.length
     ) {
       return Response.json({
         message: '沒有找到相關資料',
@@ -90,6 +93,7 @@ export async function GET(request) {
         wkRegulatoryTrack: [],
         wkControversialCases: [],
         wkComControl: [],
+        frProjectIncome: [],
       })
     }
 
@@ -112,6 +116,7 @@ export async function GET(request) {
       wkRegulatoryTrack: wkRegulatoryTrackData,
       wkControversialCases: wkControversialCasesData,
       wkComControl: wkComControlData,
+      frProjectIncome: frProjectIncomeData,
     })
   } catch (error) {
     console.error('API錯誤:', error)

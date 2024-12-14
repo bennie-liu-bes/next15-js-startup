@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
+import { COLOR } from '@/config-global'
 import { ICCC_URL } from '@/config-global'
 
 import Stack from '@mui/material/Stack'
@@ -12,10 +13,13 @@ import Slider from '@mui/material/Slider'
 import { IconButton } from '@mui/material'
 import Tooltip from '@mui/material/Tooltip'
 import Toolbar from '@mui/material/Toolbar'
+import Checkbox from '@mui/material/Checkbox'
+import FormGroup from '@mui/material/FormGroup'
 import Typography from '@mui/material/Typography'
 import SettingsIcon from '@mui/icons-material/Settings'
 import FormatSizeIcon from '@mui/icons-material/FormatSize'
 import FullscreenIcon from '@mui/icons-material/Fullscreen'
+import FormControlLabel from '@mui/material/FormControlLabel'
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit'
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp'
 
@@ -68,13 +72,30 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
 
   const [showButtons, setShowButtons] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
-  const { fontSize, setFontSize, fontSizeAlt, setFontSizeAlt } = useFontSize()
+  const {
+    fontSize,
+    setFontSize,
+    fontSizeAlt,
+    setFontSizeAlt,
+    bottomLine,
+    setBottomLine,
+    bgColor,
+    setBgColor,
+  } = useFontSize()
 
   const handleChange = (event, newValue) => {
     setFontSize(newValue)
   }
   const handleChangeAlt = (event, newValue) => {
     setFontSizeAlt(newValue)
+  }
+
+  const handleBottomLineChange = () => {
+    setBottomLine(!bottomLine)
+  }
+
+  const handleBgColorChange = () => {
+    setBgColor(!bgColor)
   }
 
   const toggleFullscreen = () => {
@@ -274,6 +295,35 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
           justifyContent: 'flex-end',
         }}
       >
+        <Stack direction="row" spacing={1} sx={{ mr: 2, display: 'flex', alignItems: 'center' }}>
+          <Typography variant="body1">差異文字註記: </Typography>
+          <FormGroup row>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={bottomLine}
+                  onChange={handleBottomLineChange}
+                  color="secondary"
+                />
+              }
+              label={
+                <Typography variant="body1" sx={{ textDecoration: 'underline solid #ab47bc 3px' }}>
+                  底線
+                </Typography>
+              }
+            />
+            <FormControlLabel
+              control={
+                <Checkbox checked={bgColor} onChange={handleBgColorChange} color="default" />
+              }
+              label={
+                <Typography variant="body1" sx={{ backgroundColor: COLOR.BGCOLOR }}>
+                  底色
+                </Typography>
+              }
+            />
+          </FormGroup>
+        </Stack>
         <Stack spacing={1} direction="row" sx={{ width: '200px', mr: 2 }}>
           <Tooltip title={<Typography variant="body1">字體大小</Typography>} placement="top" arrow>
             <FormatSizeIcon />

@@ -1,7 +1,9 @@
 import { SIZE, COLOR, BORDER_STYLE } from '@/config-global.js'
 
 import { Stack, Tooltip, TableCell, Typography } from '@mui/material'
-export default function TableDataCellDiff({
+
+import { useFontSize } from '../context/useFontSize'
+export default function TableDataCellDiff2({
   icon,
   title,
   originalText,
@@ -14,6 +16,7 @@ export default function TableDataCellDiff({
   tooltip,
   sx,
 }) {
+  const { bottomLine, bgColor } = useFontSize()
   return tooltip ? (
     <Tooltip
       title={
@@ -63,7 +66,10 @@ export default function TableDataCellDiff({
             <Typography
               variant={SIZE.TEXT}
               style={{
-                textDecoration: 'underline solid #ab47bc 3px',
+                display: 'inline-block',
+                textDecorationSkipInk: 'none',
+                textDecoration: bottomLine ? 'underline solid #ab47bc 3px' : 'none',
+                backgroundColor: bgColor ? COLOR.BGCOLOR : 'transparent',
               }}
             >
               {modifiedText}
