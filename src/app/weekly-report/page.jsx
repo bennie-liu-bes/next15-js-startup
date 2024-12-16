@@ -79,7 +79,7 @@ export default function WeeklyReport() {
             plotData2={data.frProjectIncome}
           />
           <Difference data={data.wkDifference[0]} />
-          <DifferenceCash data={data.wkDifferenceCash} />
+          <DifferenceCash data={data.wkDifferenceCash} plotData={data.frProjectIncome} />
           <Revenue data={data.wkRevenue[0]} frProjectIncome={data.frProjectIncome} />
           <Milestone data={data.wkMilestone} />
           <File data={data.wkFile} />

@@ -16,6 +16,13 @@ export default [
   pluginJs.configs.recommended,
   pluginReact.configs.flat.recommended,
   importPlugin.flatConfigs.recommended,
+  // pluginCypress.configs.recommended,
+  // {
+  //   languageOptions: {
+  //     ecmaVersion: 'latest',
+  //     globals: globals.browser,
+  //   },
+  // },
   {
     plugins: {
       'unused-imports': unusedImports,

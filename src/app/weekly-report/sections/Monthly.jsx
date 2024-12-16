@@ -1,14 +1,25 @@
 import { diffWords } from 'diff'
 import { fm2, fmNoUnit, toTWDate } from '@/utils/fm'
-import { SIZE, COLOR, OFFSET } from '@/config-global'
+import { SIZE, COLOR, OFFSET, BORDER_RADIUS } from '@/config-global'
 
 import { red, grey } from '@mui/material/colors'
 import NoteAltIcon from '@mui/icons-material/NoteAlt'
 import CampaignIcon from '@mui/icons-material/Campaign'
-import { Box, Stack, TableRow, TableHead, TableBody, TableCell, Typography } from '@mui/material'
+import {
+  Box,
+  Paper,
+  Stack,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+  Typography,
+} from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
 import { useFontSize } from '../context/useFontSize'
+import MonthlyPlot1 from '../components/MonthlyPlot1'
+import MonthlyPlot2 from '../components/MonthlyPlot2'
 import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
@@ -28,12 +39,12 @@ export default function Monthly({ data, plotData1, plotData2 }) {
         {data && tableHead()}
         {data ? tableBody() : <TableBodyNodata colSpan={4} />}
       </TableWrapper>
-      {/* <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
+      <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
         <MonthlyPlot1 data={plotData1} />
       </Paper>
       <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
         <MonthlyPlot2 data={plotData2} />
-      </Paper> */}
+      </Paper>
     </>
   )
 

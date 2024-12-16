@@ -38,7 +38,7 @@ export default function RegulatoryTrack({ data }) {
               <TableDataCell value={index + 1} textAlign="center" />
               <TableDataCell value={item.CONTRACK_NO} />
               <TableDataCell value={item.CONTRACK_NANE} />
-              <TableDataCell value={item.CONTRACK_LEVEL} />
+              <TableDataCell value={item.CONTRACK_LEVEL} textAlign="center" />
               <TableDataCell
                 value={item.RESERVE_DATE && toTWDate(item.RESERVE_DATE)}
                 tooltip={

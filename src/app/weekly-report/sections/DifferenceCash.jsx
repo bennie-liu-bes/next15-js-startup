@@ -1,10 +1,10 @@
 import { Fragment } from 'react'
-import { COLOR, OFFSET } from '@/config-global'
 import { fmNoUnit, toTWDate } from '@/utils/fm'
+import { COLOR, OFFSET, BORDER_RADIUS } from '@/config-global'
 
 import { grey } from '@mui/material/colors'
 import NoteAltIcon from '@mui/icons-material/NoteAlt'
-import { TableRow, TableHead, TableBody } from '@mui/material'
+import { Paper, TableRow, TableHead, TableBody } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
 import { useFontSize } from '../context/useFontSize'
@@ -14,7 +14,8 @@ import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
 import TableDataCellDiff from '../components/TableDataCellDiff'
 import TableDataCellDiff2 from '../components/TableDataCellDiff2'
-export default function DifferenceCash({ data }) {
+import DifferenceCashPlot from '../components/DifferenceCashPlot'
+export default function DifferenceCash({ data, plotData }) {
   const { fontSizeAlt } = useFontSize()
   return (
     <>
@@ -26,6 +27,9 @@ export default function DifferenceCash({ data }) {
         {tableHead()}
         {data.length > 0 ? tableBody() : <TableBodyNodata colSpan={12} />}
       </TableWrapper>
+      <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
+        <DifferenceCashPlot data={plotData} />
+      </Paper>
     </>
   )
 

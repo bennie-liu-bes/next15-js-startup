@@ -30,10 +30,10 @@ export default function RevenuePlot({ data }) {
         let result = params[0].axisValueLabel + '<br/>'
 
         // 找出對應的數值
-        const monthlyBudget = params.find(p => p.seriesName === '單月預定').value || 0
-        const monthlyActual = params.find(p => p.seriesName === '單月實際').value || 0
-        const accumulatedBudget = params.find(p => p.seriesName === '累計預定').value || 0
-        const accumulatedActual = params.find(p => p.seriesName === '累計實際').value || 0
+        const monthlyBudget = params.find(p => p.seriesName === '單月預定')?.value || 0
+        const monthlyActual = params.find(p => p.seriesName === '單月實際')?.value || 0
+        const accumulatedBudget = params.find(p => p.seriesName === '累計預定')?.value || 0
+        const accumulatedActual = params.find(p => p.seriesName === '累計實際')?.value || 0
 
         // 計算差異值
         const monthlyDiff = monthlyActual - monthlyBudget

@@ -338,7 +338,7 @@ export default function MonthlyPlot1({ data }) {
         xAxisIndex: [0, 1], // 控制兩個 x 軸
         startValue: xAxisData[Math.max(0, xAxisData.length - 12)],
         endValue: xAxisData[xAxisData.length - 1],
-        bottom: 0,
+        bottom: 17,
       },
       {
         type: 'inside',
