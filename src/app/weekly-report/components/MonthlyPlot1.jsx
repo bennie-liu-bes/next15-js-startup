@@ -3,8 +3,7 @@
 import ReactECharts from 'echarts-for-react'
 import { fm2Percent, toTWDate3, toTWDate4, formatNumber } from '@/utils/fm'
 
-export default function MonthlyPlot1({ data, show = false }) {
-  if (!show) return
+export default function MonthlyPlot1({ data }) {
   data = data.sort((a, b) => new Date(a.CALENDAR_DATE) - new Date(b.CALENDAR_DATE))
 
   // 準備圖表數據

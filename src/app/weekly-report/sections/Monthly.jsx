@@ -39,10 +39,14 @@ export default function Monthly({ data, plotData1, plotData2 }) {
         {data && tableHead()}
         {data ? tableBody() : <TableBodyNodata colSpan={4} />}
       </TableWrapper>
-      <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
+      <Paper
+        sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1, display: 'none' }}
+      >
         <MonthlyPlot1 data={plotData1} />
       </Paper>
-      <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
+      <Paper
+        sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1, display: 'none' }}
+      >
         <MonthlyPlot2 data={plotData2} />
       </Paper>
     </>

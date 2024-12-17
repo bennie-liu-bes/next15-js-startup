@@ -3,8 +3,7 @@
 import ReactECharts from 'echarts-for-react'
 import { fm, toTWDate3, formatNumber } from '@/utils/fm'
 
-export default function MonthlyPlot2({ data, show = false }) {
-  if (!show) return
+export default function MonthlyPlot2({ data }) {
   // 準備圖表數據
   const xAxisData = data.map(item => toTWDate3(item.YM))
   const yAxisData = data.map(item => item.AAGBAMT)

@@ -27,7 +27,9 @@ export default function DifferenceCash({ data, plotData }) {
         {tableHead()}
         {data.length > 0 ? tableBody() : <TableBodyNodata colSpan={12} />}
       </TableWrapper>
-      <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
+      <Paper
+        sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1, display: 'none' }}
+      >
         <DifferenceCashPlot data={plotData} />
       </Paper>
     </>
