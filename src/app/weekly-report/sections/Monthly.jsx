@@ -27,7 +27,7 @@ import TableBodyNodata from '../components/TableBodyNodata'
 import TableDataCellDiff from '../components/TableDataCellDiff'
 
 export default function Monthly({ data, plotData1, plotData2 }) {
-  const { fontSize } = useFontSize()
+  const { fontSize, bottomLine, bgColor } = useFontSize()
 
   return (
     <>
@@ -119,18 +119,19 @@ export default function Monthly({ data, plotData1, plotData2 }) {
                     textDecoration: part.removed
                       ? 'line-through'
                       : part.added
-                        ? 'underline solid #ab47bc 3px'
+                        ? bottomLine
+                          ? 'underline solid #ab47bc 3px'
+                          : 'none'
                         : 'none',
                     display: part.removed && 'none',
+                    backgroundColor: part.added && bgColor ? COLOR.BGCOLOR : 'transparent',
                   }}
                 >
                   {part.value}
                 </Typography>
               ))}
             </Box>
-            {/* <Typography variant={SIZE.TEXT} sx={{ whiteSpace: 'pre-wrap', pl: 4 }}>
-                {data.REMARK1}
-              </Typography> */}
+
             <Typography variant={SIZE.TEXT}>
               🎯 日報進度-營收進度差異說明(至{toTWDate(data.YEAR_MONTHEND)})&nbsp;= &nbsp;
               {fm2(data.ACT_SUM)}％&nbsp;-&nbsp;{fm2(data.REV_SUM)}％&nbsp;=&nbsp;
@@ -147,9 +148,12 @@ export default function Monthly({ data, plotData1, plotData2 }) {
                     textDecoration: part.removed
                       ? 'line-through'
                       : part.added
-                        ? 'underline solid #ab47bc 3px'
+                        ? bottomLine
+                          ? 'underline solid #ab47bc 3px'
+                          : 'none'
                         : 'none',
                     display: part.removed && 'none',
+                    backgroundColor: part.added && bgColor ? COLOR.BGCOLOR : 'transparent',
                   }}
                 >
                   {part.value}
