@@ -27,6 +27,7 @@ export async function GET(request) {
     let wkRegulatoryTrackData = []
     let wkControversialCasesData = []
     let wkComControlData = []
+    let wkMonthlyPlot1Data = []
     let frProjectIncomeData = []
     try {
       wkWeeklyDateData = await tables.wkWeeklyDate.getData(ordNo)
@@ -47,6 +48,7 @@ export async function GET(request) {
       wkRegulatoryTrackData = await tables.wkRegulatoryTrack.getData(ordNo)
       wkControversialCasesData = await tables.wkControversialCases.getData(ordNo)
       wkComControlData = await tables.wkComControl.getData(ordNo)
+      wkMonthlyPlot1Data = await tables.wkMonthlyPlot1.getData(ordNo)
       frProjectIncomeData = await tables.frProjectIncome.getData(ordNo)
     } catch (err) {
       console.error(err)
@@ -71,6 +73,7 @@ export async function GET(request) {
       !wkRegulatoryTrackData.length &&
       !wkControversialCasesData.length &&
       !wkComControlData.length &&
+      !wkMonthlyPlot1Data.length &&
       !frProjectIncomeData.length
     ) {
       return Response.json({
@@ -93,6 +96,7 @@ export async function GET(request) {
         wkRegulatoryTrack: [],
         wkControversialCases: [],
         wkComControl: [],
+        wkMonthlyPlot1: [],
         frProjectIncome: [],
       })
     }
@@ -116,6 +120,7 @@ export async function GET(request) {
       wkRegulatoryTrack: wkRegulatoryTrackData,
       wkControversialCases: wkControversialCasesData,
       wkComControl: wkComControlData,
+      wkMonthlyPlot1: wkMonthlyPlot1Data,
       frProjectIncome: frProjectIncomeData,
     })
   } catch (error) {

@@ -27,6 +27,17 @@ export const fm2 = number => {
   }).format(number)
 }
 
+// 格式化百分比的函數(強制顯示小數2位)
+export const fm2Percent = number => {
+  if (!number || isNaN(number)) return '-'
+  return (
+    new Intl.NumberFormat('zh-TW', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(number) + '%'
+  )
+}
+
 // 西元年轉民國年
 export const toTWDate = dateStr => {
   if (!dateStr) return '-'
@@ -86,6 +97,29 @@ export const toTWDate3 = dateStr => {
   }
 }
 
+// 西元年轉民國年
+export const toTWDate4 = dateStr => {
+  if (!dateStr) return '-'
+  const ifTrans = true
+
+  try {
+    // 檢查是否符合 yyyy/MM/dd 格式
+    const datePattern = /^\d{4}\/\d{2}\/\d{2}$/
+    if (!datePattern.test(dateStr)) return dateStr
+
+    const [year, month, day] = dateStr.split('/')
+
+    if (ifTrans) {
+      const twYear = parseInt(year) - 1911
+      return `${twYear}年${month}月${day}日`
+    }
+
+    return dateStr
+    // eslint-disable-next-line unused-imports/no-unused-vars
+  } catch (error) {
+    return '-'
+  }
+}
 // 格式化數字函數
 export const formatNumber = value => {
   const absValue = Math.abs(value)
