@@ -3,7 +3,8 @@
 import ReactECharts from 'echarts-for-react'
 import { fm, toTWDate3, formatNumber } from '@/utils/fm'
 
-export default function MonthlyPlot2({ data }) {
+export default function MonthlyPlot2({ data, show = false }) {
+  if (!show) return
   // 準備圖表數據
   const xAxisData = data.map(item => toTWDate3(item.YM))
   const yAxisData = data.map(item => item.AAGBAMT)
@@ -63,7 +64,7 @@ export default function MonthlyPlot2({ data }) {
     yAxis: [
       {
         type: 'value',
-        name: '累計金額(元)',
+        name: '金額(元)',
         position: 'left',
         axisLine: {
           show: true,
