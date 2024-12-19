@@ -373,12 +373,12 @@ export default function MonthlyPlot1({ data }) {
         endValue: getCurrentYearMonth(),
         bottom: 17,
       },
-      {
-        type: 'inside',
-        xAxisIndex: [0, 1], // 控制兩個 x 軸
-        startValue: getStartYearMonth(),
-        endValue: getCurrentYearMonth(),
-      },
+      // {
+      //   type: 'inside',
+      //   xAxisIndex: [0, 1], // 控制兩個 x 軸
+      //   startValue: getStartYearMonth(),
+      //   endValue: getCurrentYearMonth(),
+      // },
     ],
   }
 

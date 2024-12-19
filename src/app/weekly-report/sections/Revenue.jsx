@@ -1,6 +1,6 @@
-import { fmNoUnit } from '@/utils/fm'
 import { COLOR, OFFSET } from '@/config-global'
 import { BORDER_RADIUS } from '@/config-global.js'
+import { fmNoUnit, toTWDate5, toTWDate6 } from '@/utils/fm'
 
 import { red, grey } from '@mui/material/colors'
 import NoteAltIcon from '@mui/icons-material/NoteAlt'
@@ -121,21 +121,29 @@ export default function Revenue({ data, frProjectIncome }) {
       >
         <TableRow>
           <TableTitleCell title="" minWidth="120px" />
-          <TableTitleCell title={data.PREPER_TITLE_A} minWidth="180px" textAlign="right" />
-          <TableTitleCell title={data.PREPER_TITLE_B} minWidth="180px" textAlign="right" />
           <TableTitleCell
-            title={data.PREPER_TITLE_C.replace(/\\n/g, '\n')}
+            title={toTWDate5(data.PREPER_TITLE_A)}
             minWidth="180px"
             textAlign="right"
           />
           <TableTitleCell
-            title={data.A_GRAND_TOTAL_TITLE}
+            title={toTWDate5(data.PREPER_TITLE_B)}
+            minWidth="180px"
+            textAlign="right"
+          />
+          <TableTitleCell
+            title={toTWDate6(data.PREPER_TITLE_C.replace(/\\n/g, '\n'))}
+            minWidth="180px"
+            textAlign="right"
+          />
+          <TableTitleCell
+            title={toTWDate6(data.A_GRAND_TOTAL_TITLE)}
             minWidth="180px"
             textAlign="right"
             rowSpan={2}
           />
           <TableTitleCell
-            title={data.A_GRAND_TOTAL_O_TITLE.replace(/\\n/g, '\n')}
+            title={toTWDate6(data.A_GRAND_TOTAL_O_TITLE.replace(/\\n/g, '\n'))}
             minWidth="240px"
             textAlign="right"
             rowSpan={2}

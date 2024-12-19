@@ -30,25 +30,27 @@ import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp
 import DateDropDown from './DateDropDown'
 import { useFontSize } from '../context/useFontSize'
 
-// 抽取共用的滾動邏輯
-const scrollToSection = sectionId => {
-  const element = document.getElementById(sectionId)
-  if (element) {
-    const elementPosition = element.getBoundingClientRect().top
-    const offsetPosition = elementPosition + window.pageYOffset
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth',
-    })
-  }
-}
-
 export default function NavBar({ data, selectedDate, handleDateChange }) {
   const theme = useTheme()
   if (data.wkMain.length === 0) return null
 
   const [isFullscreen, setIsFullscreen] = useState(false)
+  const [secondToolbarHeight, setSecondToolbarHeight] = useState(0)
+  console.log(secondToolbarHeight)
+
+  // 抽取共用的滾動邏輯
+  const scrollToSection = sectionId => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset
+
+      window.scrollTo({
+        top: offsetPosition - 50,
+        behavior: 'smooth',
+      })
+    }
+  }
 
   const handleScrollToTop = () => {
     window.scrollTo({
@@ -123,6 +125,31 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
     }
   }, [isSmUp])
 
+  // 新增 useEffect 來獲取 toolbar 高度
+  useEffect(() => {
+    const updateToolbarHeight = () => {
+      const secondToolbarElement = document.querySelector('.second-toolbar')
+      if (secondToolbarElement) {
+        const height =
+          secondToolbarElement.offsetHeight +
+          parseInt(window.getComputedStyle(secondToolbarElement).marginTop) +
+          parseInt(window.getComputedStyle(secondToolbarElement).marginBottom)
+        setSecondToolbarHeight(height)
+      }
+    }
+
+    // 初始計算
+    updateToolbarHeight()
+
+    // 監聽視窗大小變化
+    window.addEventListener('resize', updateToolbarHeight)
+
+    // 清理函數
+    return () => {
+      window.removeEventListener('resize', updateToolbarHeight)
+    }
+  }, []) // 當螢幕寬度改變時重新計算
+
   return (
     <AppBar
       position="sticky"
@@ -191,6 +218,7 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
   function secondToolbar() {
     return (
       <Toolbar
+        id="second-toolbar"
         variant="dense"
         sx={{
           minHeight: '35px',

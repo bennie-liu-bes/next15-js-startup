@@ -97,11 +97,11 @@ export default function MonthlyPlot2({ data }) {
         startValue: xAxisData[Math.max(0, xAxisData.length - 12)],
         endValue: xAxisData[xAxisData.length - 1],
       },
-      {
-        type: 'inside',
-        startValue: xAxisData[Math.max(0, xAxisData.length - 12)],
-        endValue: xAxisData[xAxisData.length - 1],
-      },
+      // {
+      //   type: 'inside',
+      //   startValue: xAxisData[Math.max(0, xAxisData.length - 12)],
+      //   endValue: xAxisData[xAxisData.length - 1],
+      // },
     ],
   }
 

@@ -120,6 +120,50 @@ export const toTWDate4 = dateStr => {
     return '-'
   }
 }
+
+// 西元年轉民國年
+export const toTWDate5 = dateStr => {
+  if (!dateStr) return '-'
+  const ifTrans = true
+
+  try {
+    // 檢查是否符合 yyyy/MM/dd 格式
+    const datePattern = /^\d{4}\/\d{2}$/
+    if (!datePattern.test(dateStr)) return dateStr
+
+    const [year, month] = dateStr.split('/')
+
+    if (ifTrans) {
+      const twYear = parseInt(year) - 1911
+      return `${twYear}/${month}`
+    }
+
+    return dateStr
+    // eslint-disable-next-line unused-imports/no-unused-vars
+  } catch (error) {
+    return '-'
+  }
+}
+
+// 西元年轉民國年
+export const toTWDate6 = str => {
+  if (!str) return '-'
+  try {
+    // 使用正則表達式找出所有 20XX 年份
+    const yearPattern = /20\d{2}/g
+
+    // 替換所有符合的年份為民國年
+    const result = str.replace(yearPattern, match => {
+      const twYear = parseInt(match) - 1911
+      return twYear.toString()
+    })
+
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
 // 格式化數字函數
 export const formatNumber = value => {
   const absValue = Math.abs(value)
