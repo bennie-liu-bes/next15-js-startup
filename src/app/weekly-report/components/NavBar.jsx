@@ -2,9 +2,9 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState } from 'react'
 import { COLOR } from '@/config-global'
 import { ICCC_URL } from '@/config-global'
+import { useState, useEffect } from 'react'
 
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
@@ -15,10 +15,12 @@ import Divider from '@mui/material/Divider'
 import Tooltip from '@mui/material/Tooltip'
 import Toolbar from '@mui/material/Toolbar'
 import Checkbox from '@mui/material/Checkbox'
+import { useTheme } from '@mui/material/styles'
 import FormGroup from '@mui/material/FormGroup'
 import Typography from '@mui/material/Typography'
 import SettingsIcon from '@mui/icons-material/Settings'
 import EditNoteIcon from '@mui/icons-material/EditNote'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import FormatSizeIcon from '@mui/icons-material/FormatSize'
 import FullscreenIcon from '@mui/icons-material/Fullscreen'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -43,6 +45,7 @@ const scrollToSection = sectionId => {
 }
 
 export default function NavBar({ data, selectedDate, handleDateChange }) {
+  const theme = useTheme()
   if (data.wkMain.length === 0) return null
 
   const [isFullscreen, setIsFullscreen] = useState(false)
@@ -72,7 +75,9 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
   // 從 data 中解構需要的數據
   const { SITE_CNAME, ORD_CH } = data.wkMain[0]
 
-  const [showButtons, setShowButtons] = useState(true)
+  const isSmUp = useMediaQuery(theme.breakpoints.up('sm'))
+
+  const [showButtons, setShowButtons] = useState(isSmUp ? false : true)
   const [showSettings, setShowSettings] = useState(false)
   const {
     fontSize,
@@ -109,13 +114,22 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
     setIsFullscreen(!isFullscreen)
   }
 
+  // 新增 useEffect 來監聽螢幕大小變化
+  useEffect(() => {
+    if (isSmUp) {
+      setShowButtons(true)
+    } else {
+      setShowButtons(false)
+    }
+  }, [isSmUp])
+
   return (
     <AppBar
       position="sticky"
       color="default"
       onMouseEnter={() => setShowButtons(true)}
       onMouseLeave={() => {
-        setShowButtons(true)
+        setShowButtons(isSmUp ? true : false)
         setShowSettings(false)
       }}
     >

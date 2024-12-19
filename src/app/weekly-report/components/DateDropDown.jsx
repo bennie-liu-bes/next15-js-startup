@@ -7,7 +7,7 @@ export default function DateDropDown({ selectedDate, onDateChange, wkWeeklyDate 
 
   return (
     <Stack direction="row" alignItems="center" spacing={1}>
-      <Typography variant="body1" noWrap>
+      <Typography variant="body1" noWrap sx={{ display: { xs: 'none', sm: 'block' } }}>
         週報日期
       </Typography>
       <FormControl size="small">
