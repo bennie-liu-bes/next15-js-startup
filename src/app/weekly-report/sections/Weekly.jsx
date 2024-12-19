@@ -1,5 +1,6 @@
 import { Fragment } from 'react'
 import { fm2, toTWDate } from '@/utils/fm'
+import NumberFlow from '@number-flow/react'
 import { COLOR, OFFSET } from '@/config-global'
 
 import { red, grey } from '@mui/material/colors'
@@ -35,11 +36,28 @@ export default function Weekly({ data, data2 }) {
       <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}>
         <TableRow>
           <TableDataCell value="預定累計" />
-          <TableDataCell value={fm2(data.EXP_PERCENT1)} textAlign="right" />
-          <TableDataCell value={fm2(data.EXP_PERCENT2)} textAlign="right" />
-          <TableDataCell value={fm2(data.EXP_PERCENT3)} textAlign="right" />
           <TableDataCell
-            value={fm2(data.EXP_PERCENT4)}
+            value={
+              <NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.EXP_PERCENT1)} />
+            }
+            textAlign="right"
+          />
+          <TableDataCell
+            value={
+              <NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.EXP_PERCENT2)} />
+            }
+            textAlign="right"
+          />
+          <TableDataCell
+            value={
+              <NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.EXP_PERCENT3)} />
+            }
+            textAlign="right"
+          />
+          <TableDataCell
+            value={
+              <NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.EXP_PERCENT4)} />
+            }
             textAlign="right"
             isChanged={'true'}
             borderRight={false}
@@ -47,11 +65,20 @@ export default function Weekly({ data, data2 }) {
         </TableRow>
         <TableRow>
           <TableDataCell value="實際累計" />
-          <TableDataCell value={fm2(data.ACT_SUM1)} textAlign="right" />
-          <TableDataCell value={fm2(data.ACT_SUM2)} textAlign="right" />
-          <TableDataCell value={fm2(data.ACT_SUM3)} textAlign="right" />
           <TableDataCell
-            value={fm2(data.ACT_SUM4)}
+            value={<NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.ACT_SUM1)} />}
+            textAlign="right"
+          />
+          <TableDataCell
+            value={<NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.ACT_SUM2)} />}
+            textAlign="right"
+          />
+          <TableDataCell
+            value={<NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.ACT_SUM3)} />}
+            textAlign="right"
+          />
+          <TableDataCell
+            value={<NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.ACT_SUM4)} />}
             textAlign="right"
             isChanged={'true'}
             borderRight={false}
@@ -59,11 +86,40 @@ export default function Weekly({ data, data2 }) {
         </TableRow>
         <TableRow>
           <TableDataCell value="差異" />
-          <TableDataCell value={fm2(data.ACT_SUM1 - data.EXP_PERCENT1)} textAlign="right" />
-          <TableDataCell value={fm2(data.ACT_SUM2 - data.EXP_PERCENT2)} textAlign="right" />
-          <TableDataCell value={fm2(data.ACT_SUM3 - data.EXP_PERCENT3)} textAlign="right" />
           <TableDataCell
-            value={fm2(data.ACT_SUM4 - data.EXP_PERCENT4)}
+            value={
+              <NumberFlow
+                format={{ minimumFractionDigits: 2 }}
+                value={fm2(data.ACT_SUM1 - data.EXP_PERCENT1)}
+              />
+            }
+            textAlign="right"
+          />
+          <TableDataCell
+            value={
+              <NumberFlow
+                format={{ minimumFractionDigits: 2 }}
+                value={fm2(data.ACT_SUM2 - data.EXP_PERCENT2)}
+              />
+            }
+            textAlign="right"
+          />
+          <TableDataCell
+            value={
+              <NumberFlow
+                format={{ minimumFractionDigits: 2 }}
+                value={fm2(data.ACT_SUM3 - data.EXP_PERCENT3)}
+              />
+            }
+            textAlign="right"
+          />
+          <TableDataCell
+            value={
+              <NumberFlow
+                format={{ minimumFractionDigits: 2 }}
+                value={fm2(data.ACT_SUM4 - data.EXP_PERCENT4)}
+              />
+            }
             textAlign="right"
             isChanged={'true'}
             borderRight={false}

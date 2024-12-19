@@ -2,9 +2,9 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { useState } from 'react'
 import { COLOR } from '@/config-global'
 import { ICCC_URL } from '@/config-global'
-import { useState, useEffect } from 'react'
 
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
@@ -35,8 +35,6 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
   if (data.wkMain.length === 0) return null
 
   const [isFullscreen, setIsFullscreen] = useState(false)
-  const [secondToolbarHeight, setSecondToolbarHeight] = useState(0)
-  console.log(secondToolbarHeight)
 
   // 抽取共用的滾動邏輯
   const scrollToSection = sectionId => {
@@ -115,40 +113,6 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
     }
     setIsFullscreen(!isFullscreen)
   }
-
-  // 新增 useEffect 來監聽螢幕大小變化
-  useEffect(() => {
-    if (isSmUp) {
-      setShowButtons(true)
-    } else {
-      setShowButtons(false)
-    }
-  }, [isSmUp])
-
-  // 新增 useEffect 來獲取 toolbar 高度
-  useEffect(() => {
-    const updateToolbarHeight = () => {
-      const secondToolbarElement = document.querySelector('.second-toolbar')
-      if (secondToolbarElement) {
-        const height =
-          secondToolbarElement.offsetHeight +
-          parseInt(window.getComputedStyle(secondToolbarElement).marginTop) +
-          parseInt(window.getComputedStyle(secondToolbarElement).marginBottom)
-        setSecondToolbarHeight(height)
-      }
-    }
-
-    // 初始計算
-    updateToolbarHeight()
-
-    // 監聽視窗大小變化
-    window.addEventListener('resize', updateToolbarHeight)
-
-    // 清理函數
-    return () => {
-      window.removeEventListener('resize', updateToolbarHeight)
-    }
-  }, []) // 當螢幕寬度改變時重新計算
 
   return (
     <AppBar
