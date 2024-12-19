@@ -72,7 +72,7 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
   // 從 data 中解構需要的數據
   const { SITE_CNAME, ORD_CH } = data.wkMain[0]
 
-  const [showButtons, setShowButtons] = useState(false)
+  const [showButtons, setShowButtons] = useState(true)
   const [showSettings, setShowSettings] = useState(false)
   const {
     fontSize,
@@ -115,7 +115,7 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
       color="default"
       onMouseEnter={() => setShowButtons(true)}
       onMouseLeave={() => {
-        setShowButtons(false)
+        setShowButtons(true)
         setShowSettings(false)
       }}
     >
