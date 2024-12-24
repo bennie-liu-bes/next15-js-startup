@@ -29,7 +29,7 @@ export default function File({ data }) {
             <TableRow sx={{ bgcolor: '#BDE3FF' }}>
               <TableCell>
                 <Typography variant={SIZE.TEXT}>
-                  🖼️ {index + 1}.{item.PIC_TYPE_CH}
+                  {item.FILE_TEXT ? '📋' : '🖼️'} {index + 1}.{item.PIC_TYPE_CH}
                 </Typography>
               </TableCell>
             </TableRow>
