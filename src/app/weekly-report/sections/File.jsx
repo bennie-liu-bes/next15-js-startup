@@ -30,6 +30,7 @@ export default function File({ data }) {
               <TableCell>
                 <Typography variant={SIZE.TEXT}>
                   {item.FILE_TEXT ? '📋' : '🖼️'} {index + 1}.{item.PIC_TYPE_CH}
+                  {item.REMARK && ` - ${item.REMARK}`}
                 </Typography>
               </TableCell>
             </TableRow>
