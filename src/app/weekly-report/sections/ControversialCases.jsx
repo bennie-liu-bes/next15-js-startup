@@ -1,7 +1,9 @@
 import { Fragment } from 'react'
 import { COLOR, OFFSET } from '@/config-global'
 
+import Chip from '@mui/material/Chip'
 import { TableRow, TableHead, TableBody } from '@mui/material'
+import PriorityHighIcon from '@mui/icons-material/PriorityHigh'
 
 import TableFooter from '../components/TableFooter'
 import { useFontSize } from '../context/useFontSize'
@@ -33,8 +35,24 @@ export default function ControversialCases({ data }) {
           <Fragment key={index}>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
               <TableDataCell value={index + 1} rowSpan={3} textAlign="center" />
-              <TableDataCell value={item.C_TYPE_CH} />
-              <TableDataCell value={item.C_ITEMS} isChanged={item.C_ITEMS_CHANGE} />
+              {item.C_TYPE_CH === '爭議中' ? (
+                <TableDataCell
+                  value={
+                    <Chip
+                      label={item.C_TYPE_CH}
+                      icon={<PriorityHighIcon />}
+                      color="error"
+                      variant="outlined"
+                      size="large"
+                      sx={{ '& .MuiChip-label': { fontSize: '1.2rem' } }}
+                    />
+                  }
+                  rowSpan={3}
+                />
+              ) : (
+                <TableDataCell value={item.C_TYPE_CH} rowSpan={3} />
+              )}
+              <TableDataCell value={item.C_ITEMS} rowSpan={3} isChanged={item.C_ITEMS_CHANGE} />
               <TableDataCell value={item.REASON} isChanged={item.REASON_CHANGE} />
               <TableDataCell value={item.C_AMOUNT} isChanged={item.C_AMOUNT_CHANGE} />
             </TableRow>
@@ -67,16 +85,10 @@ export default function ControversialCases({ data }) {
         <TableRow>
           <TableTitleCell title="項次" width="80px" rowSpan={3} textAlign="center" />
           <TableTitleCell title="狀態" minWidth="120px" />
-          <TableTitleCell title="爭議項目(包含業主、廠商及其他關係人)" minWidth="200px" />
+          <TableTitleCell title="爭議項目(包含業主、廠商及其他關係人)" minWidth="140px" />
           <TableTitleCell title="原由及說明(包含人事時地物)" minWidth="200px" />
           <TableTitleCell title="爭議標的(工期或金額)" minWidth="200px" borderRight={false} />
         </TableRow>
-        {/* <TableRow>
-          <TableTitleCell title="辦況說明" colSpan={4} borderRight={false} />
-        </TableRow>
-        <TableRow>
-          <TableTitleCell title="備註" colSpan={4} borderRight={false} />
-        </TableRow> */}
       </TableHead>
     )
   }

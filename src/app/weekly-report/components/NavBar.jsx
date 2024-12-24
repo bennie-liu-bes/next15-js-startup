@@ -352,7 +352,7 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
             step={0.05}
             marks={[{ value: 1.25, label: undefined }]}
             valueLabelDisplay="auto"
-            valueLabelFormat={value => (value === 1.25 ? '預設1.25倍' : `${value}倍`)}
+            valueLabelFormat={value => (value === 1.25 ? `預設${value}倍` : `${value}倍`)}
             onChange={handleChange}
           />
         </Stack>

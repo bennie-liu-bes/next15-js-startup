@@ -20,6 +20,7 @@ export const fmNoUnit = number => {
 
 // 格式化金額的函數(強制顯示小數2位)
 export const fm2 = number => {
+  if (number === 0) return 0.0
   if (!number || isNaN(number)) return '-'
   return new Intl.NumberFormat('zh-TW', {
     minimumFractionDigits: 2,

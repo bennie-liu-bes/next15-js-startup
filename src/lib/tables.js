@@ -211,6 +211,7 @@ export const tables = {
         FROM FR_WK_CONTROVERSIAL_CASES
         WHERE 1=1
         AND ORD_NO = @ordNo
+        ORDER BY C_TYPE DESC, C_ID
       `
       return await db.query(query, { ordNo })
     },

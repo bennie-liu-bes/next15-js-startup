@@ -2,8 +2,6 @@ import { Fragment } from 'react'
 import { fmNoUnit, toTWDate } from '@/utils/fm'
 import { COLOR, OFFSET, BORDER_RADIUS } from '@/config-global'
 
-import { grey } from '@mui/material/colors'
-import NoteAltIcon from '@mui/icons-material/NoteAlt'
 import { Paper, TableRow, TableHead, TableBody } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
@@ -42,9 +40,12 @@ export default function DifferenceCash({ data, plotData }) {
           <Fragment key={index}>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
               <TableDataCell value={index + 1} rowSpan={2} textAlign="center" />
-              <TableDataCell value={`${toTWDate(item.ESTM_START)}~\n${toTWDate(item.ESTM_END)}`} />
-              <TableDataCell value={item.CMP_ITEM_DESC} />
-              <TableDataCell value={item.ESTM_COUNT} textAlign="center" />
+              <TableDataCell
+                value={`${toTWDate(item.ESTM_START)}~\n${toTWDate(item.ESTM_END)}`}
+                rowSpan={2}
+              />
+              <TableDataCell value={item.CMP_ITEM_DESC} rowSpan={2} />
+              <TableDataCell value={item.ESTM_COUNT} rowSpan={2} textAlign="center" />
               <TableDataCellDiff2
                 originalText={toTWDate(item.PRE_VOI_DAY_PRE)}
                 modifiedText={toTWDate(item.PRE_VOI_DAY)}
@@ -53,8 +54,7 @@ export default function DifferenceCash({ data, plotData }) {
               />
               <TableDataCellDiff2
                 originalText={fmNoUnit(item.PRE_VOI_AMOUNT_PRE)}
-                // modifiedText={fmNoUnit(item.PRE_VOI_AMOUNT)}
-                modifiedText={'99,999,999'}
+                modifiedText={fmNoUnit(item.PRE_VOI_AMOUNT)}
                 isChanged={item.PRE_VOI_AMOUNT_CHANGE}
                 textAlign="right"
               />
@@ -98,11 +98,11 @@ export default function DifferenceCash({ data, plotData }) {
             </TableRow>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
               <TableDataCellDiff
-                originalText={item.REMARK_PRE}
-                modifiedText={item.REMARK}
-                icon={<NoteAltIcon sx={{ color: grey[600] }} />}
+                originalText={`備註：${item.REMARK_PRE}`}
+                modifiedText={`備註：${item.REMARK}`}
+                // icon={<NoteAltIcon sx={{ color: grey[600] }} />}
                 colSpan={11}
-                title="備註："
+                // title="備註："
                 isChanged={item.REMARK_CHANGE}
                 borderRight={false}
               />

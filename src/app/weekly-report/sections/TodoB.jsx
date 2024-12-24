@@ -33,8 +33,8 @@ export default function TodoB({ data }) {
           <Fragment key={index}>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
               <TableDataCell value={index + 1} rowSpan={2} textAlign="center" />
-              <TableDataCell value={item.TODOB_NUM} isChanged={item.TODOB_NUM_CHANGE} />
-              <TableDataCell value={item.TODOB_NO} isChanged={item.TODOB_NO_CHANGE} />
+              <TableDataCell value={item.TODOB_NUM} rowSpan={2} isChanged={item.TODOB_NUM_CHANGE} />
+              <TableDataCell value={item.TODOB_NO} rowSpan={2} isChanged={item.TODOB_NO_CHANGE} />
               <TableDataCell value={item.DELIVER_DATE} isChanged={item.DELIVER_DATE_CHANGE} />
               <TableDataCell value={item.ORGANIZER} isChanged={item.ORGANIZER_CHANGE} />
               <TableDataCell value={item.LISTED_TYPE_CH} isChanged={item.LISTED_TYPE_CH_CHANGE} />

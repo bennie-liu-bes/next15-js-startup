@@ -33,7 +33,7 @@ export default function WeeklyReport() {
   const { selectedDate, handleDateChange, setDefaultDate } = useWeeklyReportDate()
   const ordNo = useGetOrdNo()
   const { data, loading, error } = useDB(ordNo, selectedDate)
-
+  console.log(data)
   useEffect(() => {
     if (data.wkWeeklyDate.length > 0 && !selectedDate) {
       setDefaultDate(data.wkWeeklyDate)

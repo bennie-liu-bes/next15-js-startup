@@ -39,6 +39,7 @@ export default function Milestone({ data }) {
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
               <TableDataCell value={index + 1} rowSpan={3} textAlign="center" />
               <TableDataCell
+                rowSpan={3}
                 value={item.MILESTONE_NO_SUB}
                 isChanged={item.MILESTONE_NO_SUB_CHANGE}
               />
@@ -104,12 +105,6 @@ export default function Milestone({ data }) {
           <TableTitleCell title="完成交付項目" minWidth="200px" />
           <TableTitleCell title="預估逾期罰款" minWidth="160px" borderRight={false} />
         </TableRow>
-        {/* <TableRow>
-          <TableTitleCell title="逾期罰則" colSpan={6} borderRight={false} />
-        </TableRow>
-        <TableRow>
-          <TableTitleCell title="備註" colSpan={6} borderRight={false} />
-        </TableRow> */}
       </TableHead>
     )
   }

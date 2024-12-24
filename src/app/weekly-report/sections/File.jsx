@@ -9,6 +9,7 @@ import TableFooter from '../components/TableFooter'
 import TableWrapper from '../components/TableWrapper'
 import TableBodyNodata from '../components/TableBodyNodata'
 export default function File({ data }) {
+  console.log(data)
   return (
     <>
       <div id="file-section" style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }} />
@@ -33,18 +34,29 @@ export default function File({ data }) {
             {item.FILE_URL && (
               <TableRow sx={{ bgcolor: COLOR.BGCOLOR }}>
                 <TableCell>
-                  <Image
-                    src={item.FILE_URL}
-                    alt={item.PIC_TYPE_CH}
-                    width={2400}
-                    height={1600}
-                    style={{
-                      objectFit: 'contain',
-                      border: '1px solid #e0e0e0', // 加入淺灰色邊框
-                      borderRadius: '8px',
-                    }}
-                    className="w-full object-contain"
-                  />
+                  {item.FILE_PATH ? (
+                    <Image
+                      src={item.FILE_URL}
+                      alt={item.PIC_TYPE_CH}
+                      width={2400}
+                      height={1600}
+                      style={{
+                        objectFit: 'contain',
+                        border: '1px solid #e0e0e0', // 加入淺灰色邊框
+                        borderRadius: '8px',
+                      }}
+                      className="w-full object-contain"
+                    />
+                  ) : (
+                    <Typography
+                      variant={SIZE.TEXT}
+                      sx={{
+                        whiteSpace: 'pre-wrap',
+                      }}
+                    >
+                      {item.FILE_TEXT}
+                    </Typography>
+                  )}
                 </TableCell>
               </TableRow>
             )}

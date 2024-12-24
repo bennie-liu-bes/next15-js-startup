@@ -38,7 +38,7 @@ export default function CriticalpathCco({ data }) {
           <Fragment key={index}>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
               <TableDataCell value={index + 1} rowSpan={3} textAlign="center" />
-              <TableDataCell value={item.CCO_NO} isChanged={item.CCO_NO_CHANGE} />
+              <TableDataCell value={item.CCO_NO} rowSpan={3} isChanged={item.CCO_NO_CHANGE} />
               <TableDataCell value={item.CCO_ITEM} isChanged={item.CCO_ITEM_CHANGE} />
               <TableDataCell value={fmNoUnit(item.CCO_AMONT)} isChanged={item.CCO_AMONT_CHANGE} />
               <TableDataCell

@@ -136,7 +136,7 @@ export default function Monthly({ data, plotData1, plotData2 }) {
               ))}
             </Box>
 
-            <Typography variant={SIZE.TEXT}>
+            <Typography variant={SIZE.TEXT} sx={{ mt: 2 }}>
               🎯 日報進度-營收進度差異說明(至{toTWDate(data.YEAR_MONTHEND)})&nbsp;= &nbsp;
               {fm2(data.ACT_SUM)}％&nbsp;-&nbsp;{fm2(data.REV_SUM)}％&nbsp;=&nbsp;
               {fm2(data.ACT_SUM - data.REV_SUM)}％
