@@ -6,10 +6,12 @@ import { SIZE, COLOR, OFFSET } from '@/config-global'
 import { TableRow, TableBody, TableCell, Typography } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
+import { useFontSize } from '../context/useFontSize'
 import TableWrapper from '../components/TableWrapper'
+import TableDataCell from '../components/TableDataCell'
 import TableBodyNodata from '../components/TableBodyNodata'
 export default function File({ data }) {
-  console.log(data)
+  const { fontSize } = useFontSize()
   return (
     <>
       <div id="file-section" style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }} />
@@ -21,7 +23,7 @@ export default function File({ data }) {
 
   function tableBody() {
     return (
-      <TableBody>
+      <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}>
         {data.map((item, index) => (
           <Fragment key={index}>
             <TableRow sx={{ bgcolor: '#BDE3FF' }}>
@@ -33,8 +35,8 @@ export default function File({ data }) {
             </TableRow>
             {item.FILE_URL && (
               <TableRow sx={{ bgcolor: COLOR.BGCOLOR }}>
-                <TableCell>
-                  {item.FILE_PATH ? (
+                {item.FILE_PATH ? (
+                  <TableCell>
                     <Image
                       src={item.FILE_URL}
                       alt={item.PIC_TYPE_CH}
@@ -46,18 +48,11 @@ export default function File({ data }) {
                         borderRadius: '8px',
                       }}
                       className="w-full object-contain"
-                    />
-                  ) : (
-                    <Typography
-                      variant={SIZE.TEXT}
-                      sx={{
-                        whiteSpace: 'pre-wrap',
-                      }}
-                    >
-                      {item.FILE_TEXT}
-                    </Typography>
-                  )}
-                </TableCell>
+                    />{' '}
+                  </TableCell>
+                ) : (
+                  <TableDataCell value={item.FILE_TEXT} />
+                )}
               </TableRow>
             )}
           </Fragment>
