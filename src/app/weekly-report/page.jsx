@@ -33,7 +33,7 @@ export default function WeeklyReport() {
   const { selectedDate, handleDateChange, setDefaultDate } = useWeeklyReportDate()
   const ordNo = useGetOrdNo()
   const { data, loading, error } = useDB(ordNo, selectedDate)
-  console.log(data)
+
   useEffect(() => {
     if (data.wkWeeklyDate.length > 0 && !selectedDate) {
       setDefaultDate(data.wkWeeklyDate)
@@ -67,31 +67,45 @@ export default function WeeklyReport() {
           },
         }}
       >
-        <Stack spacing={2}>
-          <Box sx={{ mb: 2 }}>
-            <Main data={data.wkMain[0]} />
-          </Box>
-          <MainHelp data={data.wkMainHelp} />
-          <Weekly data={data.wkWeekly[0]} data2={data.wkWeeklyCustomize} />
-          <Monthly
-            data={data.wkMonthly[0]}
-            plotData1={data.wkMonthlyPlot1}
-            plotData2={data.frProjectIncome}
-          />
-          <Difference data={data.wkDifference[0]} />
-          <DifferenceCash data={data.wkDifferenceCash} plotData={data.frProjectIncome} />
-          <Revenue data={data.wkRevenue[0]} frProjectIncome={data.frProjectIncome} />
-          <Milestone data={data.wkMilestone} />
-          <File data={data.wkFile} />
-          <CriticalpathCco data={data.wkCriticalpathCco} />
-          <Todo data={data.wkTodo} />
-          <TodoB data={data.wkTodoB} />
-          <Track data={data.wkTrack} />
-          <RegulatoryTrack data={data.wkRegulatoryTrack} />
-          <ControversialCases data={data.wkControversialCases} />
-          <ComControl data={data.wkComControl[0]} />
-          <Footer />
-        </Stack>
+        {ordNo === '102B1A' ? (
+          <Stack spacing={2}>
+            <DifferenceCash data={data.wkDifferenceCash} plotData={data.frProjectIncome} />
+            <Revenue
+              data={data.wkRevenue[0]}
+              frProjectIncome={data.frProjectIncome}
+              showPlot={false}
+            />
+            <File data={data.wkFile} />
+            <RegulatoryTrack data={data.wkRegulatoryTrack} />
+            <Footer />
+          </Stack>
+        ) : (
+          <Stack spacing={2}>
+            <Box sx={{ mb: 2 }}>
+              <Main data={data.wkMain[0]} />
+            </Box>
+            <MainHelp data={data.wkMainHelp} />
+            <Weekly data={data.wkWeekly[0]} data2={data.wkWeeklyCustomize} />
+            <Monthly
+              data={data.wkMonthly[0]}
+              plotData1={data.wkMonthlyPlot1}
+              plotData2={data.frProjectIncome}
+            />
+            <Difference data={data.wkDifference[0]} />
+            <DifferenceCash data={data.wkDifferenceCash} plotData={data.frProjectIncome} />
+            <Revenue data={data.wkRevenue[0]} frProjectIncome={data.frProjectIncome} />
+            <Milestone data={data.wkMilestone} />
+            <File data={data.wkFile} />
+            <CriticalpathCco data={data.wkCriticalpathCco} />
+            <Todo data={data.wkTodo} />
+            <TodoB data={data.wkTodoB} />
+            <Track data={data.wkTrack} />
+            <RegulatoryTrack data={data.wkRegulatoryTrack} />
+            <ControversialCases data={data.wkControversialCases} />
+            <ComControl data={data.wkComControl[0]} />
+            <Footer />
+          </Stack>
+        )}
       </Box>
     </>
   )

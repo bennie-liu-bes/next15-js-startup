@@ -16,7 +16,7 @@ import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
 import TableDataCellDiff from '../components/TableDataCellDiff'
 
-export default function Revenue({ data, frProjectIncome }) {
+export default function Revenue({ data, frProjectIncome, showPlot = true }) {
   const { fontSize } = useFontSize()
 
   return (
@@ -29,9 +29,11 @@ export default function Revenue({ data, frProjectIncome }) {
         {data && tableHead()}
         {data ? tableBody() : <TableBodyNodata colSpan={6} />}
       </TableWrapper>
-      <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
-        <RevenuePlot data={frProjectIncome} />
-      </Paper>
+      {showPlot && (
+        <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
+          <RevenuePlot data={frProjectIncome} />
+        </Paper>
+      )}
     </>
   )
 
