@@ -30,7 +30,7 @@ import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp
 import DateDropDown from './DateDropDown'
 import { useFontSize } from '../context/useFontSize'
 
-export default function NavBar({ data, selectedDate, handleDateChange }) {
+export default function NavBar({ data, selectedDate, handleDateChange, is102B1A }) {
   const theme = useTheme()
   if (data.wkMain.length === 0) return null
 
@@ -205,69 +205,100 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
             width: '100%',
             justifyContent: 'space-evenly',
             overflow: 'hidden',
-            flexWrap: 'wrap', // 允許按��斷行
+            flexWrap: 'wrap', // 允許按鈕斷行
             gap: '4px', // 設定按鈕之間的間距
             mb: 1,
           }}
         >
-          {navButton({
-            value: '壹',
-            handleScroll: handleScrollToWeekly,
-            tooltip: '週進度',
-          })}
-          {navButton({
-            value: '貳',
-            handleScroll: handleScrollToMonthly,
-            tooltip: '月進度差異值',
-          })}
-          {navButton({
-            value: '參-1',
-            handleScroll: handleScrollToDifference,
-            tooltip: '會計報表現金差異',
-          })}
-          {navButton({
-            value: '參-2',
-            handleScroll: handleScrollToDifferenceCash,
-            tooltip: '預估三個月/實際開發票、入帳日期及金額',
-          })}
-          {navButton({
-            value: '肆',
-            handleScroll: handleScrollToRevenue,
-            tooltip: '營收管控',
-          })}
-          {navButton({ value: '伍-1', handleScroll: handleScrollToMilestone, tooltip: '里程碑' })}
-          {navButton({ value: '伍-2', handleScroll: handleScrollToFile, tooltip: '施工現況' })}
-          {navButton({
-            value: '陸',
-            handleScroll: handleScrollToCriticalpathCco,
-            tooltip: '契約變更',
-          })}
-          {navButton({
-            value: '柒-1(a)',
-            handleScroll: handleScrollToTodo,
-            tooltip: '應辦事項-困難解決需求',
-          })}
-          {navButton({
-            value: '柒-1(b)',
-            handleScroll: handleScrollToTodoB,
-            tooltip: '應辦事項-契約規定應辦事項',
-          })}
-          {navButton({ value: '柒-2', handleScroll: handleScrollToTrack, tooltip: '追蹤管制事項' })}
-          {navButton({
-            value: '柒-3',
-            handleScroll: handleScrollToRegulatoryTrack,
-            tooltip: '未來三個月採發提送管制追蹤',
-          })}
-          {navButton({
-            value: '柒-4',
-            handleScroll: handleScrollToControversialCases,
-            tooltip: '爭議案件',
-          })}
-          {navButton({
-            value: '捌',
-            handleScroll: handleScrollToComControl,
-            tooltip: '完工階段管控 - 小包合約結算辦理情形',
-          })}
+          {!is102B1A ? (
+            <>
+              {navButton({
+                value: '壹',
+                handleScroll: handleScrollToWeekly,
+                tooltip: '週進度',
+              })}
+              {navButton({
+                value: '貳',
+                handleScroll: handleScrollToMonthly,
+                tooltip: '月進度差異值',
+              })}
+              {navButton({
+                value: '參-1',
+                handleScroll: handleScrollToDifference,
+                tooltip: '會計報表現金差異',
+              })}
+              {navButton({
+                value: '參-2',
+                handleScroll: handleScrollToDifferenceCash,
+                tooltip: '預估三個月/實際開發票、入帳日期及金額',
+              })}
+              {navButton({
+                value: '肆',
+                handleScroll: handleScrollToRevenue,
+                tooltip: '營收管控',
+              })}
+              {navButton({
+                value: '伍-1',
+                handleScroll: handleScrollToMilestone,
+                tooltip: '里程碑',
+              })}
+              {navButton({ value: '伍-2', handleScroll: handleScrollToFile, tooltip: '施工現況' })}
+              {navButton({
+                value: '陸',
+                handleScroll: handleScrollToCriticalpathCco,
+                tooltip: '契約變更',
+              })}
+              {navButton({
+                value: '柒-1(a)',
+                handleScroll: handleScrollToTodo,
+                tooltip: '應辦事項-困難解決需求',
+              })}
+              {navButton({
+                value: '柒-1(b)',
+                handleScroll: handleScrollToTodoB,
+                tooltip: '應辦事項-契約規定應辦事項',
+              })}
+              {navButton({
+                value: '柒-2',
+                handleScroll: handleScrollToTrack,
+                tooltip: '追蹤管制事項',
+              })}
+              {navButton({
+                value: '柒-3',
+                handleScroll: handleScrollToRegulatoryTrack,
+                tooltip: '未來三個月採發提送管制追蹤',
+              })}
+              {navButton({
+                value: '柒-4',
+                handleScroll: handleScrollToControversialCases,
+                tooltip: '爭議案件',
+              })}
+              {navButton({
+                value: '捌',
+                handleScroll: handleScrollToComControl,
+                tooltip: '完工階段管控 - 小包合約結算辦理情形',
+              })}
+            </>
+          ) : (
+            <>
+              {navButton({
+                value: '壹',
+                handleScroll: handleScrollToRevenue,
+                tooltip: '營收管控',
+              })}
+              {navButton({
+                value: '貳',
+                handleScroll: handleScrollToDifferenceCash,
+                tooltip: '預估三個月/實際開發票、入帳日期及金額',
+              })}
+              {navButton({ value: '參', handleScroll: handleScrollToFile, tooltip: '施工現況' })}
+              {navButton({
+                value: '肆',
+                handleScroll: handleScrollToRegulatoryTrack,
+                tooltip: '未來三個月採發提送管制追蹤',
+              })}
+            </>
+          )}
         </Stack>
         <Tooltip title={<Typography variant="body1">設定</Typography>} placement="top" arrow>
           <IconButton
@@ -390,7 +421,7 @@ export default function NavBar({ data, selectedDate, handleDateChange }) {
           size="medium"
           color="default"
           onClick={handleScroll}
-          sx={{ border: '1px solid #E0E0E0', py: 0.5 }}
+          sx={{ border: '1px solid #E0E0E0', py: 0.5, flex: 1 }}
         >
           {value}
         </Button>

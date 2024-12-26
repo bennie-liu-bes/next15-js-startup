@@ -10,12 +10,12 @@ import { useFontSize } from '../context/useFontSize'
 import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableBodyNodata from '../components/TableBodyNodata'
-export default function File({ data }) {
+export default function File({ data, is102B1A = false }) {
   const { fontSize } = useFontSize()
   return (
     <>
       <div id="file-section" style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }} />
-      <TableWrapper title="伍-2、施工現況">
+      <TableWrapper title={is102B1A ? '參、施工現況' : '伍-2、施工現況'} colSpan={6}>
         {data.length > 0 ? tableBody() : <TableBodyNodata />}
       </TableWrapper>
     </>

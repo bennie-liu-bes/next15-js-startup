@@ -13,7 +13,7 @@ import TableBodyNodata from '../components/TableBodyNodata'
 import TableDataCellDiff from '../components/TableDataCellDiff'
 import TableDataCellDiff2 from '../components/TableDataCellDiff2'
 import DifferenceCashPlot from '../components/DifferenceCashPlot'
-export default function DifferenceCash({ data, plotData }) {
+export default function DifferenceCash({ data, plotData, is102B1A = false }) {
   const { fontSizeAlt } = useFontSize()
   return (
     <>
@@ -21,7 +21,14 @@ export default function DifferenceCash({ data, plotData }) {
         id="difference-cash-section"
         style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }}
       />
-      <TableWrapper title="參-2、預估三個月/實際開發票、入帳日期及金額" colSpan={12}>
+      <TableWrapper
+        title={
+          is102B1A
+            ? '貳、預估三個月/實際開發票、入帳日期及金額'
+            : '參-2、預估三個月/實際開發票、入帳日期及金額'
+        }
+        colSpan={12}
+      >
         {tableHead()}
         {data.length > 0 ? tableBody() : <TableBodyNodata colSpan={12} />}
       </TableWrapper>

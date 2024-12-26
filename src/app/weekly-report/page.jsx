@@ -32,8 +32,9 @@ import ControversialCases from './sections/ControversialCases'
 export default function WeeklyReport() {
   const { selectedDate, handleDateChange, setDefaultDate } = useWeeklyReportDate()
   const ordNo = useGetOrdNo()
+  const is102B1A = ordNo === '102B1A'
   const { data, loading, error } = useDB(ordNo, selectedDate)
-
+  console.log(data)
   useEffect(() => {
     if (data.wkWeeklyDate.length > 0 && !selectedDate) {
       setDefaultDate(data.wkWeeklyDate)
@@ -56,7 +57,12 @@ export default function WeeklyReport() {
 
   return (
     <>
-      <NavBar data={data} selectedDate={selectedDate} handleDateChange={handleDateChange} />
+      <NavBar
+        data={data}
+        selectedDate={selectedDate}
+        handleDateChange={handleDateChange}
+        is102B1A={is102B1A}
+      />
       <Box
         sx={{
           my: 2,
@@ -67,16 +73,21 @@ export default function WeeklyReport() {
           },
         }}
       >
-        {ordNo === '102B1A' ? (
+        {is102B1A ? (
           <Stack spacing={2}>
-            <DifferenceCash data={data.wkDifferenceCash} plotData={data.frProjectIncome} />
             <Revenue
               data={data.wkRevenue[0]}
               frProjectIncome={data.frProjectIncome}
               showPlot={false}
+              is102B1A={is102B1A}
             />
-            <File data={data.wkFile} />
-            <RegulatoryTrack data={data.wkRegulatoryTrack} />
+            <DifferenceCash
+              data={data.wkDifferenceCash}
+              plotData={data.frProjectIncome}
+              is102B1A={is102B1A}
+            />
+            <File data={data.wkFile} is102B1A={is102B1A} />
+            <RegulatoryTrack data={data.wkRegulatoryTrack} is102B1A={is102B1A} />
             <Footer />
           </Stack>
         ) : (

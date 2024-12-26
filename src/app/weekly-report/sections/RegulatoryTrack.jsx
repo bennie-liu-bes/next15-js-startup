@@ -11,7 +11,7 @@ import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
 
-export default function RegulatoryTrack({ data }) {
+export default function RegulatoryTrack({ data, is102B1A = false }) {
   const WARN_COLOR1 = '#AD2D37'
   const WARN_COLOR2 = '#FB6F92'
   const { fontSizeAlt } = useFontSize()
@@ -22,7 +22,10 @@ export default function RegulatoryTrack({ data }) {
         id="regulatory-track-section"
         style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }}
       />
-      <TableWrapper title="柒-3、未來三個月採發提送管制追蹤" colSpan={10}>
+      <TableWrapper
+        title={is102B1A ? '肆、未來三個月採發提送管制追蹤' : '柒-3、未來三個月採發提送管制追蹤'}
+        colSpan={10}
+      >
         {tableHead()}
         {data.length > 0 ? tableBody() : <TableBodyNodata colSpan={10} />}
       </TableWrapper>

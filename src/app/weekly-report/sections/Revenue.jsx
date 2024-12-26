@@ -16,19 +16,25 @@ import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
 import TableDataCellDiff from '../components/TableDataCellDiff'
 
-export default function Revenue({ data, frProjectIncome, showPlot = true }) {
+export default function Revenue({ data, frProjectIncome, showPlot = true, is102B1A = false }) {
   const { fontSize } = useFontSize()
 
   return (
     <>
       <div
         id="revenue-section"
-        style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }}
+        style={{
+          position: 'relative',
+          top: OFFSET,
+          visibility: 'hidden',
+          marginTop: is102B1A && '-16px',
+        }}
       />
-      <TableWrapper title="肆、營收管控(含物調)" colSpan={6}>
+      <TableWrapper title={is102B1A ? '壹、營收管控(含物調)' : '肆、營收管控(含物調)'} colSpan={6}>
         {data && tableHead()}
         {data ? tableBody() : <TableBodyNodata colSpan={6} />}
       </TableWrapper>
+
       {showPlot && (
         <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
           <RevenuePlot data={frProjectIncome} />
