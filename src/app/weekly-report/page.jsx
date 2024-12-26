@@ -35,6 +35,7 @@ export default function WeeklyReport() {
   const is102B1A = ordNo === '102B1A'
   const { data, loading, error } = useDB(ordNo, selectedDate)
   console.log(data)
+
   useEffect(() => {
     if (data.wkWeeklyDate.length > 0 && !selectedDate) {
       setDefaultDate(data.wkWeeklyDate)
@@ -48,6 +49,10 @@ export default function WeeklyReport() {
   if (error) {
     return <Error message={error} />
   }
+
+  // if (data.wkWeeklyDate.length === 0) {
+  //   return <Error message={'工令相關資料尚未建立'} />
+  // }
 
   if (data.message === '沒有找到相關資料') {
     return <Error message={data.message} />

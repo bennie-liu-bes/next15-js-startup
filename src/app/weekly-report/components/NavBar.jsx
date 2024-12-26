@@ -76,8 +76,7 @@ export default function NavBar({ data, selectedDate, handleDateChange, is102B1A 
   const { SITE_CNAME, ORD_CH } = data.wkMain[0]
 
   const isSmUp = useMediaQuery(theme.breakpoints.up('sm'))
-
-  const [showButtons, setShowButtons] = useState(isSmUp ? false : true)
+  const [showButtons, setShowButtons] = useState(isSmUp ? true : false)
   const [showSettings, setShowSettings] = useState(false)
   const {
     fontSize,
