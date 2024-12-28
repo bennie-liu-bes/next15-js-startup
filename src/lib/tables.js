@@ -139,7 +139,7 @@ export const tables = {
         FROM FR_WK_FILE
         WHERE 1=1
         AND ORD_NO = @ordNo
-        ORDER BY PIC_TYPE, FILE_NAME
+        ORDER BY PIC_TYPE, PIC_ORDER
       `
       return await db.query(query, { ordNo })
     },
