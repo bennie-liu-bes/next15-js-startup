@@ -9,6 +9,16 @@ export const fm = number => {
   )
 }
 
+export const fmThousand = number => {
+  if (!number || isNaN(number)) return '-'
+  return (
+    new Intl.NumberFormat('zh-TW', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(number) + '仟元'
+  )
+}
+
 export const fmNoUnit = number => {
   if (number === 0) return '0'
   if (!number || isNaN(number)) return '-'

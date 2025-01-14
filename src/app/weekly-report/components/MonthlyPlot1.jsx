@@ -16,14 +16,14 @@ export default function MonthlyPlot1({ data }) {
   const getCurrentYearMonth = () => {
     const now = new Date()
     // 將日期設為上個月
-    now.setMonth(now.getMonth() - 1)
+    now.setMonth(now.getMonth() - 1 + 1)
     return `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}`
   }
 
   const getStartYearMonth = () => {
     const now = new Date()
     // 從上個月開始往回推11個月（總共12個月）
-    now.setMonth(now.getMonth() - 12)
+    now.setMonth(now.getMonth() - 12 + 1)
     return `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}`
   }
 
@@ -33,24 +33,24 @@ export default function MonthlyPlot1({ data }) {
 
   const s3Data = data.map(item => item.ACT_CUMSUM_PERCENT)
 
-  const s4Data = data.map(item => 2)
+  const s4Data = data.map(item => item.REVENUE_PERCENT)
 
-  const s5Data = data.map(item => 1)
+  const s5Data = data.map(item => item.VALUATION_PERCENT)
 
-  const d1Data = s3Data.map((value, index) => value - s2Data[index])
+  const d1Data = data.map(item => item.ACT_CUMSUM_PERCENT_AND_EXP_CUMSUM_PERCENT_DIFF)
 
-  const d2Data = s3Data.map((value, index) => value - s4Data[index])
+  const d2Data = data.map(item => item.ACT_CUMSUM_PERCENT_AND_REVENUE_PERCENT_DIFF)
 
-  const d3Data = s3Data.map((value, index) => value - s5Data[index])
+  const d3Data = data.map(item => item.ACT_CUMSUM_PERCENT_AND_VALUATION_PERCENT_DIFF)
 
-  const s1Color = '#33658a'
-  const s2Color = '#f6ae2d'
-  const s3Color = '#f26419'
-  const s4Color = '#2f4858'
-  const s5Color = '#86bbd8'
-  const d1Color = '#33658a'
-  const d2Color = '#f6ae2d'
-  const d3Color = '#f26419'
+  const s1Color = '#FF6666'
+  const s2Color = '#66B266'
+  const s3Color = '#A982C6'
+  const s4Color = '#66A9D9'
+  const s5Color = '#FFC966'
+  const d1Color = '#66A9D9'
+  const d2Color = '#A982C6'
+  const d3Color = '#FFC966'
 
   const s1Name = '工期進度'
   const s2Name = '預定進度'

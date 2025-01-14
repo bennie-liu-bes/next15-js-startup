@@ -5,11 +5,27 @@ import { fm, toTWDate3, formatNumber } from '@/utils/fm'
 
 export default function RevenuePlot({ data }) {
   // 準備圖表數據
-  const xAxisData = data.map(item => toTWDate3(item.YM))
+  const xAxisData = data.map(item => item.YM)
+  const xAxisLabel = data.map(item => toTWDate3(item.YM))
   const aagbamtData = data.map(item => item.AAGBAMT)
   const bagbamtData = data.map(item => item.BAGBAMT)
   const aayamtData = data.map(item => item.AAYAMT)
   const bayamtData = data.map(item => item.BAYAMT)
+
+  // 在 option 定義之前加入這段程式碼來計算日期範圍
+  const getCurrentYearMonth = () => {
+    const now = new Date()
+    // 將日期設為上個月
+    now.setMonth(now.getMonth() - 1 + 1)
+    return `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}`
+  }
+
+  const getStartYearMonth = () => {
+    const now = new Date()
+    // 從上個月開始往回推11個月（總共12個月）
+    now.setMonth(now.getMonth() - 12 + 1)
+    return `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}`
+  }
 
   // 圖表配置
   const option = {
@@ -27,7 +43,7 @@ export default function RevenuePlot({ data }) {
       },
       formatter: function (params) {
         // 取得年月標籤
-        let result = params[0].axisValueLabel + '<br/>'
+        let result = toTWDate3(params[0].axisValueLabel) + '<br/>'
 
         // 找出對應的數值
         const monthlyBudget = params.find(p => p.seriesName === '單月預定')?.value || 0
@@ -102,6 +118,7 @@ export default function RevenuePlot({ data }) {
       axisLabel: {
         rotate: 0,
         fontSize: 14,
+        formatter: value => toTWDate3(value),
       },
     },
     yAxis: [
@@ -192,8 +209,8 @@ export default function RevenuePlot({ data }) {
     dataZoom: [
       {
         type: 'slider',
-        startValue: xAxisData[Math.max(0, xAxisData.length - 12)],
-        endValue: xAxisData[xAxisData.length - 1],
+        startValue: getStartYearMonth(),
+        endValue: getCurrentYearMonth(),
       },
       // {
       //   type: 'inside',

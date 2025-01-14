@@ -22,11 +22,13 @@ import MonthlyPlot1 from '../components/MonthlyPlot1'
 import MonthlyPlot2 from '../components/MonthlyPlot2'
 import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
+import MonthlyPlot1DT from '../components/MonthlyPlot1DT'
+import MonthlyPlot2DT from '../components/MonthlyPlot2DT'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
 import TableDataCellDiff from '../components/TableDataCellDiff'
 
-export default function Monthly({ data, plotData1, plotData2 }) {
+export default function Monthly({ data, plotData1 }) {
   const { fontSize, bottomLine, bgColor } = useFontSize()
 
   return (
@@ -39,15 +41,17 @@ export default function Monthly({ data, plotData1, plotData2 }) {
         {data && tableHead()}
         {data ? tableBody() : <TableBodyNodata colSpan={4} />}
       </TableWrapper>
-      <Paper
-        sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1, display: 'none' }}
-      >
+      <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
         <MonthlyPlot1 data={plotData1} />
+        <Box sx={{ mx: '3%', my: '20px' }}>
+          <MonthlyPlot1DT data={plotData1} />
+        </Box>
       </Paper>
-      <Paper
-        sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1, display: 'none' }}
-      >
-        <MonthlyPlot2 data={plotData2} />
+      <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
+        <MonthlyPlot2 data={plotData1} />
+        <Box sx={{ mx: '3%', my: '20px' }}>
+          <MonthlyPlot2DT data={plotData1} />
+        </Box>
       </Paper>
     </>
   )

@@ -5,8 +5,8 @@ import { fm, toTWDate3, formatNumber } from '@/utils/fm'
 
 export default function DifferenceCashPlot({ data }) {
   // 準備圖表數據
-  const xAxisData = data.map(item => toTWDate3(item.YM))
-  const yAxisData = data.map(item => item.AAGBAMT)
+  const xAxisData = data.map(item => toTWDate3(item.YYMM))
+  const yAxisData = data.map(item => item.CUMULATIVE_CASH_RECEIPTS_AND_PAYMENTS_DIFFERENTS)
 
   // 圖表配置
   const option = {
@@ -30,9 +30,7 @@ export default function DifferenceCashPlot({ data }) {
         const accumulatedActual = params.find(p => p.seriesName === '累計金額').value || 0
 
         // 按照指定順序組織顯示內容
-        const items = [
-          { name: '累計金額', value: accumulatedActual, color: '#33658a', type: 'rect' },
-        ]
+        const items = [{ name: '金額', value: accumulatedActual, color: '#33658a', type: 'rect' }]
 
         // 將每個項目加入到 result 中
         items.forEach(item => {

@@ -102,13 +102,9 @@ export default function WeeklyReport() {
             </Box>
             <MainHelp data={data.wkMainHelp} />
             <Weekly data={data.wkWeekly[0]} data2={data.wkWeeklyCustomize} />
-            <Monthly
-              data={data.wkMonthly[0]}
-              plotData1={data.wkMonthlyPlot1}
-              plotData2={data.frProjectIncome}
-            />
+            <Monthly data={data.wkMonthly[0]} plotData1={data.wkMonthlyPlot1} />
             <Difference data={data.wkDifference[0]} />
-            <DifferenceCash data={data.wkDifferenceCash} plotData={data.frProjectIncome} />
+            <DifferenceCash data={data.wkDifferenceCash} plotData={data.wkDifferenceCashPlot} />
             <Revenue data={data.wkRevenue[0]} frProjectIncome={data.frProjectIncome} />
             <Milestone data={data.wkMilestone} />
             <File data={data.wkFile} />

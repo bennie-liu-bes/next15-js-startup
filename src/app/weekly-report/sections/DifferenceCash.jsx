@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { fmNoUnit, toTWDate } from '@/utils/fm'
 import { COLOR, OFFSET, BORDER_RADIUS } from '@/config-global'
 
-import { Paper, TableRow, TableHead, TableBody } from '@mui/material'
+import { Box, Paper, TableRow, TableHead, TableBody } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
 import { useFontSize } from '../context/useFontSize'
@@ -13,6 +13,7 @@ import TableBodyNodata from '../components/TableBodyNodata'
 import TableDataCellDiff from '../components/TableDataCellDiff'
 import TableDataCellDiff2 from '../components/TableDataCellDiff2'
 import DifferenceCashPlot from '../components/DifferenceCashPlot'
+import DifferenceCashPlotDT from '../components/DifferenceCashPlotDT'
 export default function DifferenceCash({ data, plotData, is102B1A = false }) {
   const { fontSizeAlt } = useFontSize()
   return (
@@ -32,10 +33,11 @@ export default function DifferenceCash({ data, plotData, is102B1A = false }) {
         {tableHead()}
         {data.length > 0 ? tableBody() : <TableBodyNodata colSpan={12} />}
       </TableWrapper>
-      <Paper
-        sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1, display: 'none' }}
-      >
+      <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
         <DifferenceCashPlot data={plotData} />
+        <Box sx={{ mx: '3%', my: '20px' }}>
+          <DifferenceCashPlotDT data={plotData} />
+        </Box>
       </Paper>
     </>
   )

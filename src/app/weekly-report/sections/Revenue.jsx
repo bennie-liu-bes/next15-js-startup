@@ -5,12 +5,13 @@ import { fmNoUnit, toTWDate5, toTWDate6 } from '@/utils/fm'
 import { red, grey } from '@mui/material/colors'
 import NoteAltIcon from '@mui/icons-material/NoteAlt'
 import CampaignIcon from '@mui/icons-material/Campaign'
-import { Paper, TableRow, TableHead, TableBody } from '@mui/material'
+import { Box, Paper, TableRow, TableHead, TableBody } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
 import RevenuePlot from '../components/RevenuePlot'
 import { useFontSize } from '../context/useFontSize'
 import TableWrapper from '../components/TableWrapper'
+import RevenuePlotDT from '../components/RevenuePlotDT'
 import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
@@ -38,6 +39,9 @@ export default function Revenue({ data, frProjectIncome, showPlot = true, is102B
       {showPlot && (
         <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
           <RevenuePlot data={frProjectIncome} />
+          <Box sx={{ mx: '3%', my: '20px' }}>
+            <RevenuePlotDT data={frProjectIncome} />
+          </Box>
         </Paper>
       )}
     </>

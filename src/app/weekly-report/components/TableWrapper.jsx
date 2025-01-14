@@ -14,7 +14,7 @@ export default function TableWrapper({ title, colSpan, children }) {
       }}
     >
       <Table sx={{ minWidth: 'md' }} size="small" aria-label="customized table">
-        <TableTitle title={title} colSpan={colSpan} />
+        {title && <TableTitle title={title} colSpan={colSpan} />}
         {children}
       </Table>
     </TableContainer>
