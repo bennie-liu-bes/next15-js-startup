@@ -33,12 +33,14 @@ export default function DifferenceCash({ data, plotData, is102B1A = false }) {
         {tableHead()}
         {data.length > 0 ? tableBody() : <TableBodyNodata colSpan={12} />}
       </TableWrapper>
-      <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
-        <DifferenceCashPlot data={plotData} />
-        <Box sx={{ mx: '3%', my: '20px' }}>
-          <DifferenceCashPlotDT data={plotData} />
-        </Box>
-      </Paper>
+      {!is102B1A && (
+        <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
+          <DifferenceCashPlot data={plotData} />
+          <Box sx={{ mx: '3%', my: '20px' }}>
+            <DifferenceCashPlotDT data={plotData} />
+          </Box>
+        </Paper>
+      )}
     </>
   )
 
