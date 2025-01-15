@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { COLOR } from '@/config-global'
 import { fmNoUnit, toTWDate3 } from '@/utils/fm'
 
@@ -11,6 +12,11 @@ import TableBodyNodata from '../components/TableBodyNodata'
 
 export default function MonthlyPlot2DT({ data }) {
   const { fontSize } = useFontSize()
+  const [sortOrder, setSortOrder] = useState('desc')
+
+  const handleSort = () => {
+    setSortOrder(prev => (prev === 'asc' ? 'desc' : 'asc'))
+  }
 
   return (
     <TableWrapper title="" colSpan={7}>
@@ -23,31 +29,39 @@ export default function MonthlyPlot2DT({ data }) {
     return (
       <>
         <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}>
-          {data.map(
-            (item, index) =>
-              item.REVENUE_LISTED_BUT_NOT_PRICED_AMT !== null && (
-                <TableRow key={index}>
-                  <TableDataCell
-                    value={toTWDate3(item.CALENDAR_DATE.substring(0, 7).replace('/', ''))}
-                    textAlign="center"
-                  />
-                  <TableDataCell value={fmNoUnit(item.CURREV)} textAlign="right" />
-                  <TableDataCell value={fmNoUnit(item.ENGAMT)} textAlign="right" />
-                  <TableDataCell value={fmNoUnit(item.RSVAMT)} textAlign="right" />
-                  <TableDataCell value={item.RSV_INVOI_CH} />
-                  <TableDataCell value={fmNoUnit(item.SAFAMT)} textAlign="right" />
-                  <TableDataCell
-                    value={fmNoUnit(item.REVENUE_LISTED_BUT_NOT_PRICED_AMT)}
-                    textAlign="right"
-                  />
-                </TableRow>
-              )
-          )}
+          {[...data]
+            .sort((a, b) => {
+              const dateA = new Date(a.CALENDAR_DATE)
+              const dateB = new Date(b.CALENDAR_DATE)
+              return sortOrder === 'asc' ? dateA - dateB : dateB - dateA
+            })
+            .map(
+              (item, index) =>
+                item.REVENUE_LISTED_BUT_NOT_PRICED_AMT !== null && (
+                  <TableRow key={index}>
+                    <TableDataCell
+                      value={toTWDate3(item.CALENDAR_DATE.substring(0, 7).replace('/', ''))}
+                      textAlign="center"
+                    />
+                    <TableDataCell value={fmNoUnit(item.CURREV)} textAlign="right" />
+                    <TableDataCell value={fmNoUnit(item.ENGAMT)} textAlign="right" />
+                    <TableDataCell value={fmNoUnit(item.RSVAMT)} textAlign="right" />
+                    <TableDataCell value={item.RSV_INVOI_CH} />
+                    <TableDataCell value={fmNoUnit(item.SAFAMT)} textAlign="right" />
+                    <TableDataCell
+                      value={fmNoUnit(item.REVENUE_LISTED_BUT_NOT_PRICED_AMT)}
+                      textAlign="right"
+                    />
+                  </TableRow>
+                )
+            )}
         </TableBody>
         <TableFooter>
           <TableRow>
-            <TableCell colSpan={7} sx={{ textAlign: 'right' }}>
-              資料來源：營管系統-9.11各工令財務管控分析表(JDE) 單位：新台幣元
+            <TableCell colSpan={7} sx={{ textAlign: 'left' }}>
+              資料來源：營管系統-9.11各工令財務管控分析表(JDE)
+              <br />
+              單位：新台幣元
             </TableCell>
           </TableRow>
         </TableFooter>
@@ -64,17 +78,33 @@ export default function MonthlyPlot2DT({ data }) {
         }}
       >
         <TableRow>
-          <TableTitleCell title="進度日期" textAlign="center" fontColor="#000" />
-          <TableTitleCell title="應收工程款" textAlign="right" fontColor="#000" />
-          <TableTitleCell title="已開發票計價金額" textAlign="right" fontColor="#000" />
-          <TableTitleCell title="保留款" textAlign="right" fontColor="#000" />
-          <TableTitleCell title="開發票狀態" fontColor="#000" />
-          <TableTitleCell title="其他金額" textAlign="right" fontColor="#000" />
+          <TableTitleCell
+            title={`進度日期${sortOrder === 'asc' ? '🔺' : '🔻'}`}
+            textAlign="center"
+            fontColor="#000"
+            minWidth="150px"
+            onClick={handleSort}
+            sx={{
+              cursor: 'pointer',
+              '&:hover': { opacity: 0.8 },
+            }}
+          />
+          <TableTitleCell title="應收工程款" textAlign="right" fontColor="#000" minWidth="150px" />
+          <TableTitleCell
+            title="已開發票計價金額"
+            textAlign="right"
+            fontColor="#000"
+            minWidth="200px"
+          />
+          <TableTitleCell title="保留款" textAlign="right" fontColor="#000" minWidth="140px" />
+          <TableTitleCell title="開發票狀態" fontColor="#000" minWidth="130px" />
+          <TableTitleCell title="其他金額" textAlign="right" fontColor="#000" minWidth="120px" />
           <TableTitleCell
             title="已列入營收未計價金額"
             borderRight={false}
             textAlign="right"
             fontColor="#000"
+            minWidth="230px"
           />
         </TableRow>
       </TableHead>

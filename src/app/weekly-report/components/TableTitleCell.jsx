@@ -13,6 +13,7 @@ export default function TableTitleCell({
   fontColor = 'white',
   isBold = true,
   sx,
+  onClick,
 }) {
   return (
     <TableCell
@@ -32,6 +33,7 @@ export default function TableTitleCell({
         },
         ...sx,
       }}
+      onClick={onClick}
     >
       <Typography
         variant={SIZE.TITLE}

@@ -1,7 +1,7 @@
 'use client'
 
 import ReactECharts from 'echarts-for-react'
-import { fm2Percent, toTWDate3, toTWDate4, formatNumber } from '@/utils/fm'
+import { toTWDate3, toTWDate4, fm2Percent, formatNumber } from '@/utils/fm'
 
 export default function MonthlyPlot1({ data }) {
   data = data.sort((a, b) => new Date(a.CALENDAR_DATE) - new Date(b.CALENDAR_DATE))
@@ -86,8 +86,6 @@ export default function MonthlyPlot1({ data }) {
         type: 'shadow',
       },
       formatter: function (params) {
-        // 取得年月標籤
-        // 使用對應索引的 CALENDAR_DATE
         const index = xAxisData.indexOf(params[0].axisValue)
         const calendarDate = data[index].CALENDAR_DATE
         let result = toTWDate4(calendarDate) + '<br/>'
@@ -97,34 +95,37 @@ export default function MonthlyPlot1({ data }) {
           const items = [
             {
               name: s1Name,
-              value: params.find(p => p.seriesName === s1Name)?.value || 0,
+              value: params.find(p => p.seriesName === s1Name)?.value,
               color: s1Color,
             },
             {
               name: s2Name,
-              value: params.find(p => p.seriesName === s2Name)?.value || 0,
+              value: params.find(p => p.seriesName === s2Name)?.value,
               color: s2Color,
             },
             {
               name: s3Name,
-              value: params.find(p => p.seriesName === s3Name)?.value || 0,
+              value: params.find(p => p.seriesName === s3Name)?.value,
               color: s3Color,
             },
             {
               name: s4Name,
-              value: params.find(p => p.seriesName === s4Name)?.value || 0,
+              value: params.find(p => p.seriesName === s4Name)?.value,
               color: s4Color,
             },
             {
               name: s5Name,
-              value: params.find(p => p.seriesName === s5Name)?.value || 0,
+              value: params.find(p => p.seriesName === s5Name)?.value,
               color: s5Color,
             },
           ]
 
           items.forEach(item => {
-            const marker = `<span style="display:inline-block;margin-right:4px;width:10px;height:10px;border-radius:50%;background-color:${item.color};"></span>`
-            result += `${marker}${item.name}: ${fm2Percent(item.value)}<br/>`
+            // 只有當 value 存在時才顯示該項目
+            if (item.value !== undefined) {
+              const marker = `<span style="display:inline-block;margin-right:4px;width:10px;height:10px;border-radius:50%;background-color:${item.color};"></span>`
+              result += `${marker}${item.name}: ${fm2Percent(item.value)}<br/>`
+            }
           })
         }
         // 第二個圖表的數據
@@ -132,24 +133,27 @@ export default function MonthlyPlot1({ data }) {
           const items = [
             {
               name: d1Name,
-              value: params.find(p => p.seriesName === d1Name).value || 0,
+              value: params.find(p => p.seriesName === d1Name)?.value,
               color: d1Color,
             },
             {
               name: d2Name,
-              value: params.find(p => p.seriesName === d2Name).value || 0,
+              value: params.find(p => p.seriesName === d2Name)?.value,
               color: d2Color,
             },
             {
               name: d3Name,
-              value: params.find(p => p.seriesName === d3Name).value || 0,
+              value: params.find(p => p.seriesName === d3Name)?.value,
               color: d3Color,
             },
           ]
 
           items.forEach(item => {
-            const marker = `<span style="display:inline-block;margin-right:4px;width:10px;height:10px;border-radius:50%;background-color:white;border:2px solid ${item.color};"></span>`
-            result += `${marker}${item.name}: ${fm2Percent(item.value)}<br/>`
+            // 只有當 value 存在時才顯示該項目
+            if (item.value !== undefined) {
+              const marker = `<span style="display:inline-block;margin-right:4px;width:10px;height:10px;border-radius:50%;background-color:white;border:2px solid ${item.color};"></span>`
+              result += `${marker}${item.name}: ${fm2Percent(item.value)}<br/>`
+            }
           })
         }
 

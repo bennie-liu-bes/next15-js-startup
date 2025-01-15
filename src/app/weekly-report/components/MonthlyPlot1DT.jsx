@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { COLOR } from '@/config-global'
 import { fm2, toTWDate4 } from '@/utils/fm'
 
@@ -11,6 +12,11 @@ import { useFontSize } from '../context/useFontSize'
 
 export default function MonthlyPlot2DT({ data }) {
   const { fontSize } = useFontSize()
+  const [sortOrder, setSortOrder] = useState('desc')
+
+  const handleSort = () => {
+    setSortOrder(prev => (prev === 'asc' ? 'desc' : 'asc'))
+  }
 
   return (
     <TableWrapper title="" colSpan={9}>
@@ -23,31 +29,37 @@ export default function MonthlyPlot2DT({ data }) {
     return (
       <>
         <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}>
-          {data.map(
-            (item, index) =>
-              item.REVENUE_LISTED_BUT_NOT_PRICED_AMT !== null && (
-                <TableRow key={index}>
-                  <TableDataCell value={toTWDate4(item.CALENDAR_DATE)} textAlign="center" />
-                  <TableDataCell value={fm2(item.CONSTRUCTION_PERCENT)} textAlign="right" />
-                  <TableDataCell value={fm2(item.EXP_CUMSUM_PERCENT)} textAlign="right" />
-                  <TableDataCell value={fm2(item.ACT_CUMSUM_PERCENT)} textAlign="right" />
-                  <TableDataCell value={fm2(item.REVENUE_PERCENT)} textAlign="right" />
-                  <TableDataCell value={fm2(item.VALUATION_PERCENT)} textAlign="right" />
-                  <TableDataCell
-                    value={fm2(item.ACT_CUMSUM_PERCENT_AND_EXP_CUMSUM_PERCENT_DIFF)}
-                    textAlign="right"
-                  />
-                  <TableDataCell
-                    value={fm2(item.ACT_CUMSUM_PERCENT_AND_REVENUE_PERCENT_DIFF)}
-                    textAlign="right"
-                  />
-                  <TableDataCell
-                    value={fm2(item.ACT_CUMSUM_PERCENT_AND_VALUATION_PERCENT_DIFF)}
-                    textAlign="right"
-                  />
-                </TableRow>
-              )
-          )}
+          {[...data]
+            .sort((a, b) => {
+              const dateA = new Date(a.CALENDAR_DATE)
+              const dateB = new Date(b.CALENDAR_DATE)
+              return sortOrder === 'asc' ? dateA - dateB : dateB - dateA
+            })
+            .map(
+              (item, index) =>
+                item.REVENUE_LISTED_BUT_NOT_PRICED_AMT !== null && (
+                  <TableRow key={index}>
+                    <TableDataCell value={toTWDate4(item.CALENDAR_DATE)} textAlign="center" />
+                    <TableDataCell value={fm2(item.CONSTRUCTION_PERCENT)} textAlign="right" />
+                    <TableDataCell value={fm2(item.EXP_CUMSUM_PERCENT)} textAlign="right" />
+                    <TableDataCell value={fm2(item.ACT_CUMSUM_PERCENT)} textAlign="right" />
+                    <TableDataCell value={fm2(item.REVENUE_PERCENT)} textAlign="right" />
+                    <TableDataCell value={fm2(item.VALUATION_PERCENT)} textAlign="right" />
+                    <TableDataCell
+                      value={fm2(item.ACT_CUMSUM_PERCENT_AND_EXP_CUMSUM_PERCENT_DIFF)}
+                      textAlign="right"
+                    />
+                    <TableDataCell
+                      value={fm2(item.ACT_CUMSUM_PERCENT_AND_REVENUE_PERCENT_DIFF)}
+                      textAlign="right"
+                    />
+                    <TableDataCell
+                      value={fm2(item.ACT_CUMSUM_PERCENT_AND_VALUATION_PERCENT_DIFF)}
+                      textAlign="right"
+                    />
+                  </TableRow>
+                )
+            )}
         </TableBody>
         <TableFooter>
           <TableRow>
@@ -90,15 +102,25 @@ export default function MonthlyPlot2DT({ data }) {
         }}
       >
         <TableRow>
-          <TableTitleCell title="進度日期" textAlign="center" fontColor="#000" />
-          <TableTitleCell title="工期進度" textAlign="right" fontColor="#000" />
-          <TableTitleCell title="預定進度" textAlign="right" fontColor="#000" />
-          <TableTitleCell title="實際進度" textAlign="right" fontColor="#000" />
-          <TableTitleCell title="營收進度" textAlign="right" fontColor="#000" />
-          <TableTitleCell title="計價進度" textAlign="right" fontColor="#000" />
-          <TableTitleCell title="實際-預定" textAlign="right" fontColor="#000" />
-          <TableTitleCell title="實際-營收" textAlign="right" fontColor="#000" />
-          <TableTitleCell title="實際-計價" textAlign="right" fontColor="#000" />
+          <TableTitleCell
+            title={`進度日期${sortOrder === 'asc' ? '🔺' : '🔻'}`}
+            textAlign="center"
+            fontColor="#000"
+            minWidth="170px"
+            onClick={handleSort}
+            sx={{
+              cursor: 'pointer',
+              '&:hover': { opacity: 0.8 },
+            }}
+          />
+          <TableTitleCell title="工期進度" textAlign="right" fontColor="#000" minWidth="115px" />
+          <TableTitleCell title="預定進度" textAlign="right" fontColor="#000" minWidth="115px" />
+          <TableTitleCell title="實際進度" textAlign="right" fontColor="#000" minWidth="115px" />
+          <TableTitleCell title="營收進度" textAlign="right" fontColor="#000" minWidth="115px" />
+          <TableTitleCell title="計價進度" textAlign="right" fontColor="#000" minWidth="115px" />
+          <TableTitleCell title="實際-預定" textAlign="right" fontColor="#000" minWidth="120px" />
+          <TableTitleCell title="實際-營收" textAlign="right" fontColor="#000" minWidth="120px" />
+          <TableTitleCell title="實際-計價" textAlign="right" fontColor="#000" minWidth="120px" />
         </TableRow>
       </TableHead>
     )
