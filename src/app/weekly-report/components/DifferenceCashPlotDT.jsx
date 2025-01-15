@@ -76,7 +76,7 @@ export default function DifferenceCashPlotDT({ data }) {
             title={`進度日期${sortOrder === 'asc' ? '🔺' : '🔻'}`}
             textAlign="center"
             fontColor="#000"
-            minWidth="150px"
+            minWidth="145px"
             onClick={handleSort}
             sx={{
               cursor: 'pointer',

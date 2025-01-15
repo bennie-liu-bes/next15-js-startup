@@ -90,8 +90,16 @@ export default function MonthlyPlot1({ data }) {
         const calendarDate = data[index].CALENDAR_DATE
         let result = toTWDate4(calendarDate) + '<br/>'
 
-        // 第一個圖表的數據
-        if (params[0].componentIndex === 0) {
+        // 檢查是否有第一個圖表的數據（通過檢查任一第一個圖表的系列是否存在）
+        const hasFirstChartData = params.some(p =>
+          [s1Name, s2Name, s3Name, s4Name, s5Name].includes(p.seriesName)
+        )
+
+        // 檢查是否有第二個圖表的數據
+        const hasSecondChartData = params.some(p => [d1Name, d2Name, d3Name].includes(p.seriesName))
+
+        // 處理第一個圖表的數據
+        if (hasFirstChartData) {
           const items = [
             {
               name: s1Name,
@@ -121,15 +129,15 @@ export default function MonthlyPlot1({ data }) {
           ]
 
           items.forEach(item => {
-            // 只有當 value 存在時才顯示該項目
             if (item.value !== undefined) {
               const marker = `<span style="display:inline-block;margin-right:4px;width:10px;height:10px;border-radius:50%;background-color:${item.color};"></span>`
               result += `${marker}${item.name}: ${fm2Percent(item.value)}<br/>`
             }
           })
         }
-        // 第二個圖表的數據
-        else {
+
+        // 處理第二個圖表的數據
+        if (hasSecondChartData) {
           const items = [
             {
               name: d1Name,
@@ -149,7 +157,6 @@ export default function MonthlyPlot1({ data }) {
           ]
 
           items.forEach(item => {
-            // 只有當 value 存在時才顯示該項目
             if (item.value !== undefined) {
               const marker = `<span style="display:inline-block;margin-right:4px;width:10px;height:10px;border-radius:50%;background-color:white;border:2px solid ${item.color};"></span>`
               result += `${marker}${item.name}: ${fm2Percent(item.value)}<br/>`

@@ -82,29 +82,29 @@ export default function MonthlyPlot2DT({ data }) {
             title={`進度日期${sortOrder === 'asc' ? '🔺' : '🔻'}`}
             textAlign="center"
             fontColor="#000"
-            minWidth="150px"
+            minWidth="145px"
             onClick={handleSort}
             sx={{
               cursor: 'pointer',
               '&:hover': { opacity: 0.8 },
             }}
           />
-          <TableTitleCell title="應收工程款" textAlign="right" fontColor="#000" minWidth="150px" />
+          <TableTitleCell title="應收工程款" textAlign="right" fontColor="#000" minWidth="135px" />
           <TableTitleCell
             title="已開發票計價金額"
             textAlign="right"
             fontColor="#000"
-            minWidth="200px"
+            minWidth="195px"
           />
-          <TableTitleCell title="保留款" textAlign="right" fontColor="#000" minWidth="140px" />
-          <TableTitleCell title="開發票狀態" fontColor="#000" minWidth="130px" />
-          <TableTitleCell title="其他金額" textAlign="right" fontColor="#000" minWidth="120px" />
+          <TableTitleCell title="保留款" textAlign="right" fontColor="#000" minWidth="135px" />
+          <TableTitleCell title="開發票狀態" fontColor="#000" minWidth="135px" />
+          <TableTitleCell title="其他" textAlign="right" fontColor="#000" minWidth="80px" />
           <TableTitleCell
             title="已列入營收未計價金額"
             borderRight={false}
             textAlign="right"
             fontColor="#000"
-            minWidth="230px"
+            minWidth="235px"
           />
         </TableRow>
       </TableHead>

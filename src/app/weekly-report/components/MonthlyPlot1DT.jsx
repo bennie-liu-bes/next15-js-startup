@@ -106,7 +106,7 @@ export default function MonthlyPlot2DT({ data }) {
             title={`進度日期${sortOrder === 'asc' ? '🔺' : '🔻'}`}
             textAlign="center"
             fontColor="#000"
-            minWidth="170px"
+            minWidth="175px"
             onClick={handleSort}
             sx={{
               cursor: 'pointer',
@@ -118,9 +118,9 @@ export default function MonthlyPlot2DT({ data }) {
           <TableTitleCell title="實際進度" textAlign="right" fontColor="#000" minWidth="115px" />
           <TableTitleCell title="營收進度" textAlign="right" fontColor="#000" minWidth="115px" />
           <TableTitleCell title="計價進度" textAlign="right" fontColor="#000" minWidth="115px" />
-          <TableTitleCell title="實際-預定" textAlign="right" fontColor="#000" minWidth="120px" />
-          <TableTitleCell title="實際-營收" textAlign="right" fontColor="#000" minWidth="120px" />
-          <TableTitleCell title="實際-計價" textAlign="right" fontColor="#000" minWidth="120px" />
+          <TableTitleCell title="實際-預定" textAlign="right" fontColor="#000" minWidth="125px" />
+          <TableTitleCell title="實際-營收" textAlign="right" fontColor="#000" minWidth="125px" />
+          <TableTitleCell title="實際-計價" textAlign="right" fontColor="#000" minWidth="125px" />
         </TableRow>
       </TableHead>
     )

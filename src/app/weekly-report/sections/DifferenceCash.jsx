@@ -135,8 +135,8 @@ export default function DifferenceCash({ data, plotData, is102B1A = false }) {
       >
         <TableRow>
           <TableTitleCell title="項次" rowSpan={3} textAlign="center" width="50px" />
-          <TableTitleCell title="工程款期間" minWidth="80px" rowSpan={2} />
-          <TableTitleCell title="計價項目" rowSpan={2} minWidth="130px" />
+          <TableTitleCell title="工程款期間" rowSpan={2} />
+          <TableTitleCell title="計價項目" rowSpan={2} minWidth="100px" />
           <TableTitleCell title="期別" rowSpan={2} minWidth="50px" textAlign="center" />
           <TableTitleCell
             title="預估"
@@ -156,8 +156,8 @@ export default function DifferenceCash({ data, plotData, is102B1A = false }) {
           <TableTitleCell
             title="開發票日期"
             sx={{ bgcolor: COLOR.HEADER1 }}
-            minWidth="110px"
             textAlign="center"
+            minWidth="110px"
           />
           <TableTitleCell title="發票金額" sx={{ bgcolor: COLOR.HEADER1 }} textAlign="right" />
           <TableTitleCell title="入帳日" sx={{ bgcolor: COLOR.HEADER1 }} textAlign="center" />
@@ -165,8 +165,8 @@ export default function DifferenceCash({ data, plotData, is102B1A = false }) {
           <TableTitleCell
             title="開發票日期"
             sx={{ bgcolor: COLOR.HEADER2 }}
-            minWidth="110px"
             textAlign="center"
+            minWidth="110px"
           />
           <TableTitleCell title="發票金額" sx={{ bgcolor: COLOR.HEADER2 }} textAlign="right" />
           <TableTitleCell title="入帳日" sx={{ bgcolor: COLOR.HEADER2 }} textAlign="center" />
