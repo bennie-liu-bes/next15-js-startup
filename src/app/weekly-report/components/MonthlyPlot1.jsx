@@ -48,8 +48,8 @@ export default function MonthlyPlot1({ data }) {
   const s3Color = '#A982C6'
   const s4Color = '#66A9D9'
   const s5Color = '#FFC966'
-  const d1Color = '#66A9D9'
-  const d2Color = '#A982C6'
+  const d1Color = '#66B266'
+  const d2Color = '#66A9D9'
   const d3Color = '#FFC966'
 
   const s1Name = '工期進度'
