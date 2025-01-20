@@ -41,7 +41,7 @@ export default function MonthlyPlot1({ data }) {
 
   const d2Data = data.map(item => item.ACT_CUMSUM_PERCENT_AND_REVENUE_PERCENT_DIFF)
 
-  const d3Data = data.map(item => item.ACT_CUMSUM_PERCENT_AND_VALUATION_PERCENT_DIFF)
+  const d3Data = data.map(item => item.REVENUE_PERCENT_AND_VALUATION_PERCENT_DIFF)
 
   const s1Color = '#FF6666'
   const s2Color = '#66B266'
@@ -52,14 +52,14 @@ export default function MonthlyPlot1({ data }) {
   const d2Color = '#66A9D9'
   const d3Color = '#FFC966'
 
-  const s1Name = '工期進度'
-  const s2Name = '預定進度'
-  const s3Name = '實際進度'
-  const s4Name = '營收進度'
-  const s5Name = '計價進度'
-  const d1Name = '實際進度-預定進度'
-  const d2Name = '實際進度-營收進度'
-  const d3Name = '實際進度-計價進度'
+  const s1Name = '累計工期進度'
+  const s2Name = '累計預定進度'
+  const s3Name = '累計實際進度'
+  const s4Name = '累計營收進度'
+  const s5Name = '累計計價進度'
+  const d1Name = '累計實際進度-預定進度'
+  const d2Name = '累計實際進度-營收進度'
+  const d3Name = '累計營收進度-計價進度'
 
   // 圖表配置
   const option = {

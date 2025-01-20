@@ -44,7 +44,7 @@ export default function MonthlyPlot2DT({ data }) {
       <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}>
         <TableRow>
           <TableTitleCell
-            title="工期進度"
+            title="累計工期進度"
             textAlign="left"
             fontColor="#000"
             className="sticky-column"
@@ -55,7 +55,7 @@ export default function MonthlyPlot2DT({ data }) {
         </TableRow>
         <TableRow>
           <TableTitleCell
-            title="預定進度"
+            title="累計預定進度"
             textAlign="left"
             fontColor="#000"
             className="sticky-column"
@@ -66,7 +66,7 @@ export default function MonthlyPlot2DT({ data }) {
         </TableRow>
         <TableRow>
           <TableTitleCell
-            title="實際進度"
+            title="累計實際進度"
             textAlign="left"
             fontColor="#000"
             className="sticky-column"
@@ -77,7 +77,7 @@ export default function MonthlyPlot2DT({ data }) {
         </TableRow>
         <TableRow>
           <TableTitleCell
-            title="營收進度"
+            title="累計營收進度"
             textAlign="left"
             fontColor="#000"
             className="sticky-column"
@@ -86,9 +86,9 @@ export default function MonthlyPlot2DT({ data }) {
             <TableDataCell key={index} value={fm2(item.REVENUE_PERCENT)} textAlign="right" />
           ))}
         </TableRow>
-        <TableRow>
+        <TableRow sx={{ borderBottom: '2px double #000' }}>
           <TableTitleCell
-            title="計價進度"
+            title="累計計價進度"
             textAlign="left"
             fontColor="#000"
             className="sticky-column"
@@ -99,7 +99,7 @@ export default function MonthlyPlot2DT({ data }) {
         </TableRow>
         <TableRow>
           <TableTitleCell
-            title="實際-預定"
+            title="累計實際進度-預定進度"
             textAlign="left"
             fontColor="#000"
             className="sticky-column"
@@ -114,7 +114,7 @@ export default function MonthlyPlot2DT({ data }) {
         </TableRow>
         <TableRow>
           <TableTitleCell
-            title="實際-營收"
+            title="累計實際進度-營收進度"
             textAlign="left"
             fontColor="#000"
             className="sticky-column"
@@ -129,7 +129,7 @@ export default function MonthlyPlot2DT({ data }) {
         </TableRow>
         <TableRow>
           <TableTitleCell
-            title="實際-計價"
+            title="累計營收進度-計價進度"
             textAlign="left"
             fontColor="#000"
             className="sticky-column"
@@ -137,7 +137,7 @@ export default function MonthlyPlot2DT({ data }) {
           {sortedData.map((item, index) => (
             <TableDataCell
               key={index}
-              value={fm2(item.ACT_CUMSUM_PERCENT_AND_VALUATION_PERCENT_DIFF)}
+              value={fm2(item.REVENUE_PERCENT_AND_VALUATION_PERCENT_DIFF)}
               textAlign="right"
             />
           ))}
@@ -160,7 +160,7 @@ export default function MonthlyPlot2DT({ data }) {
             sx={{ bgcolor: COLOR.BGCOLOR }}
             textAlign="center"
             fontColor="#000"
-            minWidth="140px"
+            minWidth="245px"
             className="sticky-column header"
             borderRight={true}
           />

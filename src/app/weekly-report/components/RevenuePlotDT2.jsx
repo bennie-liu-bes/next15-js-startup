@@ -45,7 +45,7 @@ export default function RevenuePlotDT({ data }) {
       <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}>
         <TableRow>
           <TableTitleCell
-            title="單月預定"
+            title="單月預定營收"
             textAlign="left"
             fontColor="#000"
             className="sticky-column"
@@ -56,7 +56,7 @@ export default function RevenuePlotDT({ data }) {
         </TableRow>
         <TableRow>
           <TableTitleCell
-            title="單月實際"
+            title="單月實際營收"
             textAlign="left"
             fontColor="#000"
             className="sticky-column"
@@ -67,7 +67,7 @@ export default function RevenuePlotDT({ data }) {
         </TableRow>
         <TableRow>
           <TableTitleCell
-            title="單月差異"
+            title="單月營收差異"
             textAlign="left"
             fontColor="#000"
             className="sticky-column"
@@ -82,7 +82,7 @@ export default function RevenuePlotDT({ data }) {
         </TableRow>
         <TableRow>
           <TableTitleCell
-            title="累計預定"
+            title="年度累計預定營收"
             textAlign="left"
             fontColor="#000"
             className="sticky-column"
@@ -93,7 +93,7 @@ export default function RevenuePlotDT({ data }) {
         </TableRow>
         <TableRow>
           <TableTitleCell
-            title="累計實際"
+            title="年度累計實際營收"
             textAlign="left"
             fontColor="#000"
             className="sticky-column"
@@ -104,7 +104,7 @@ export default function RevenuePlotDT({ data }) {
         </TableRow>
         <TableRow>
           <TableTitleCell
-            title="累計差異"
+            title="年度累計營收差異"
             textAlign="left"
             fontColor="#000"
             className="sticky-column"
@@ -134,7 +134,7 @@ export default function RevenuePlotDT({ data }) {
             title="項目"
             textAlign="center"
             fontColor="#000"
-            minWidth="120px"
+            minWidth="200px"
             className="sticky-column header"
           />
           {[...data]

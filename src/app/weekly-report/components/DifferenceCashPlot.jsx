@@ -28,9 +28,10 @@ export default function DifferenceCashPlot({ data }) {
 
         // 找出對應的數值
         const accumulatedActual = params.find(p => p.seriesName === '累計金額').value || 0
+        const color = accumulatedActual < 0 ? '#FF6666' : '#33658a'
 
         // 按照指定順序組織顯示內容
-        const items = [{ name: '金額', value: accumulatedActual, color: '#33658a', type: 'rect' }]
+        const items = [{ name: '金額', value: accumulatedActual, color: color, type: 'rect' }]
 
         // 將每個項目加入到 result 中
         items.forEach(item => {
@@ -74,11 +75,13 @@ export default function DifferenceCashPlot({ data }) {
     ],
     series: [
       {
-        name: '累計金額', // 預定放在下面（先渲染）
+        name: '累計金額',
         type: 'bar',
         data: yAxisData,
         itemStyle: {
-          color: '#33658a', // 橘色
+          color: params => {
+            return params.value < 0 ? '#FF6666' : '#33658a'
+          },
         },
       },
     ],

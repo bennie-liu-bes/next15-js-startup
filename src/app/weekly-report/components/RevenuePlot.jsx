@@ -46,10 +46,10 @@ export default function RevenuePlot({ data }) {
         let result = toTWDate3(params[0].axisValueLabel) + '<br/>'
 
         // 找出對應的數值
-        const monthlyBudget = params.find(p => p.seriesName === '單月預定')?.value || 0
-        const monthlyActual = params.find(p => p.seriesName === '單月實際')?.value || 0
-        const accumulatedBudget = params.find(p => p.seriesName === '累計預定')?.value || 0
-        const accumulatedActual = params.find(p => p.seriesName === '累計實際')?.value || 0
+        const monthlyBudget = params.find(p => p.seriesName === '單月預定營收')?.value || 0
+        const monthlyActual = params.find(p => p.seriesName === '單月實際營收')?.value || 0
+        const accumulatedBudget = params.find(p => p.seriesName === '年度累計預定營收')?.value || 0
+        const accumulatedActual = params.find(p => p.seriesName === '年度累計實際營收')?.value || 0
 
         // 計算差異值
         const monthlyDiff = monthlyActual - monthlyBudget
@@ -60,19 +60,19 @@ export default function RevenuePlot({ data }) {
 
         // 按照指定順序組織顯示內容
         const items = [
-          { name: '單月預定', value: monthlyBudget, color: '#33658a', type: 'rect' },
-          { name: '單月實際', value: monthlyActual, color: '#f6ae2d', type: 'rect' },
+          { name: '單月預定營收', value: monthlyBudget, color: '#33658a', type: 'rect' },
+          { name: '單月實際營收', value: monthlyActual, color: '#f6ae2d', type: 'rect' },
           {
-            name: '單月差異',
+            name: '單月營收差異',
             value: monthlyDiff,
             color: '#fff',
             type: 'rect',
             style: getDiffColor(monthlyDiff),
           },
-          { name: '累計預定', value: accumulatedBudget, color: '#2f4858', type: 'circle' },
-          { name: '累計實際', value: accumulatedActual, color: '#f26419', type: 'circle' },
+          { name: '年度累計預定營收', value: accumulatedBudget, color: '#2f4858', type: 'circle' },
+          { name: '年度累計實際營收', value: accumulatedActual, color: '#f26419', type: 'circle' },
           {
-            name: '累計差異',
+            name: '年度累計營收差異',
             value: accumulatedDiff,
             color: '#fff',
             type: 'circle',
@@ -98,16 +98,16 @@ export default function RevenuePlot({ data }) {
     legend: {
       data: [
         {
-          name: '單月預定',
+          name: '單月預定營收',
         },
         {
-          name: '單月實際',
+          name: '單月實際營收',
         },
         {
-          name: '累計預定',
+          name: '年度累計預定營收',
         },
         {
-          name: '累計實際',
+          name: '年度累計實際營收',
         },
       ],
       top: '30px',
@@ -149,7 +149,7 @@ export default function RevenuePlot({ data }) {
     ],
     series: [
       {
-        name: '單月預定', // 預定放在下面（先渲染）
+        name: '單月預定營收', // 預定放在下面（先渲染）
         type: 'bar',
         data: bagbamtData,
         itemStyle: {
@@ -159,7 +159,7 @@ export default function RevenuePlot({ data }) {
         z: 1, // 較低的層級
       },
       {
-        name: '單月實際',
+        name: '單月實際營收',
         type: 'bar',
         data: aagbamtData,
         itemStyle: {
@@ -171,7 +171,7 @@ export default function RevenuePlot({ data }) {
         barGap: '-76%', // 調整這個值來使兩個柱狀圖的中心重疊
       },
       {
-        name: '累計預定',
+        name: '年度累計預定營收',
         type: 'line',
         yAxisIndex: 1,
         data: bayamtData,
@@ -185,7 +185,7 @@ export default function RevenuePlot({ data }) {
         },
       },
       {
-        name: '累計實際',
+        name: '年度累計實際營收',
         type: 'line',
         yAxisIndex: 1,
         data: aayamtData,
