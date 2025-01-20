@@ -11,8 +11,8 @@ import TableFooter from '../components/TableFooter'
 import RevenuePlot from '../components/RevenuePlot'
 import { useFontSize } from '../context/useFontSize'
 import TableWrapper from '../components/TableWrapper'
-import RevenuePlotDT from '../components/RevenuePlotDT'
 import TableDataCell from '../components/TableDataCell'
+import RevenuePlotDT2 from '../components/RevenuePlotDT2'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
 import TableDataCellDiff from '../components/TableDataCellDiff'
@@ -40,7 +40,21 @@ export default function Revenue({ data, frProjectIncome, showPlot = true, is102B
         <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
           <RevenuePlot data={frProjectIncome} />
           <Box sx={{ mx: '3%', my: '20px' }}>
-            <RevenuePlotDT data={frProjectIncome} />
+            {/* <RevenuePlotDT data={frProjectIncome} /> */}
+            <RevenuePlotDT2 data={frProjectIncome} />
+            <Box
+              sx={{
+                color: grey[600],
+                fontSize: '0.75rem',
+                mt: 1,
+                pl: 2,
+                borderLeft: `4px solid ${grey[300]}`,
+              }}
+            >
+              資料來源：智慧決策平台-損益表/營建收入明細
+              <br />
+              單位：新台幣元
+            </Box>
           </Box>
         </Paper>
       )}

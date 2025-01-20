@@ -14,6 +14,8 @@ export default function TableTitleCell({
   isBold = true,
   sx,
   onClick,
+  'data-month': dataMonth,
+  className = '',
 }) {
   return (
     <TableCell
@@ -34,6 +36,8 @@ export default function TableTitleCell({
         ...sx,
       }}
       onClick={onClick}
+      data-month={dataMonth}
+      className={`${className}`}
     >
       <Typography
         variant={SIZE.TITLE}

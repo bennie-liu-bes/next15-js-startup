@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import { fmNoUnit, toTWDate } from '@/utils/fm'
 import { COLOR, OFFSET, BORDER_RADIUS } from '@/config-global'
 
+import { grey } from '@mui/material/colors'
 import { Box, Paper, TableRow, TableHead, TableBody } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
@@ -13,7 +14,7 @@ import TableBodyNodata from '../components/TableBodyNodata'
 import TableDataCellDiff from '../components/TableDataCellDiff'
 import TableDataCellDiff2 from '../components/TableDataCellDiff2'
 import DifferenceCashPlot from '../components/DifferenceCashPlot'
-import DifferenceCashPlotDT from '../components/DifferenceCashPlotDT'
+import DifferenceCashPlotDT2 from '../components/DifferenceCashPlotDT2'
 export default function DifferenceCash({ data, plotData, is102B1A = false }) {
   const { fontSizeAlt } = useFontSize()
   return (
@@ -37,7 +38,21 @@ export default function DifferenceCash({ data, plotData, is102B1A = false }) {
         <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
           <DifferenceCashPlot data={plotData} />
           <Box sx={{ mx: '3%', my: '20px' }}>
-            <DifferenceCashPlotDT data={plotData} />
+            {/* <DifferenceCashPlotDT data={plotData} /> */}
+            <DifferenceCashPlotDT2 data={plotData} />
+            <Box
+              sx={{
+                color: grey[600],
+                fontSize: '0.75rem',
+                mt: 1,
+                pl: 2,
+                borderLeft: `4px solid ${grey[300]}`,
+              }}
+            >
+              資料來源：營管系統-9.6工務所現金差異追蹤管控
+              <br />
+              單位：新台幣元
+            </Box>
           </Box>
         </Paper>
       )}
