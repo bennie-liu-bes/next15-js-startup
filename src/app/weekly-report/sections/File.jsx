@@ -72,9 +72,31 @@ export default function File({ data, is102B1A = false }) {
                 ) : item.FILE_TYPE === 'txt' ? (
                   <TableDataCell value={item.FILE_TEXT} />
                 ) : item.FILE_TYPE === 'pdf' ? (
-                  <TableDataCell value="顯示PDF" />
-                ) : item.FILE_TYPE === 'docx' || item.FILE_TYPE === 'docx' ? (
-                  <TableDataCell value="顯示DOC" />
+                  <TableCell>
+                    <iframe
+                      src={`${item.FILE_URL}#view=FitH`}
+                      style={{
+                        width: '100%',
+                        height: '1676px',
+                        border: '1px solid #e0e0e0',
+                        borderRadius: '8px',
+                      }}
+                      title={item.FILE_NAME.replace('.pdf', '')}
+                    />
+                  </TableCell>
+                ) : item.FILE_TYPE === 'doc' || item.FILE_TYPE === 'docx' ? (
+                  <TableCell>
+                    <iframe
+                      src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(item.FILE_URL)}`}
+                      style={{
+                        width: '100%',
+                        height: '835px',
+                        border: '1px solid #e0e0e0',
+                        borderRadius: '8px',
+                      }}
+                      title={item.FILE_NAME.replace('.doc', '')}
+                    />
+                  </TableCell>
                 ) : (
                   <TableDataCell value="無內容" />
                 )}
