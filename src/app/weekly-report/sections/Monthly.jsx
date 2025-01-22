@@ -247,17 +247,17 @@ export default function Monthly({ data, plotData1 }) {
           <TableTitleCell title={''} minWidth="120px" />
           <TableTitleCell
             textAlign="right"
-            title={`截至${toTWDate(data.YEAR_MONTHEND).slice(0, 7)}/26累計日報進度`}
+            title={`截至${toTWDate(data.YEAR_MONTHEND).slice(0, 7)}26累計日報進度`}
             minWidth="180px"
           />
           <TableTitleCell
             textAlign="right"
-            title={`截至${toTWDate(data.YEAR_MONTHEND).slice(0, 7)}/26累計營收進度`}
+            title={`截至${toTWDate(data.YEAR_MONTHEND).slice(0, 7)}26累計營收進度`}
             minWidth="180px"
           />
           <TableTitleCell
             textAlign="right"
-            title={`截至${toTWDate(data.LAST_GRAND_DATE).slice(0, 7)}/26累計計價進度`}
+            title={`截至${toTWDate(data.LAST_GRAND_DATE).slice(0, 7)}26累計計價進度`}
             minWidth="180px"
             borderRight={false}
           />
