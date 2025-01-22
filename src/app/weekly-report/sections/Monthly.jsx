@@ -159,7 +159,9 @@ export default function Monthly({ data, plotData1 }) {
               <Typography variant={SIZE.TITLE}>差異說明：</Typography>
             </Stack>
             <Typography variant={SIZE.TEXT}>
-              🎯 計價進度-營收進度差異說明(至{toTWDate(data.YEAR_MONTHEND)})&nbsp;=&nbsp;
+              🎯 計價進度-營收進度差異說明(至
+              {toTWDate(data.YEAR_MONTHEND).slice(0, 7).replace('/', '年').replace('/', '月')}
+              )&nbsp;=&nbsp;
               {fm2(data.VAL_SUM - data.REV_SUM)}％， 金額：{fmNoUnit(data.TOT_NOPAY)}仟元(未稅)
             </Typography>
             <Box sx={{ pl: 4 }}>
@@ -187,7 +189,9 @@ export default function Monthly({ data, plotData1 }) {
             </Box>
 
             <Typography variant={SIZE.TEXT} sx={{ mt: 2 }}>
-              🎯 日報進度-營收進度差異說明(至{toTWDate(data.YEAR_MONTHEND)})&nbsp;= &nbsp;
+              🎯 日報進度-營收進度差異說明(至
+              {toTWDate(data.YEAR_MONTHEND).slice(0, 7).replace('/', '年').replace('/', '月')}
+              )&nbsp;= &nbsp;
               {fm2(data.ACT_SUM)}％&nbsp;-&nbsp;{fm2(data.REV_SUM)}％&nbsp;=&nbsp;
               {fm2(data.ACT_SUM - data.REV_SUM)}％
             </Typography>
@@ -243,17 +247,17 @@ export default function Monthly({ data, plotData1 }) {
           <TableTitleCell title={''} minWidth="120px" />
           <TableTitleCell
             textAlign="right"
-            title={`截至${toTWDate(data.YEAR_MONTHEND)}累計日報進度`}
+            title={`截至${toTWDate(data.YEAR_MONTHEND).slice(0, 7)}/26累計日報進度`}
             minWidth="180px"
           />
           <TableTitleCell
             textAlign="right"
-            title={`截至${toTWDate(data.YEAR_MONTHEND)}累計營收進度`}
+            title={`截至${toTWDate(data.YEAR_MONTHEND).slice(0, 7)}/26累計營收進度`}
             minWidth="180px"
           />
           <TableTitleCell
             textAlign="right"
-            title={`截至${toTWDate(data.LAST_GRAND_DATE)}累計計價進度`}
+            title={`截至${toTWDate(data.LAST_GRAND_DATE).slice(0, 7)}/26累計計價進度`}
             minWidth="180px"
             borderRight={false}
           />
