@@ -129,13 +129,7 @@ export const tables = {
   wkFile: {
     getData: async ordNo => {
       const query = `
-        SELECT *,
-        CASE
-          WHEN LOWER(RIGHT(FILE_NAME, 4)) = '.jpg' THEN LEFT(FILE_NAME, LEN(FILE_NAME) - 4)
-          WHEN LOWER(RIGHT(FILE_NAME, 4)) = '.png' THEN LEFT(FILE_NAME, LEN(FILE_NAME) - 4)
-          WHEN LOWER(RIGHT(FILE_NAME, 4)) = '.svg' THEN LEFT(FILE_NAME, LEN(FILE_NAME) - 4)
-          ELSE FILE_NAME
-        END AS FILE_NAME_MOD
+        SELECT *
         FROM FR_WK_FILE
         WHERE 1=1
         AND ORD_NO = @ordNo

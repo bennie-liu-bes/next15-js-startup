@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { Fragment } from 'react'
 import { SIZE, COLOR, OFFSET } from '@/config-global'
 
-import { TableRow, TableBody, TableCell, Typography } from '@mui/material'
+import { Tooltip, TableRow, TableBody, TableCell, Typography } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
 import { useFontSize } from '../context/useFontSize'
@@ -29,14 +29,30 @@ export default function File({ data, is102B1A = false }) {
             <TableRow sx={{ bgcolor: '#BDE3FF' }}>
               <TableCell>
                 <Typography variant={SIZE.TEXT}>
-                  {item.FILE_TEXT ? '📋' : '🖼️'} {index + 1}.{item.PIC_TYPE_CH}
+                  {/* 如果FILE_TYPE是txt，則顯示📋，是jpg或是png則顯示🖼️，是pdf則顯示📃 */}
+                  {item.FILE_TYPE === 'txt' ? (
+                    <Tooltip title="文字" placement="top" arrow>
+                      📋
+                    </Tooltip>
+                  ) : item.FILE_TYPE === 'jpg' || item.FILE_TYPE === 'png' ? (
+                    <Tooltip title="圖片" placement="top" arrow>
+                      🖼️
+                    </Tooltip>
+                  ) : item.FILE_TYPE === 'pdf' ? (
+                    <Tooltip title="PDF" placement="top" arrow>
+                      📕
+                    </Tooltip>
+                  ) : (
+                    ''
+                  )}
+                  {index + 1}.{item.PIC_TYPE_CH}
                   {item.REMARK && ` - ${item.REMARK}`}
                 </Typography>
               </TableCell>
             </TableRow>
             {item.FILE_URL && (
               <TableRow sx={{ bgcolor: COLOR.BGCOLOR }}>
-                {item.FILE_PATH ? (
+                {item.FILE_TYPE === 'jpg' || item.FILE_TYPE === 'png' ? (
                   <TableCell>
                     <Image
                       src={item.FILE_URL}
@@ -51,8 +67,12 @@ export default function File({ data, is102B1A = false }) {
                       className="w-full object-contain"
                     />{' '}
                   </TableCell>
-                ) : (
+                ) : item.FILE_TYPE === 'txt' ? (
                   <TableDataCell value={item.FILE_TEXT} />
+                ) : item.FILE_TYPE === 'pdf' ? (
+                  <TableDataCell value="顯示PDF" />
+                ) : (
+                  <TableDataCell value="無內容" />
                 )}
               </TableRow>
             )}
