@@ -38,8 +38,10 @@ export default function File({ data, is102B1A = false }) {
                     <Tooltip title="圖片" placement="top" arrow>
                       🖼️
                     </Tooltip>
-                  ) : item.FILE_TYPE === 'pdf' ? (
-                    <Tooltip title="PDF" placement="top" arrow>
+                  ) : item.FILE_TYPE === 'pdf' ||
+                    item.FILE_TYPE === 'doc' ||
+                    item.FILE_TYPE === 'docx' ? (
+                    <Tooltip title="文件" placement="top" arrow>
                       📕
                     </Tooltip>
                   ) : (
@@ -71,6 +73,8 @@ export default function File({ data, is102B1A = false }) {
                   <TableDataCell value={item.FILE_TEXT} />
                 ) : item.FILE_TYPE === 'pdf' ? (
                   <TableDataCell value="顯示PDF" />
+                ) : item.FILE_TYPE === 'docx' || item.FILE_TYPE === 'docx' ? (
+                  <TableDataCell value="顯示DOC" />
                 ) : (
                   <TableDataCell value="無內容" />
                 )}
