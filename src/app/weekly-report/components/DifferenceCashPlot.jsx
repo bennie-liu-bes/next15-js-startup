@@ -3,7 +3,11 @@
 import ReactECharts from 'echarts-for-react'
 import { fm, toTWDate3, formatNumber } from '@/utils/fm'
 
+import { useTheme } from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
 export default function DifferenceCashPlot({ data }) {
+  const theme = useTheme()
+  const isXs = useMediaQuery(theme.breakpoints.down('sm'))
   // 準備圖表數據
   const xAxisData = data.map(item => toTWDate3(item.YYMM))
   const yAxisData = data.map(item => item.CUMULATIVE_CASH_RECEIPTS_AND_PAYMENTS_DIFFERENTS)
@@ -87,10 +91,10 @@ export default function DifferenceCashPlot({ data }) {
     ],
     grid: {
       containLabel: true,
-      left: '3%',
-      right: '3%',
+      top: isXs ? '20%' : '15%',
       bottom: '15%',
-      top: '15%',
+      left: isXs ? '3%' : '3%',
+      right: isXs ? '3%' : '3%',
     },
     dataZoom: [
       {

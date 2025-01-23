@@ -2,8 +2,12 @@
 
 import ReactECharts from 'echarts-for-react'
 import { toTWDate3, toTWDate4, fm2Percent, formatNumber } from '@/utils/fm'
-
+import { useTheme } from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
 export default function MonthlyPlot1({ data }) {
+  const theme = useTheme()
+  const isXs = useMediaQuery(theme.breakpoints.down('sm'))
+
   data = data.sort((a, b) => new Date(a.CALENDAR_DATE) - new Date(b.CALENDAR_DATE))
 
   // 準備圖表數據
@@ -368,13 +372,19 @@ export default function MonthlyPlot1({ data }) {
     ],
     grid: [
       {
-        top: '13%',
+        top: isXs ? '18%' : '13%',
         bottom: '55%',
-        left: '3%',
-        right: '3%',
+        left: isXs ? '6%' : '3%',
+        right: isXs ? '3%' : '3%',
         containLabel: true,
       },
-      { containLabel: true, left: '3%', right: '3%', top: '60%', bottom: '8%' },
+      {
+        containLabel: true,
+        top: isXs ? '65%' : '60%',
+        bottom: '8%',
+        left: isXs ? '6%' : '3%',
+        right: isXs ? '3%' : '3%',
+      },
     ],
     dataZoom: [
       {

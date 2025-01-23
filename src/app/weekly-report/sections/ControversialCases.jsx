@@ -85,9 +85,9 @@ export default function ControversialCases({ data }) {
         <TableRow>
           <TableTitleCell title="項次" width="80px" rowSpan={3} textAlign="center" />
           <TableTitleCell title="狀態" minWidth="120px" />
-          <TableTitleCell title="爭議項目(包含業主、廠商及其他關係人)" minWidth="140px" />
-          <TableTitleCell title="原由及說明(包含人事時地物)" minWidth="200px" />
-          <TableTitleCell title="爭議標的(工期或金額)" minWidth="200px" borderRight={false} />
+          <TableTitleCell title={'爭議項目\n(包含業主、廠商及其他關係人)'} minWidth="320px" />
+          <TableTitleCell title={'原由及說明\n(包含人事時地物)'} minWidth="200px" />
+          <TableTitleCell title={'爭議標的\n(工期或金額)'} minWidth="200px" borderRight={false} />
         </TableRow>
       </TableHead>
     )

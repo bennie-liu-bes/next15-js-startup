@@ -2,8 +2,11 @@
 
 import ReactECharts from 'echarts-for-react'
 import { fm, toTWDate3, formatNumber } from '@/utils/fm'
-
+import { useTheme } from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
 export default function RevenuePlot({ data }) {
+  const theme = useTheme()
+  const isXs = useMediaQuery(theme.breakpoints.down('sm'))
   // 準備圖表數據
   const xAxisData = data.map(item => item.YM)
   const xAxisLabel = data.map(item => toTWDate3(item.YM))
@@ -201,10 +204,10 @@ export default function RevenuePlot({ data }) {
     ],
     grid: {
       containLabel: true,
-      left: '3%',
-      right: '3%',
+      top: isXs ? '22%' : '16%',
       bottom: '10%',
-      top: '16%',
+      left: isXs ? '2%' : '3%',
+      right: isXs ? '2%' : '3%',
     },
     dataZoom: [
       {

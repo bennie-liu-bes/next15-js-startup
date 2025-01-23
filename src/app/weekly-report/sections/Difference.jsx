@@ -38,7 +38,7 @@ export default function Difference({ data }) {
             value={`截至 ${toTWDate(data.DF_DATE_BLAST)}\n${fm(data.CASH_BLAST)}`}
             isChanged={data.CASH_BLAST_CHANGE}
             textAlign="center"
-            sx={{ bgcolor: COLOR.BGCOLOR, width: '50%', verticalAlign: 'top' }}
+            sx={{ bgcolor: COLOR.BGCOLOR, width: '50%', minWidth: '300px', verticalAlign: 'top' }}
           />
           <TableCell
             size="small"
@@ -47,6 +47,7 @@ export default function Difference({ data }) {
               textAlign: 'center',
               bgcolor: COLOR.BGCOLOR,
               verticalAlign: 'top',
+              minWidth: '300px',
             }}
           >
             <Typography variant={SIZE.TEXT} gutterBottom>

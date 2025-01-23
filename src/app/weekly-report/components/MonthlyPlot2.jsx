@@ -3,7 +3,11 @@
 import ReactECharts from 'echarts-for-react'
 import { fmNoUnit, toTWDate3, fmThousand } from '@/utils/fm'
 
+import { useTheme } from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
 export default function MonthlyPlot2({ data }) {
+  const theme = useTheme()
+  const isXs = useMediaQuery(theme.breakpoints.down('sm'))
   // 過濾掉 REVENUE_LISTED_BUT_NOT_PRICED_AMT 為 null 的資料
   data = data.filter(item => item.REVENUE_LISTED_BUT_NOT_PRICED_AMT !== null)
   // 準備圖表數據
@@ -86,10 +90,10 @@ export default function MonthlyPlot2({ data }) {
     ],
     grid: {
       containLabel: true,
-      left: '3%',
-      right: '3%',
+      top: isXs ? '20%' : '15%',
       bottom: '15%',
-      top: '15%',
+      left: isXs ? '3%' : '3%',
+      right: isXs ? '3%' : '3%',
     },
     dataZoom: [
       {

@@ -29,13 +29,13 @@ export default function Main({ data }) {
           <TableDataCell
             icon={<CalendarMonthIcon sx={{ color: '#2194D4' }} />}
             title={'實際開工日'}
-            sx={{ width: '50%' }}
+            sx={{ width: '50%', minWidth: '300px' }}
           />
           <TableDataCell
             value={toTWDate(data.START_DATE)}
             isChanged={data.START_DATE_CHANGE}
             borderRight={false}
-            sx={{ width: '50%' }}
+            sx={{ width: '50%', minWidth: '300px' }}
           />
         </TableRow>
         <TableRow>

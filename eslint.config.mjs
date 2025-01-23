@@ -16,13 +16,6 @@ export default [
   pluginJs.configs.recommended,
   pluginReact.configs.flat.recommended,
   importPlugin.flatConfigs.recommended,
-  // pluginCypress.configs.recommended,
-  // {
-  //   languageOptions: {
-  //     ecmaVersion: 'latest',
-  //     globals: globals.browser,
-  //   },
-  // },
   {
     plugins: {
       'unused-imports': unusedImports,
@@ -60,7 +53,6 @@ export default [
       'import/no-unresolved': 0,
       'import/no-nodejs-modules': 0,
       'import/no-dynamic-require': 0,
-      // unused imports
       'unused-imports/no-unused-imports': 1,
       'unused-imports/no-unused-vars': [
         1,
@@ -71,10 +63,8 @@ export default [
           argsIgnorePattern: '^_',
         },
       ],
-      // jsx-a11y
       'jsx-a11y/anchor-is-valid': 0,
       'jsx-a11y/control-has-associated-label': 0,
-      // perfectionist
       'perfectionist/sort-named-imports': [1, { order: 'asc', type: 'line-length' }],
       'perfectionist/sort-imports': [
         1,
