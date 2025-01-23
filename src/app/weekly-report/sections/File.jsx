@@ -77,12 +77,12 @@ export default function File({ data, is102B1A = false }) {
                 ) : item.FILE_TYPE === 'txt' ? (
                   <TableDataCell value={item.FILE_TEXT} />
                 ) : item.FILE_TYPE === 'pdf' ? (
-                  <TableCell>
+                  <TableCell sx={{ p: 0 }}>
                     <iframe
                       src={`${item.FILE_URL}#view=FitH`}
                       style={{
                         width: '100%',
-                        height: isXs ? '100%' : '1676px',
+                        height: isXs ? '100%' : '835px',
                         border: '1px solid #e0e0e0',
                         borderRadius: '8px',
                       }}
@@ -90,7 +90,7 @@ export default function File({ data, is102B1A = false }) {
                     />
                   </TableCell>
                 ) : item.FILE_TYPE === 'doc' || item.FILE_TYPE === 'docx' ? (
-                  <TableCell>
+                  <TableCell sx={{ p: 0 }}>
                     <iframe
                       src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(item.FILE_URL)}&wdStartOn=1&wdEmbedCode=0&wdAllowInteractivity=False&wdPrint=1&wdDownloadButton=1&wdFitPage=True`}
                       style={{
