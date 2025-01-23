@@ -3,6 +3,8 @@ import Image from 'next/image'
 import { Fragment } from 'react'
 import { SIZE, COLOR, OFFSET } from '@/config-global'
 
+import { useTheme } from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import { Tooltip, TableRow, TableBody, TableCell, Typography } from '@mui/material'
 
 import TableFooter from '../components/TableFooter'
@@ -10,7 +12,10 @@ import { useFontSize } from '../context/useFontSize'
 import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableBodyNodata from '../components/TableBodyNodata'
+
 export default function File({ data, is102B1A = false }) {
+  const theme = useTheme()
+  const isXs = useMediaQuery(theme.breakpoints.down('sm'))
   const { fontSize } = useFontSize()
   return (
     <>
@@ -77,7 +82,7 @@ export default function File({ data, is102B1A = false }) {
                       src={`${item.FILE_URL}#view=FitH`}
                       style={{
                         width: '100%',
-                        height: '1676px',
+                        height: isXs ? '100%' : '1676px',
                         border: '1px solid #e0e0e0',
                         borderRadius: '8px',
                       }}
@@ -90,7 +95,7 @@ export default function File({ data, is102B1A = false }) {
                       src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(item.FILE_URL)}`}
                       style={{
                         width: '100%',
-                        height: '835px',
+                        height: isXs ? '100%' : '835px',
                         border: '1px solid #e0e0e0',
                         borderRadius: '8px',
                       }}
