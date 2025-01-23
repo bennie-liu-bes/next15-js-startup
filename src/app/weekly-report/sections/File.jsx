@@ -92,14 +92,15 @@ export default function File({ data, is102B1A = false }) {
                 ) : item.FILE_TYPE === 'doc' || item.FILE_TYPE === 'docx' ? (
                   <TableCell>
                     <iframe
-                      src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(item.FILE_URL)}`}
+                      src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(item.FILE_URL)}&wdStartOn=1&wdEmbedCode=0&wdAllowInteractivity=False&wdPrint=1&wdDownloadButton=1&wdFitPage=True`}
                       style={{
                         width: '100%',
-                        height: isXs ? '100%' : '835px',
+                        height: isXs ? '400px' : '835px',
                         border: '1px solid #e0e0e0',
                         borderRadius: '8px',
                       }}
                       title={item.FILE_NAME.replace('.doc', '')}
+                      width="100%"
                     />
                   </TableCell>
                 ) : (
