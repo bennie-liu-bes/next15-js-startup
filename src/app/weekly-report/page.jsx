@@ -21,7 +21,7 @@ export async function generateMetadata({ params, searchParams }) {
     const searchParamsValues = await searchParams
     const { ORD_NO } = searchParamsValues
     const data = await getData(ORD_NO)
-    const siteName = `${data?.wkMain[0]?.SITE_CNAME}/${data?.wkMain[0]?.ORD_CH}`
+    const siteName = `${data?.wkMain[0]?.SITE_CNAME} - ${data?.wkMain[0]?.ORD_CH}`
 
     return {
       title: siteName,
