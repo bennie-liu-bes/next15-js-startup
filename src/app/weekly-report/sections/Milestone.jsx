@@ -42,24 +42,33 @@ export default function Milestone({ data }) {
                 rowSpan={3}
                 value={item.MILESTONE_NO_SUB}
                 isChanged={item.MILESTONE_NO_SUB_CHANGE}
+                sx={{ color: COLOR.ALERTCOLOR }}
               />
               <TableDataCell
                 value={toTWDate(item.MILESTONE_DATE)}
                 isChanged={item.MILESTONE_DATE_CHANGE}
+                sx={{ color: COLOR.ALERTCOLOR }}
               />
               <TableDataCell
                 value={toTWDate(item.POSTPONE_E_DATE)}
                 isChanged={item.POSTPONE_E_DATE_CHANGE}
+                sx={{ color: COLOR.ALERTCOLOR }}
               />
               <TableDataCell
                 value={toTWDate(item.COMPLETION_DATE)}
                 isChanged={item.COMPLETION_DATE_CHANGE}
+                sx={{ color: COLOR.ALERTCOLOR }}
               />
-              <TableDataCell value={item.MILESTONE} isChanged={item.MILESTONE_CHANGE} />
+              <TableDataCell
+                value={item.MILESTONE}
+                isChanged={item.MILESTONE_CHANGE}
+                sx={{ color: COLOR.ALERTCOLOR }}
+              />
               <TableDataCell
                 value={item.OVERDUE_FINE_D}
                 isChanged={item.OVERDUE_FINE_D_CHANGE}
                 borderRight={false}
+                sx={{ color: COLOR.ALERTCOLOR }}
               />
             </TableRow>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>

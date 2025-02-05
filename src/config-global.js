@@ -12,6 +12,7 @@ export const COLOR = {
   HEADER1: '#3498DB',
   HEADER2: '#18BC9C',
   BGCOLOR: '#EEEEEE',
+  ALERTCOLOR: '#FF6666',
 }
 
 export const SIZE = {

@@ -71,9 +71,9 @@ export default function Monthly({ data, plotData1 }) {
             <br />
             &emsp;• 計價進度：營管系統-9.11各工令財務管控分析表(JDE)
             <br />
-            &emsp;&emsp;◦ 保留款已開發票：已開發票計價金額 / 已開發票未入帳金額 * 100%
+            &emsp;&emsp;◦ 保留款已開發票：已開發票計價金額 / 變更後合約金額(未稅) * 100%
             <br />
-            &emsp;&emsp;◦ 保留款未開發票：(已開發票計價金額 + 保留款) / 已開發票未入帳金額 * 100%
+            &emsp;&emsp;◦ 保留款未開發票：(已開發票計價金額 + 保留款) / 變更後合約金額(未稅) * 100%
             <br />
             單位：%
           </Box>
@@ -257,7 +257,7 @@ export default function Monthly({ data, plotData1 }) {
           />
           <TableTitleCell
             textAlign="right"
-            title={`截至${toTWDate(data.LAST_GRAND_DATE).slice(0, 7)}26累計計價進度`}
+            title={`截至${toTWDate(data.LAST_GRAND_DATE)}累計計價進度`}
             minWidth="180px"
             borderRight={false}
           />

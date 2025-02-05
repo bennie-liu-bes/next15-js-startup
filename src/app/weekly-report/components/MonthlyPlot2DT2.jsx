@@ -76,10 +76,14 @@ export default function MonthlyPlot2DT({ data }) {
             className="sticky-column"
           />
           {sortedData.map((item, index) => (
-            <TableDataCell key={index} value={fmNoUnit(item.RSVAMT)} textAlign="right" />
+            <TableDataCell
+              key={index}
+              value={`${fmNoUnit(item.RSVAMT)}\n(${item.RSV_INVOI_CH})`}
+              textAlign="right"
+            />
           ))}
         </TableRow>
-        <TableRow>
+        {/* <TableRow>
           <TableTitleCell
             title="開發票狀態"
             textAlign="left"
@@ -100,7 +104,7 @@ export default function MonthlyPlot2DT({ data }) {
           {sortedData.map((item, index) => (
             <TableDataCell key={index} value={fmNoUnit(item.SAFAMT)} textAlign="right" />
           ))}
-        </TableRow>
+        </TableRow> */}
         <TableRow>
           <TableTitleCell
             title="已列入營收未計價金額"
@@ -113,6 +117,7 @@ export default function MonthlyPlot2DT({ data }) {
               key={index}
               value={fmNoUnit(item.REVENUE_LISTED_BUT_NOT_PRICED_AMT)}
               textAlign="right"
+              sx={{ color: COLOR.ALERTCOLOR }}
             />
           ))}
         </TableRow>

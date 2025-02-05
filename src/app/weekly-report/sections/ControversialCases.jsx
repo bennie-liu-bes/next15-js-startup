@@ -52,9 +52,22 @@ export default function ControversialCases({ data }) {
               ) : (
                 <TableDataCell value={item.C_TYPE_CH} rowSpan={3} />
               )}
-              <TableDataCell value={item.C_ITEMS} rowSpan={3} isChanged={item.C_ITEMS_CHANGE} />
-              <TableDataCell value={item.REASON} isChanged={item.REASON_CHANGE} />
-              <TableDataCell value={item.C_AMOUNT} isChanged={item.C_AMOUNT_CHANGE} />
+              <TableDataCell
+                value={item.C_ITEMS}
+                rowSpan={3}
+                isChanged={item.C_ITEMS_CHANGE}
+                sx={{ color: COLOR.ALERTCOLOR }}
+              />
+              <TableDataCell
+                value={item.REASON}
+                isChanged={item.REASON_CHANGE}
+                sx={{ color: COLOR.ALERTCOLOR }}
+              />
+              <TableDataCell
+                value={item.C_AMOUNT}
+                isChanged={item.C_AMOUNT_CHANGE}
+                sx={{ color: COLOR.ALERTCOLOR }}
+              />
             </TableRow>
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
               <TableDataCell
