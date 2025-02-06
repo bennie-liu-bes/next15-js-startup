@@ -298,7 +298,7 @@ export default function RevenuePlot({ data }) {
           show: true,
           formatter: function (params) {
             // 只在每 3 個點顯示一次標籤
-            if (params.dataIndex % 3 !== 0) {
+            if (params.dataIndex % 2 !== 0) {
               return ''
             }
             const value = params.value
@@ -328,7 +328,7 @@ export default function RevenuePlot({ data }) {
           show: true,
           formatter: function (params) {
             // 只在每 3 個點顯示一次標籤
-            if (params.dataIndex % 3 !== 0) {
+            if (params.dataIndex % 2 !== 0) {
               return ''
             }
             const value = params.value
