@@ -251,7 +251,7 @@ export const tables = {
   },
   frProjectIncome: {
     getData: async ordNo => {
-      const query = `SELECT * FROM FR_PROJECT_INCOME WHERE GBMCU = @ordNo`
+      const query = `SELECT * FROM FR_PROJECT_INCOME WHERE GBMCU = @ordNo ORDER BY YM`
       return await db.query(query, { ordNo })
     },
   },

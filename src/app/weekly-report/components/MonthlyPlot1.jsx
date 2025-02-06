@@ -393,6 +393,10 @@ export default function MonthlyPlot1({ data }) {
         startValue: getStartYearMonth(),
         endValue: getCurrentYearMonth(),
         bottom: 17,
+        labelFormatter: function (value) {
+          // 將 YYYYMM 格式轉換為 YYYY年MM月
+          return xAxisLabel[value]
+        },
       },
       // {
       //   type: 'inside',
