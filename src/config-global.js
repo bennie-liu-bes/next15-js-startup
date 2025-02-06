@@ -12,7 +12,10 @@ export const COLOR = {
   HEADER1: '#3498DB',
   HEADER2: '#18BC9C',
   BGCOLOR: '#EEEEEE',
-  ALERTCOLOR: '#FF6666',
+  WARN_COLOR1: '#F93827', //原本顏色#AD2D37
+  WARN_COLOR2: '#FB6F92',
+  ALERTCOLOR: '#FB6F92',
+  ALERTRED: '#F93827',
 }
 
 export const SIZE = {

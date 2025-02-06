@@ -12,8 +12,8 @@ import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
 
 export default function RegulatoryTrack({ data, is102B1A = false }) {
-  const WARN_COLOR1 = '#AD2D37'
-  const WARN_COLOR2 = '#FB6F92'
+  const WARN_COLOR1 = COLOR.WARN_COLOR1
+  const WARN_COLOR2 = COLOR.WARN_COLOR2
   const { fontSizeAlt } = useFontSize()
 
   return (

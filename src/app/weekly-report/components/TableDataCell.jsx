@@ -49,7 +49,13 @@ export default function TableDataCell({
             {icon && icon}
             <Typography variant={SIZE.TEXT}>{title}</Typography>
           </Stack>
-          <Typography variant={SIZE.TEXT} sx={{ textAlign }}>
+          <Typography
+            variant={SIZE.TEXT}
+            sx={{
+              textAlign,
+              color: Number(value?.toString().replace(/,/g, '')) < 0 && COLOR.ALERTRED,
+            }}
+          >
             {value}
           </Typography>
         </Stack>

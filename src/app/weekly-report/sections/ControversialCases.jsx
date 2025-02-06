@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import { COLOR, OFFSET } from '@/config-global'
 
 import Chip from '@mui/material/Chip'
+import AltRouteIcon from '@mui/icons-material/AltRoute'
 import { TableRow, TableHead, TableBody } from '@mui/material'
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh'
 
@@ -50,7 +51,19 @@ export default function ControversialCases({ data }) {
                   rowSpan={3}
                 />
               ) : (
-                <TableDataCell value={item.C_TYPE_CH} rowSpan={3} />
+                <TableDataCell
+                  value={
+                    <Chip
+                      label={item.C_TYPE_CH}
+                      icon={<AltRouteIcon />}
+                      color="warning"
+                      variant="outlined"
+                      size="large"
+                      sx={{ '& .MuiChip-label': { fontSize: '1.2rem' } }}
+                    />
+                  }
+                  rowSpan={3}
+                />
               )}
               <TableDataCell
                 value={item.C_ITEMS}

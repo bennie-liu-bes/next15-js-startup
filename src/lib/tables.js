@@ -145,7 +145,7 @@ export const tables = {
         FROM FR_WK_CRITICALPATH_CCO
         WHERE 1=1
         AND ORD_NO = @ordNo
-        ORDER BY CCO_ID
+        ORDER BY CCO_NUM
       `
       return await db.query(query, { ordNo })
     },
