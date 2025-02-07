@@ -6,8 +6,22 @@ export default function WeeklyReport() {
 }
 
 async function getData(ordNo) {
+  if (!ordNo) return null
+
   try {
-    const response = await fetch(`${CONFIG.API_HOST}/api/db?ordNo=${ordNo}`)
+    const response = await fetch(`${CONFIG.API_HOST}/api/db?ordNo=${ordNo}`, {
+      // 加入 next 的 fetch 配置
+      next: {
+        revalidate: 0, // 不快取
+      },
+      // 處理 fetch timeout
+      signal: AbortSignal.timeout(5000), // 5 秒 timeout
+    })
+
+    if (!response.ok) {
+      throw new Error('資料獲取失敗')
+    }
+
     const result = await response.json()
     return result
   } catch (error) {
