@@ -16,6 +16,7 @@ export const COLOR = {
   WARN_COLOR2: '#FB6F92',
   ALERTCOLOR: '#FB6F92',
   ALERTRED: '#F93827',
+  NAVBTNHIGHLIGHT: '#3498DB',
 }
 
 export const SIZE = {

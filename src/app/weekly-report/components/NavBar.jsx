@@ -29,12 +29,14 @@ import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp
 
 import DateDropDown from './DateDropDown'
 import { useFontSize } from '../context/useFontSize'
+import { useActiveSection } from '../hooks/useActiveSection'
 
 export default function NavBar({ data, selectedDate, handleDateChange, is102B1A }) {
   const theme = useTheme()
   if (data.wkMain.length === 0) return null
 
   const [isFullscreen, setIsFullscreen] = useState(false)
+  const activeSection = useActiveSection()
 
   // 抽取共用的滾動邏輯
   const scrollToSection = sectionId => {
@@ -215,67 +217,85 @@ export default function NavBar({ data, selectedDate, handleDateChange, is102B1A 
                 value: '壹',
                 handleScroll: handleScrollToWeekly,
                 tooltip: '週進度',
+                sectionId: 'weekly-section',
               })}
               {navButton({
                 value: '貳',
                 handleScroll: handleScrollToMonthly,
                 tooltip: '月進度差異值',
+                sectionId: 'monthly-section',
               })}
               {navButton({
                 value: '參-1',
                 handleScroll: handleScrollToDifference,
                 tooltip: '會計報表現金差異',
+                sectionId: 'difference-section',
               })}
               {navButton({
                 value: '參-2',
                 handleScroll: handleScrollToDifferenceCash,
                 tooltip: '預估三個月/實際開發票、入帳日期及金額',
+                sectionId: 'difference-cash-section',
               })}
               {navButton({
                 value: '肆',
                 handleScroll: handleScrollToRevenue,
                 tooltip: '營收管控',
+                sectionId: 'revenue-section',
               })}
               {navButton({
                 value: '伍-1',
                 handleScroll: handleScrollToMilestone,
                 tooltip: '里程碑',
+                sectionId: 'milestone-section',
               })}
-              {navButton({ value: '伍-2', handleScroll: handleScrollToFile, tooltip: '施工現況' })}
+              {navButton({
+                value: '伍-2',
+                handleScroll: handleScrollToFile,
+                tooltip: '施工現況',
+                sectionId: 'file-section',
+              })}
               {navButton({
                 value: '陸',
                 handleScroll: handleScrollToCriticalpathCco,
                 tooltip: '契約變更',
+                sectionId: 'criticalpath-cco-section',
               })}
               {navButton({
                 value: '柒-1(a)',
                 handleScroll: handleScrollToTodo,
                 tooltip: '應辦事項-困難解決需求',
+                sectionId: 'todo-section',
               })}
               {navButton({
                 value: '柒-1(b)',
                 handleScroll: handleScrollToTodoB,
                 tooltip: '應辦事項-契約規定應辦事項',
+                sectionId: 'todo-b-section',
               })}
               {navButton({
                 value: '柒-2',
                 handleScroll: handleScrollToTrack,
                 tooltip: '追蹤管制事項',
+                sectionId: 'track-section',
               })}
               {navButton({
                 value: '柒-3',
                 handleScroll: handleScrollToRegulatoryTrack,
                 tooltip: '未來三個月採發提送管制追蹤',
+                sectionId: 'regulatory-track-section',
               })}
               {navButton({
                 value: '柒-4',
                 handleScroll: handleScrollToControversialCases,
                 tooltip: '爭議案件',
+                sectionId: 'controversial-cases-section',
               })}
               {navButton({
                 value: '捌',
                 handleScroll: handleScrollToComControl,
                 tooltip: '完工階段管控 - 小包合約結算辦理情形',
+                sectionId: 'com-control-section',
               })}
             </>
           ) : (
@@ -284,17 +304,25 @@ export default function NavBar({ data, selectedDate, handleDateChange, is102B1A 
                 value: '壹',
                 handleScroll: handleScrollToRevenue,
                 tooltip: '營收管控',
+                sectionId: 'revenue-section',
               })}
               {navButton({
                 value: '貳',
                 handleScroll: handleScrollToDifferenceCash,
                 tooltip: '預估三個月/實際開發票、入帳日期及金額',
+                sectionId: 'difference-cash-section',
               })}
-              {navButton({ value: '參', handleScroll: handleScrollToFile, tooltip: '施工現況' })}
+              {navButton({
+                value: '參',
+                handleScroll: handleScrollToFile,
+                tooltip: '施工現況',
+                sectionId: 'file-section',
+              })}
               {navButton({
                 value: '肆',
                 handleScroll: handleScrollToRegulatoryTrack,
                 tooltip: '未來三個月採發提送管制追蹤',
+                sectionId: 'regulatory-track-section',
               })}
             </>
           )}
@@ -412,15 +440,39 @@ export default function NavBar({ data, selectedDate, handleDateChange, is102B1A 
     )
   }
 
-  function navButton({ value, handleScroll, tooltip }) {
+  function navButton({ value, handleScroll, tooltip, sectionId }) {
+    const isActive = activeSection === sectionId
+
     return (
       <Tooltip title={<Typography variant="body1">{tooltip}</Typography>} placement="top" arrow>
         <Button
+          disableRipple
           variant="text"
           size="medium"
-          color="default"
           onClick={handleScroll}
-          sx={{ border: '1px solid #E0E0E0', py: 0.5, flex: 1 }}
+          sx={{
+            border: '1px solid #E0E0E0',
+            py: 0.5,
+            flex: 1,
+            position: 'relative',
+            overflow: 'hidden',
+            color: isActive ? '#fff' : 'inherit',
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: isActive ? 0 : '-100%',
+              width: '100%',
+              height: '100%',
+              backgroundColor: COLOR.NAVBTNHIGHLIGHT,
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              zIndex: -1,
+            },
+            // '&:hover': {
+            //   border: `2px solid ${COLOR.NAVBTNHIGHLIGHT}`,
+            // },
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          }}
         >
           {value}
         </Button>
