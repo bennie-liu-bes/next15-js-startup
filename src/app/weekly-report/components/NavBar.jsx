@@ -27,9 +27,10 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit'
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp'
 
+import { useActiveSection } from '@/hooks/useActiveSection'
+
 import DateDropDown from './DateDropDown'
 import { useFontSize } from '../context/useFontSize'
-import { useActiveSection } from '../hooks/useActiveSection'
 
 export default function NavBar({ data, selectedDate, handleDateChange, is102B1A }) {
   const theme = useTheme()
@@ -454,24 +455,8 @@ export default function NavBar({ data, selectedDate, handleDateChange, is102B1A 
             border: '1px solid #E0E0E0',
             py: 0.5,
             flex: 1,
-            position: 'relative',
-            overflow: 'hidden',
             color: isActive ? '#fff' : 'inherit',
-            '&::before': {
-              content: '""',
-              position: 'absolute',
-              top: 0,
-              left: isActive ? 0 : '-100%',
-              width: '100%',
-              height: '100%',
-              backgroundColor: COLOR.NAVBTNHIGHLIGHT,
-              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-              zIndex: -1,
-            },
-            // '&:hover': {
-            //   border: `2px solid ${COLOR.NAVBTNHIGHLIGHT}`,
-            // },
-            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            backgroundColor: isActive ? COLOR.NAVBTNHIGHLIGHT : 'transparent',
           }}
         >
           {value}
