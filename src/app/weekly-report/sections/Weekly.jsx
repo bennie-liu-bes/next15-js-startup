@@ -94,6 +94,7 @@ export default function Weekly({ data, data2 }) {
               />
             }
             textAlign="right"
+            sx={{ color: data.ACT_SUM1 - data.EXP_PERCENT1 < 0 && COLOR.ALERTRED }}
           />
           <TableDataCell
             value={
@@ -103,6 +104,7 @@ export default function Weekly({ data, data2 }) {
               />
             }
             textAlign="right"
+            sx={{ color: data.ACT_SUM2 - data.EXP_PERCENT2 < 0 && COLOR.ALERTRED }}
           />
           <TableDataCell
             value={
@@ -112,6 +114,7 @@ export default function Weekly({ data, data2 }) {
               />
             }
             textAlign="right"
+            sx={{ color: data.ACT_SUM3 - data.EXP_PERCENT3 < 0 && COLOR.ALERTRED }}
           />
           <TableDataCell
             value={
@@ -123,6 +126,7 @@ export default function Weekly({ data, data2 }) {
             textAlign="right"
             isChanged={'true'}
             borderRight={false}
+            sx={{ color: data.ACT_SUM4 - data.EXP_PERCENT4 < 0 && COLOR.ALERTRED }}
           />
         </TableRow>
         <TableRow>
