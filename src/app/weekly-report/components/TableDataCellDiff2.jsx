@@ -54,7 +54,7 @@ export default function TableDataCellDiff2({
         </Stack>
         {isChanged === 'true' ? (
           <>
-            <Typography
+            {/* <Typography
               variant={SIZE.TEXT}
               style={{
                 color: 'red',
@@ -62,7 +62,7 @@ export default function TableDataCellDiff2({
               }}
             >
               {originalText}
-            </Typography>
+            </Typography> */}
             <Typography
               variant={SIZE.TEXT}
               style={{
