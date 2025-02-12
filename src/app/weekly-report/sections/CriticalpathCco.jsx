@@ -73,7 +73,7 @@ export default function CriticalpathCco({ data }) {
                 originalText={item.STATUS_PRE}
                 modifiedText={item.STATUS}
                 isChanged={item.STATUS_CHANGE}
-                colSpan={5}
+                colSpan={4}
                 borderRight={false}
               />
             </TableRow>
@@ -84,7 +84,7 @@ export default function CriticalpathCco({ data }) {
                 originalText={item.REMARK_PRE}
                 modifiedText={item.REMARK}
                 isChanged={item.REMARK_CHANGE}
-                colSpan={5}
+                colSpan={4}
                 borderRight={false}
               />
             </TableRow>

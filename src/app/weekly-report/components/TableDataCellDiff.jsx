@@ -18,6 +18,9 @@ export default function TableDataCellDiff({
   sx,
 }) {
   const { bottomLine, bgColor } = useFontSize()
+  console.log('originalText', originalText)
+  console.log('modifiedText', modifiedText)
+
   return tooltip ? (
     <Tooltip
       title={
