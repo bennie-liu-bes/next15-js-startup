@@ -11,7 +11,6 @@ import TableBodyNodata from './TableBodyNodata'
 import { useFontSize } from '../context/useFontSize'
 
 export default function DifferenceCashPlotDT({ data }) {
-  console.log(data)
   const { fontSize } = useFontSize()
   const [sortOrder, setSortOrder] = useState('desc')
 

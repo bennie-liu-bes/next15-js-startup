@@ -10,6 +10,14 @@ const sqlConfig = {
     encrypt: true,
     trustServerCertificate: true,
   },
+  // 添加連接和請求超時設定
+  pool: {
+    max: 10,
+    min: 0,
+    idleTimeoutMillis: 30000,
+  },
+  requestTimeout: 30000, // 設定請求超時為 30 秒
+  connectionTimeout: 30000, // 設定連接超時為 30 秒
 }
 
 class Database {

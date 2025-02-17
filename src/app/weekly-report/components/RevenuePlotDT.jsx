@@ -11,7 +11,6 @@ import TableBodyNodata from './TableBodyNodata'
 import { useFontSize } from '../context/useFontSize'
 
 export default function RevenuePlotDT({ data }) {
-  console.log(data)
   const { fontSize } = useFontSize()
   const [sortOrder, setSortOrder] = useState('desc')
 

@@ -25,7 +25,6 @@ export function useActiveSection() {
           const newActiveSection = topSection.target.id
           if (activeSection !== newActiveSection) {
             setActiveSection(newActiveSection)
-            // console.log('Active section changed to:', newActiveSection) // 除錯用
           }
         }
       },
@@ -52,7 +51,6 @@ export function useActiveSection() {
 
       if (topSection) {
         setActiveSection(topSection.id)
-        // console.log('Initial active section:', topSection.id) // 除錯用
       }
     }
 
