@@ -1,8 +1,11 @@
 import { Fragment } from 'react'
+import { SIZE } from '@/config-global'
 import { fmNoUnit, toTWDate } from '@/utils/fm'
 import { COLOR, OFFSET } from '@/config-global'
 
+import Chip from '@mui/material/Chip'
 import { red, grey } from '@mui/material/colors'
+import { Stack, Typography } from '@mui/material'
 import NoteAltIcon from '@mui/icons-material/NoteAlt'
 import CampaignIcon from '@mui/icons-material/Campaign'
 import { TableRow, TableHead, TableBody } from '@mui/material'
@@ -39,7 +42,19 @@ export default function CriticalpathCco({ data }) {
             <TableRow sx={{ bgcolor: index % 2 === 1 && COLOR.BGCOLOR }}>
               <TableDataCell value={index + 1} rowSpan={3} textAlign="center" />
               <TableDataCell
-                value={item.CCO_NO}
+                value={
+                  <Stack spacing={1}>
+                    <Typography variant={SIZE.TEXT}>{item.CCO_NO}</Typography>
+                    <Chip
+                      label={item.C_TYPE_CH}
+                      // icon={<PriorityHighIcon />}
+                      color="secondary"
+                      variant="outlined"
+                      size="medium"
+                      sx={{ '& .MuiChip-label': { fontSize: '1.2rem' } }}
+                    />
+                  </Stack>
+                }
                 rowSpan={3}
                 isChanged={item.CCO_NO_CHANGE}
                 sx={{ color: COLOR.ALERTCOLOR }}
@@ -102,7 +117,7 @@ export default function CriticalpathCco({ data }) {
       >
         <TableRow>
           <TableTitleCell title="項次" width="80px" rowSpan={3} textAlign="center" />
-          <TableTitleCell title="契約變更編號" minWidth="160px" />
+          <TableTitleCell title="契約變更編號" minWidth="170px" />
           <TableTitleCell title="事由" minWidth="200px" />
           <TableTitleCell title="案件金額" minWidth="120px" />
           <TableTitleCell title="變更金額及計價情形說明" minWidth="260px" />

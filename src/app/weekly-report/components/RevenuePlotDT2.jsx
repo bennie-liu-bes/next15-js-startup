@@ -65,7 +65,7 @@ export default function RevenuePlotDT({ data }) {
             <TableDataCell key={index} value={fmNoUnit(item.AAGBAMT)} textAlign="right" />
           ))}
         </TableRow>
-        <TableRow>
+        <TableRow sx={{ borderBottom: '2px double #000' }}>
           <TableTitleCell
             title="單月營收差異"
             textAlign="left"
