@@ -51,7 +51,7 @@ export default function CriticalpathCco({ data }) {
                       color="secondary"
                       variant="outlined"
                       size="medium"
-                      sx={{ '& .MuiChip-label': { fontSize: '1.2rem' } }}
+                      sx={{ '& .MuiChip-label': { fontSize: `${fontSize}rem` } }}
                     />
                   </Stack>
                 }

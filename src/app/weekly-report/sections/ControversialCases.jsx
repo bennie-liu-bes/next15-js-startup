@@ -45,7 +45,7 @@ export default function ControversialCases({ data }) {
                       color="error"
                       variant="outlined"
                       size="large"
-                      sx={{ '& .MuiChip-label': { fontSize: '1.2rem' } }}
+                      sx={{ '& .MuiChip-label': { fontSize: `${fontSize}rem` } }}
                     />
                   }
                   rowSpan={3}
@@ -59,7 +59,7 @@ export default function ControversialCases({ data }) {
                       color="warning"
                       variant="outlined"
                       size="large"
-                      sx={{ '& .MuiChip-label': { fontSize: '1.2rem' } }}
+                      sx={{ '& .MuiChip-label': { fontSize: `${fontSize}rem` } }}
                     />
                   }
                   rowSpan={3}
