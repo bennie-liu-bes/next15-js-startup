@@ -99,7 +99,11 @@ export const tables = {
         SELECT 
           a.*,
           b.BAYAMT AS EXPECT_REVENUE_YEARLY,
-          FORMAT(a.PREPER_ACCAMT_C, '#,##0') + '\n[' + FORMAT(b.BAYAMT, '#,##0') + ']' AS PREPER_ACCAMT_C_MOD
+          CASE WHEN b.BAYAMT IS NOT NULL 
+        THEN FORMAT(a.PREPER_ACCAMT_C, '#,##0') + '\n[' + FORMAT(b.BAYAMT, '#,##0') + ']' 
+        ELSE FORMAT(a.PREPER_ACCAMT_C, '#,##0') + '\n[ ]'
+        END AS PREPER_ACCAMT_C_MOD,
+        FORMAT(a.PREPER_ACCAMT_C, '#,##0') + '\n[197,660,000]' AS PREPER_ACCAMT_C_MOD_TEST
         FROM FR_WK_REVENUE a
         LEFT JOIN
         (
