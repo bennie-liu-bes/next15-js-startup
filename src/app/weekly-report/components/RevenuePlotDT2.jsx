@@ -28,6 +28,7 @@ export default function RevenuePlotDT({ data }) {
           scrollBehavior: 'smooth',
         },
       }}
+      // scrollToRight={true}
     >
       {tableHead()}
       {data ? tableBody() : <TableBodyNodata colSpan={5} />}

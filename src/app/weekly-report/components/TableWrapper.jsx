@@ -25,6 +25,8 @@ export default function TableWrapper({ title, colSpan, children, sx, scrollToRig
           const targetPosition = targetCell.offsetLeft
           const scrollTo = targetPosition - containerWidth + 160
           scrollContainer.scrollLeft = scrollTo
+        } else {
+          scrollContainer.scrollLeft = scrollContainer.scrollWidth
         }
       }
     }
