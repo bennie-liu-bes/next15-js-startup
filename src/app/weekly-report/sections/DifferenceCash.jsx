@@ -26,7 +26,7 @@ export default function DifferenceCash({ data, plotData, is102B1A = false }) {
       <TableWrapper
         title={
           is102B1A
-            ? '貳、預估三個月/實際開發票、入帳日期及金額'
+            ? '參、預估三個月/實際開發票、入帳日期及金額'
             : '參-2、預估三個月/實際開發票、入帳日期及金額'
         }
         colSpan={12}

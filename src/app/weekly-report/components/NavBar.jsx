@@ -59,8 +59,8 @@ export default function NavBar({ data, selectedDate, handleDateChange, is102B1A 
       behavior: 'smooth',
     })
   }
-
   const handleScrollToWeekly = () => scrollToSection('weekly-section')
+  const handleScrollToMainHelp = () => scrollToSection('main-help-section')
   const handleScrollToMonthly = () => scrollToSection('monthly-section')
   const handleScrollToDifference = () => scrollToSection('difference-section')
   const handleScrollToDifferenceCash = () => scrollToSection('difference-cash-section')
@@ -303,24 +303,30 @@ export default function NavBar({ data, selectedDate, handleDateChange, is102B1A 
             <>
               {navButton({
                 value: '壹',
+                handleScroll: handleScrollToMainHelp,
+                tooltip: '需公司援助事項',
+                sectionId: 'main-help-section',
+              })}
+              {navButton({
+                value: '貳',
                 handleScroll: handleScrollToRevenue,
                 tooltip: '營收管控',
                 sectionId: 'revenue-section',
               })}
               {navButton({
-                value: '貳',
+                value: '參',
                 handleScroll: handleScrollToDifferenceCash,
                 tooltip: '預估三個月/實際開發票、入帳日期及金額',
                 sectionId: 'difference-cash-section',
               })}
               {navButton({
-                value: '參',
+                value: '肆',
                 handleScroll: handleScrollToFile,
                 tooltip: '施工現況',
                 sectionId: 'file-section',
               })}
               {navButton({
-                value: '肆',
+                value: '伍',
                 handleScroll: handleScrollToRegulatoryTrack,
                 tooltip: '未來三個月採發提送管制追蹤',
                 sectionId: 'regulatory-track-section',

@@ -23,7 +23,7 @@ export default function RegulatoryTrack({ data, is102B1A = false }) {
         style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }}
       />
       <TableWrapper
-        title={is102B1A ? '肆、未來三個月採發提送管制追蹤' : '柒-3、未來三個月採發提送管制追蹤'}
+        title={is102B1A ? '伍、未來三個月採發提送管制追蹤' : '柒-3、未來三個月採發提送管制追蹤'}
         colSpan={10}
       >
         {tableHead()}

@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { toTWDate } from '@/utils/fm'
-import { COLOR } from '@/config-global'
+import { COLOR, OFFSET } from '@/config-global'
 
 import { red, grey } from '@mui/material/colors'
 import NoteAltIcon from '@mui/icons-material/NoteAlt'
@@ -13,13 +13,19 @@ import TableWrapper from '../components/TableWrapper'
 import TableDataCell from '../components/TableDataCell'
 import TableBodyNodata from '../components/TableBodyNodata'
 import TableDataCellDiff from '../components/TableDataCellDiff'
-export default function MainHelp({ data }) {
+export default function MainHelp({ data, is102B1A = false }) {
   const { fontSize } = useFontSize()
 
   return (
-    <TableWrapper title="需公司援助事項" colSpan={2}>
-      {data.length > 0 ? tableBody() : <TableBodyNodata colSpan={2} />}
-    </TableWrapper>
+    <>
+      <div
+        id="main-help-section"
+        style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }}
+      />
+      <TableWrapper title={is102B1A ? '壹、需公司援助事項' : '需公司援助事項'} colSpan={2}>
+        {data.length > 0 ? tableBody() : <TableBodyNodata colSpan={2} />}
+      </TableWrapper>
+    </>
   )
 
   function tableBody() {

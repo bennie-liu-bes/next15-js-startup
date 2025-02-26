@@ -28,10 +28,10 @@ export default function Revenue({ data, frProjectIncome, showPlot = true, is102B
           position: 'relative',
           top: OFFSET,
           visibility: 'hidden',
-          marginTop: is102B1A && '-16px',
+          // marginTop: is102B1A && '-16px',
         }}
       />
-      <TableWrapper title={is102B1A ? '壹、營收管控(含物調)' : '肆、營收管控(含物調)'} colSpan={6}>
+      <TableWrapper title={is102B1A ? '貳、營收管控(含物調)' : '肆、營收管控(含物調)'} colSpan={6}>
         {data && tableHead()}
         {data ? tableBody() : <TableBodyNodata colSpan={6} />}
       </TableWrapper>

@@ -73,7 +73,10 @@ export default function WeeklyReportClient() {
         }}
       >
         {is102B1A ? (
-          <Stack spacing={2}>
+          <Stack spacing={2} direction="column">
+            <Box sx={{ mb: 2 }}>
+              <MainHelp data={data.wkMainHelp} is102B1A={is102B1A} />
+            </Box>
             <Revenue
               data={data.wkRevenue[0]}
               frProjectIncome={data.frProjectIncome}

@@ -20,7 +20,7 @@ export default function File({ data, is102B1A = false }) {
   return (
     <>
       <div id="file-section" style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }} />
-      <TableWrapper title={is102B1A ? '參、施工現況' : '伍-2、施工現況'} colSpan={6}>
+      <TableWrapper title={is102B1A ? '肆、施工現況' : '伍-2、施工現況'} colSpan={6}>
         {data.length > 0 ? tableBody() : <TableBodyNodata />}
       </TableWrapper>
     </>

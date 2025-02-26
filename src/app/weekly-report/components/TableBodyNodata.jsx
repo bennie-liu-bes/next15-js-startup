@@ -11,7 +11,7 @@ export default function TableBodyNodata({ colSpan }) {
     <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}>
       <TableRow>
         <TableCell colSpan={colSpan} sx={{ bgcolor: COLOR.BGCOLOR }}>
-          <Typography variant={SIZE.TEXT}>🚧 無資料 🚧</Typography>
+          <Typography variant={SIZE.TEXT}>無</Typography>
         </TableCell>
       </TableRow>
       <TableFooter wkDate={''} colSpan={colSpan} />
