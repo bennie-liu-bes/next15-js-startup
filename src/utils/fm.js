@@ -81,6 +81,8 @@ export const toTWDate2 = dateStr => {
       .filter(date => date)
       .map(date => toTWDate(date))
       .join('\n')
+  } else {
+    return toTWDate(dateStr)
   }
 }
 
