@@ -15,57 +15,52 @@ const DEFAULT_BG_COLOR = true
 const BG_COLOR_KEY = 'weeklyReport_bgColor'
 
 export function FontSizeProvider({ children }) {
-  // 從 localStorage 讀取儲存的值，如果沒有則使用預設值
-  const [fontSize, setFontSize] = useState(() => {
-    // 由於這是 client component，我們需要確保 localStorage 的存取是在客戶端執行
-    if (typeof window !== 'undefined') {
-      const savedSize = localStorage.getItem(FONT_SIZE_KEY)
-      return savedSize ? parseFloat(savedSize) : DEFAULT_FONT_SIZE
-    }
-    return DEFAULT_FONT_SIZE
-  })
+  const [fontSize, setFontSize] = useState(DEFAULT_FONT_SIZE)
+  const [fontSizeAlt, setFontSizeAlt] = useState(DEFAULT_FONT_SIZE_ALT)
+  const [bottomLine, setBottomLine] = useState(DEFAULT_BOTTOM_LINE)
+  const [bgColor, setBgColor] = useState(DEFAULT_BG_COLOR)
+  const [isClient, setIsClient] = useState(false)
 
-  const [fontSizeAlt, setFontSizeAlt] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const savedSize = localStorage.getItem(FONT_SIZE_ALT_KEY)
-      return savedSize ? parseFloat(savedSize) : DEFAULT_FONT_SIZE_ALT
-    }
-    return DEFAULT_FONT_SIZE_ALT
-  })
-
-  const [bottomLine, setBottomLine] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const savedBottomLine = localStorage.getItem(BOTTOM_LINE_KEY)
-      return savedBottomLine ? savedBottomLine === 'true' : DEFAULT_BOTTOM_LINE
-    }
-    return DEFAULT_BOTTOM_LINE
-  })
-
-  const [bgColor, setBgColor] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const savedBgColor = localStorage.getItem(BG_COLOR_KEY)
-      return savedBgColor ? savedBgColor === 'true' : DEFAULT_BG_COLOR
-    }
-    return DEFAULT_BG_COLOR
-  })
-
-  // 當 fontSize 改變時，儲存到 localStorage
+  // 在組件掛載時從 localStorage 讀取設置
   useEffect(() => {
-    localStorage.setItem(FONT_SIZE_KEY, fontSize.toString())
-  }, [fontSize])
+    setIsClient(true)
+    const savedSize = localStorage.getItem(FONT_SIZE_KEY)
+    if (savedSize) setFontSize(parseFloat(savedSize))
 
-  // 當 fontSizeAlt 改變時，儲存到 localStorage
+    const savedSizeAlt = localStorage.getItem(FONT_SIZE_ALT_KEY)
+    if (savedSizeAlt) setFontSizeAlt(parseFloat(savedSizeAlt))
+
+    const savedBottomLine = localStorage.getItem(BOTTOM_LINE_KEY)
+    if (savedBottomLine) setBottomLine(savedBottomLine === 'true')
+
+    const savedBgColor = localStorage.getItem(BG_COLOR_KEY)
+    if (savedBgColor) setBgColor(savedBgColor === 'true')
+  }, [])
+
+  // 當設置改變時，儲存到 localStorage
   useEffect(() => {
-    localStorage.setItem(FONT_SIZE_ALT_KEY, fontSizeAlt.toString())
-  }, [fontSizeAlt])
+    if (isClient) {
+      localStorage.setItem(FONT_SIZE_KEY, fontSize.toString())
+    }
+  }, [fontSize, isClient])
 
   useEffect(() => {
-    localStorage.setItem(BOTTOM_LINE_KEY, bottomLine.toString())
-  }, [bottomLine])
+    if (isClient) {
+      localStorage.setItem(FONT_SIZE_ALT_KEY, fontSizeAlt.toString())
+    }
+  }, [fontSizeAlt, isClient])
 
   useEffect(() => {
-    localStorage.setItem(BG_COLOR_KEY, bgColor.toString())
-  }, [bgColor])
+    if (isClient) {
+      localStorage.setItem(BOTTOM_LINE_KEY, bottomLine.toString())
+    }
+  }, [bottomLine, isClient])
+
+  useEffect(() => {
+    if (isClient) {
+      localStorage.setItem(BG_COLOR_KEY, bgColor.toString())
+    }
+  }, [bgColor, isClient])
 
   return (
     <FontSizeContext.Provider
