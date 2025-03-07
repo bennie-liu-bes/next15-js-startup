@@ -5,11 +5,13 @@ import { fmNoUnit, toTWDate3, fmThousand } from '@/utils/fm'
 
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
-export default function MonthlyPlot2({ data }) {
+export default function MonthlyPlot2({ data1, data2 }) {
   const theme = useTheme()
   const isXs = useMediaQuery(theme.breakpoints.down('sm'))
   // 過濾掉 REVENUE_LISTED_BUT_NOT_PRICED_AMT 為 null 的資料
-  data = data.filter(item => item.REVENUE_LISTED_BUT_NOT_PRICED_AMT !== null)
+  data1 = data1.filter(item => item.REVENUE_LISTED_BUT_NOT_PRICED_AMT !== null)
+  data2 = data2.filter(item => item.REVENUE_LISTED_BUT_NOT_PRICED_AMT !== null)
+  const data = data1 ? data1.concat(data2) : data2
   // 準備圖表數據
   const xAxisData = data.map(item => toTWDate3(item.CALENDAR_DATE.substring(0, 7).replace('/', '')))
   const yAxisData = data.map(item => item.REVENUE_LISTED_BUT_NOT_PRICED_AMT)

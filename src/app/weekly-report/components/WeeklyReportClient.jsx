@@ -1,5 +1,4 @@
 'use client'
-
 import { useEffect } from 'react'
 import { Box, Stack } from '@mui/material'
 import { useWeeklyReportDate } from '@/hooks/useWeeklyReportDate'
@@ -99,7 +98,11 @@ export default function WeeklyReportClient() {
             </Box>
             <MainHelp data={data.wkMainHelp} />
             <Weekly data={data.wkWeekly[0]} data2={data.wkWeeklyCustomize} />
-            <Monthly data={data.wkMonthly[0]} plotData1={data.wkMonthlyPlot1} />
+            <Monthly
+              data={data.wkMonthly[0]}
+              plotData1={data.wkMonthlyPlot1}
+              plotData2={data.wkMonthlyPlot1Extra}
+            />
             <Difference data={data.wkDifference[0]} />
             <DifferenceCash data={data.wkDifferenceCash} plotData={data.wkDifferenceCashPlot} />
             <Revenue data={data.wkRevenue[0]} frProjectIncome={data.frProjectIncome} />

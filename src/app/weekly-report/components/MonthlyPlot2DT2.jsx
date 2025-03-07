@@ -11,7 +11,8 @@ import TableTitleCell from './TableTitleCell'
 import TableBodyNodata from './TableBodyNodata'
 import { useFontSize } from '../context/useFontSize'
 
-export default function MonthlyPlot2DT({ data }) {
+export default function MonthlyPlot2DT({ data, data2 }) {
+  const combinedData = data ? data.concat(data2) : data2
   const { fontSize } = useFontSize()
   const [sortOrder, setSortOrder] = useState('asc')
 
@@ -36,7 +37,7 @@ export default function MonthlyPlot2DT({ data }) {
   )
 
   function tableBody() {
-    const sortedData = [...data]
+    const sortedData = [...combinedData]
       .sort((a, b) => {
         const dateA = new Date(a.CALENDAR_DATE)
         const dateB = new Date(b.CALENDAR_DATE)
@@ -141,7 +142,7 @@ export default function MonthlyPlot2DT({ data }) {
             minWidth="240px"
             className="sticky-column header"
           />
-          {[...data]
+          {[...combinedData]
             .sort((a, b) => {
               const dateA = new Date(a.CALENDAR_DATE)
               const dateB = new Date(b.CALENDAR_DATE)

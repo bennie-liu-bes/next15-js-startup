@@ -189,3 +189,50 @@ export const formatNumber = value => {
   }
   return value.toString()
 }
+
+export const getDateWeek = date => {
+  // 如果傳入的date是物件，則直接使用，否則創建一個新的日期物件
+  const currentDate = typeof date === 'object' ? date : new Date()
+  // 創建當年1月1日的日期物件
+  const januaryFirst = new Date(currentDate.getFullYear(), 0, 1)
+  // 計算1月1日到下一個星期天的天數
+  const daysToNextSunday = januaryFirst.getDay() === 0 ? 0 : (7 - januaryFirst.getDay()) % 7
+  // 創建下一個星期天的日期物件
+  const nextSunday = new Date(
+    currentDate.getFullYear(),
+    0,
+    januaryFirst.getDate() + daysToNextSunday
+  )
+
+  // 判斷當前日期是否小於下一個星期天
+  if (currentDate < nextSunday) {
+    // 如果小於，則返回1，表示當前日期在第一週
+    return 1
+  } else if (currentDate > nextSunday) {
+    // 如果大於，則計算當前日期到下一個星期天的週數
+    // 首先計算毫秒數，然後除以一天的毫秒數（86400000），再除以7（一週的天數），最後取整數
+    const weeks = Math.ceil((currentDate - nextSunday) / (24 * 3600 * 1000) / 7) + 1
+    // 返回週數
+    return weeks
+  } else {
+    // 如果等於，則返回1，表示當前日期是下一個星期天
+    return 1
+  }
+}
+
+export const getCurrentDateWithWeekNumber = wkWeeklyDate => {
+  const wkWeeklyDateWithWeekNumber = wkWeeklyDate.map(date => ({
+    ...date,
+    weekNumber: `${date.CALENDAR_DATE.split('/')[0]}-${getDateWeek(new Date(date.CALENDAR_DATE.replace(/\//g, '-')))}`,
+  }))
+  const currentDateWithWeekNumber = `${new Date().getFullYear()}-${getDateWeek(new Date())}`
+  const wkWeeklyDateWithWeekNumberThisWeek = wkWeeklyDateWithWeekNumber.filter(
+    date => date.weekNumber === currentDateWithWeekNumber
+  )
+  const wkWeeklyDateWithWeekNumberThisWeeklatestDate = wkWeeklyDateWithWeekNumberThisWeek.reduce(
+    (prev, current) =>
+      new Date(prev.CALENDAR_DATE) > new Date(current.CALENDAR_DATE) ? prev : current
+  )
+  let targetDate = wkWeeklyDateWithWeekNumberThisWeeklatestDate.CALENDAR_DATE
+  return targetDate
+}

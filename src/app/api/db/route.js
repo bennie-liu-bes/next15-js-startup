@@ -28,6 +28,7 @@ export async function GET(request) {
     let wkControversialCasesData = []
     let wkComControlData = []
     let wkMonthlyPlot1Data = []
+    let wkMonthlyPlot1ExtraData = []
     let wkDifferenceCashPlotData = []
     let frProjectIncomeData = []
     try {
@@ -50,6 +51,7 @@ export async function GET(request) {
       wkControversialCasesData = await tables.wkControversialCases.getData(ordNo)
       wkComControlData = await tables.wkComControl.getData(ordNo)
       wkMonthlyPlot1Data = await tables.wkMonthlyPlot1.getData(ordNo)
+      wkMonthlyPlot1ExtraData = await tables.wkMonthlyPlot1Extra.getData(ordNo)
       wkDifferenceCashPlotData = await tables.wkDifferenceCashPlot.getData(ordNo)
       frProjectIncomeData = await tables.frProjectIncome.getData(ordNo)
     } catch (err) {
@@ -76,6 +78,7 @@ export async function GET(request) {
       !wkControversialCasesData.length &&
       !wkComControlData.length &&
       !wkMonthlyPlot1Data.length &&
+      !wkMonthlyPlot1ExtraData.length &&
       !wkDifferenceCashPlotData.length &&
       !frProjectIncomeData.length
     ) {
@@ -100,6 +103,7 @@ export async function GET(request) {
         wkControversialCases: [],
         wkComControl: [],
         wkMonthlyPlot1: [],
+        wkMonthlyPlot1Extra: [],
         wkDifferenceCashPlot: [],
         frProjectIncome: [],
       })
@@ -125,6 +129,7 @@ export async function GET(request) {
       wkControversialCases: wkControversialCasesData,
       wkComControl: wkComControlData,
       wkMonthlyPlot1: wkMonthlyPlot1Data,
+      wkMonthlyPlot1Extra: wkMonthlyPlot1ExtraData,
       wkDifferenceCashPlot: wkDifferenceCashPlotData,
       frProjectIncome: frProjectIncomeData,
     })

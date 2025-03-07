@@ -27,6 +27,7 @@ export function useDB(ordNo, selectedDate) {
     wkControversialCases: [],
     wkComControl: [],
     wkMonthlyPlot1: [],
+    wkMonthlyPlot1Extra: [],
     wkDifferenceCashPlot: [],
     frProjectIncome: [],
   }
@@ -102,6 +103,7 @@ export function useDB(ordNo, selectedDate) {
       ),
       wkComControl: rawData.wkComControl.filter(item => item.CALENDAR_DATE === selectedDate),
       wkMonthlyPlot1: rawData.wkMonthlyPlot1,
+      wkMonthlyPlot1Extra: rawData.wkMonthlyPlot1Extra,
       wkDifferenceCashPlot: rawData.wkDifferenceCashPlot,
       frProjectIncome: rawData.frProjectIncome,
     }

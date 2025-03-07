@@ -247,6 +247,12 @@ export const tables = {
       return await db.query(query, { ordNo })
     },
   },
+  wkMonthlyPlot1Extra: {
+    getData: async ordNo => {
+      const query = `SELECT * FROM FR_WK_MONTHLY_PROGRESS_PLOTDATA_EXTRA WHERE ORD_NO = @ordNo`
+      return await db.query(query, { ordNo })
+    },
+  },
   wkDifferenceCashPlot: {
     getData: async ordNo => {
       const query = `SELECT * FROM FR_WK_DIFFERENCE_CASH_PLOTDATA WHERE ORD_NO = @ordNo ORDER BY YYMM`

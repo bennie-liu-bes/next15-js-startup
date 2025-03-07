@@ -28,7 +28,7 @@ import MonthlyPlot2DT2 from '../components/MonthlyPlot2DT2'
 import TableBodyNodata from '../components/TableBodyNodata'
 import TableDataCellDiff from '../components/TableDataCellDiff'
 
-export default function Monthly({ data, plotData1 }) {
+export default function Monthly({ data, plotData1, plotData2 }) {
   const { fontSize, bottomLine, bgColor } = useFontSize()
 
   return (
@@ -80,10 +80,10 @@ export default function Monthly({ data, plotData1 }) {
         </Box>
       </Paper>
       <Paper sx={{ borderRadius: BORDER_RADIUS, border: '1px solid #2C3E50', py: 1 }}>
-        <MonthlyPlot2 data={plotData1} />
+        <MonthlyPlot2 data1={plotData1} data2={plotData2} />
         <Box sx={{ mx: '3%', my: '20px' }}>
           {/* <MonthlyPlot2DT data={plotData1} /> */}
-          <MonthlyPlot2DT2 data={plotData1} />
+          <MonthlyPlot2DT2 data={plotData1} data2={plotData2} />
           <Box
             sx={{
               color: grey[600],

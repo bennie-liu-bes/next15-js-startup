@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import { getCurrentDateWithWeekNumber } from '@/utils/fm'
 export function useWeeklyReportDate() {
   const [selectedDate, setSelectedDate] = useState('')
 
@@ -9,7 +9,10 @@ export function useWeeklyReportDate() {
 
   const setDefaultDate = dates => {
     if (dates && dates.length > 0 && !selectedDate) {
-      setSelectedDate(dates[0].CALENDAR_DATE)
+      console.log(dates)
+      let targetDate = getCurrentDateWithWeekNumber(dates)
+
+      setSelectedDate(targetDate || dates[0].CALENDAR_DATE)
     }
   }
 
