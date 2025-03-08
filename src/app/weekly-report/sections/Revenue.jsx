@@ -198,7 +198,7 @@ export default function Revenue({ data, frProjectIncome, showPlot = true, is102B
             sx={{ bgcolor: 'white' }}
           />
           <TableTitleCell
-            title={is102B1A ? data.PREPER_ACCAMT_C_MOD_TEST : data.PREPER_ACCAMT_C_MOD}
+            title={data.PREPER_ACCAMT_C_MOD.replace(/\\n/g, '\n')}
             bgcolor={data.PREPER_ACCAMT_C_CHANGE === 'true' ? COLOR.CHANGE : 'white'}
             textAlign="right"
             fontColor="black"

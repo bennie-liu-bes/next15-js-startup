@@ -96,24 +96,9 @@ export const tables = {
   wkRevenue: {
     getData: async ordNo => {
       const query = `
-        SELECT 
-          a.*,
-          b.BAYAMT AS EXPECT_REVENUE_YEARLY,
-          CASE WHEN b.BAYAMT IS NOT NULL 
-        THEN FORMAT(a.PREPER_ACCAMT_C, '#,##0') + '\n[' + FORMAT(b.BAYAMT, '#,##0') + ']' 
-        ELSE FORMAT(a.PREPER_ACCAMT_C, '#,##0') + '\n[ ]'
-        END AS PREPER_ACCAMT_C_MOD,
-        FORMAT(a.PREPER_ACCAMT_C, '#,##0') + '\n[197,660,000]' AS PREPER_ACCAMT_C_MOD_TEST
-        FROM FR_WK_REVENUE a
-        LEFT JOIN
-        (
-        SELECT YM, ORD_NO, BAYAMT FROM FR_PROJECT_INCOME 
-        WHERE RIGHT(YM, 2) = '12' AND ORD_NO IS NOT NULL
-        ) b
-        ON a.ORD_NO = b.ORD_NO
-        AND LEFT(a. CALENDAR_DATE, 4) = LEFT(b.YM, 4)
-        WHERE 1 = 1
-        AND a.ORD_NO = @ordNo
+        SELECT * 
+        FROM FR_WK_REVENUE 
+        WHERE ORD_NO = @ordNo
       `
       return await db.query(query, { ordNo })
     },
@@ -123,8 +108,7 @@ export const tables = {
       const query = `
         SELECT * 
         FROM FR_WK_MILESTONE
-        WHERE 1=1
-        AND ORD_NO = @ordNo
+        WHERE ORD_NO = @ordNo
         ORDER BY MILESTONE_ID
       `
       return await db.query(query, { ordNo })
