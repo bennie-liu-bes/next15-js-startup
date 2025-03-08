@@ -6,8 +6,7 @@ export const tables = {
       const query = `
         SELECT DISTINCT CALENDAR_DATE 
         FROM FR_WK_WEEKLY
-        WHERE 1=1
-        AND ORD_NO = @ordNo
+        WHERE ORD_NO = @ordNo
         ORDER BY CALENDAR_DATE DESC
       `
       return await db.query(query, { ordNo })
@@ -18,8 +17,7 @@ export const tables = {
       const query = `
         SELECT *
         FROM FR_WK_MAIN
-        WHERE 1=1
-        AND ORD_NO = @ordNo
+        WHERE ORD_NO = @ordNo
       `
       return await db.query(query, { ordNo })
     },
@@ -29,8 +27,7 @@ export const tables = {
       const query = `
         SELECT *
         FROM FR_WK_MAIN_HELP
-        WHERE 1=1
-        AND ORD_NO = @ordNo
+        WHERE ORD_NO = @ordNo
         ORDER BY HELP_NUM
       `
       return await db.query(query, { ordNo })
@@ -41,8 +38,7 @@ export const tables = {
       const query = `
         SELECT *
         FROM FR_WK_WEEKLY
-        WHERE 1=1
-        AND ORD_NO = @ordNo
+        WHERE ORD_NO = @ordNo
       `
       return await db.query(query, { ordNo })
     },
@@ -52,8 +48,7 @@ export const tables = {
       const query = `
         SELECT *
         FROM FR_WK_WEEKLY_CUSTOMIZE
-        WHERE 1=1
-        AND ORD_NO = @ordNo
+        WHERE ORD_NO = @ordNo
         ORDER BY SORT
     `
       return await db.query(query, { ordNo })
@@ -64,8 +59,7 @@ export const tables = {
       const query = `
         SELECT *
         FROM FR_WK_MONTHLY
-        WHERE 1=1
-        AND ORD_NO = @ordNo
+        WHERE ORD_NO = @ordNo
       `
       return await db.query(query, { ordNo })
     },
@@ -75,8 +69,7 @@ export const tables = {
       const query = `
         SELECT * 
         FROM FR_WK_DIFFERENCE
-        WHERE 1=1
-        AND ORD_NO = @ordNo
+        WHERE ORD_NO = @ordNo
       `
       return await db.query(query, { ordNo })
     },
@@ -86,8 +79,7 @@ export const tables = {
       const query = `
         SELECT * 
         FROM FR_WK_DIFFERENCE_CASH
-        WHERE 1=1
-        AND ORD_NO = @ordNo
+        WHERE ORD_NO = @ordNo
         ORDER BY DIFFERENCE_CASH_ID
       `
       return await db.query(query, { ordNo })
@@ -119,8 +111,7 @@ export const tables = {
       const query = `
         SELECT *
         FROM FR_WK_FILE
-        WHERE 1=1
-        AND ORD_NO = @ordNo
+        WHERE ORD_NO = @ordNo
         ORDER BY PIC_TYPE, PIC_ORDER
       `
       return await db.query(query, { ordNo })
@@ -131,8 +122,7 @@ export const tables = {
       const query = `
         SELECT * 
         FROM FR_WK_CRITICALPATH_CCO
-        WHERE 1=1
-        AND ORD_NO = @ordNo
+        WHERE ORD_NO = @ordNo
         ORDER BY CCO_NUM
       `
       return await db.query(query, { ordNo })
@@ -143,8 +133,7 @@ export const tables = {
       const query = `
         SELECT * 
         FROM FR_WK_TO_DO
-        WHERE 1=1
-        AND ORD_NO = @ordNo
+        WHERE ORD_NO = @ordNo
         ORDER BY TODO_NUM
       `
       return await db.query(query, { ordNo })
@@ -155,8 +144,7 @@ export const tables = {
       const query = `
         SELECT * 
         FROM FR_WK_TO_DO_B
-        WHERE 1=1
-        AND ORD_NO = @ordNo
+        WHERE ORD_NO = @ordNo
       `
       return await db.query(query, { ordNo })
     },
@@ -165,8 +153,7 @@ export const tables = {
     getData: async ordNo => {
       const query = `
         SELECT * FROM FR_WK_TRACK
-        WHERE 1=1
-        AND ORD_NO = @ordNo
+        WHERE ORD_NO = @ordNo
       `
       return await db.query(query, { ordNo })
     },
@@ -176,8 +163,7 @@ export const tables = {
       const query = `
         SELECT * 
         FROM FR_WK_REGULATORY_TRACK
-        WHERE 1=1
-        AND ORD_NO = @ordNo
+        WHERE ORD_NO = @ordNo
         ORDER BY 
           ISNULL(RESERVE_DATE, 'Z'),
           CONTRACK_LEVEL,
@@ -191,8 +177,7 @@ export const tables = {
       const query = `
         SELECT * 
         FROM FR_WK_CONTROVERSIAL_CASES
-        WHERE 1=1
-        AND ORD_NO = @ordNo
+        WHERE ORD_NO = @ordNo
         ORDER BY C_TYPE DESC, C_ID
       `
       return await db.query(query, { ordNo })
@@ -201,26 +186,9 @@ export const tables = {
   wkComControl: {
     getData: async ordNo => {
       const query = `
-        SELECT 
-          PROJECT_ID
-          ,ORD_NO
-          ,ORD_CH
-          ,DIV
-          ,SITE_CNAME
-          ,CALENDAR_DATE
-          ,ISNULL([SHOULD_BE],'') AS SHOULD_BE
-          ,ISNULL([ALREADY_APPROVED],'') AS ALREADY_APPROVED
-          ,ISNULL([UNDER_REVIEW],'') AS UNDER_REVIEW
-          ,ISNULL([SETTLEMENT],'') AS SETTLEMENT
-          ,ISNULL([REMARK], '') AS REMARK
-          ,SHOULD_BE_CHANGE
-          ,ALREADY_APPROVED_CHANGE
-          ,UNDER_REVIEW_CHANGE
-          ,SETTLEMENT_CHANGE
-          ,REMARK_CHANGE
+        SELECT *
         FROM FR_WK_COM_CONTROL
-        WHERE 1=1
-        AND ORD_NO = @ordNo
+        WHERE ORD_NO = @ordNo
       `
       return await db.query(query, { ordNo })
     },
