@@ -74,6 +74,36 @@ export default function DifferenceCashPlotDT({ data }) {
             />
           ))}
         </TableRow>
+        <TableRow>
+          <TableTitleCell
+            title="當月墊繳利息"
+            textAlign="left"
+            fontColor="#000"
+            className="sticky-column"
+          />
+          {sortedData.map((item, index) => (
+            <TableDataCell
+              key={index}
+              value={fmNoUnit(item.THE_MONTH_ADVANCE_INTEREST)}
+              textAlign="right"
+            />
+          ))}
+        </TableRow>
+        <TableRow>
+          <TableTitleCell
+            title="累計墊繳利息"
+            textAlign="left"
+            fontColor="#000"
+            className="sticky-column"
+          />
+          {sortedData.map((item, index) => (
+            <TableDataCell
+              key={index}
+              value={fmNoUnit(item.CUMULATIVE_ADVANCE_INTEREST)}
+              textAlign="right"
+            />
+          ))}
+        </TableRow>
       </TableBody>
     )
   }
