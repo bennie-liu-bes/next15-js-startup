@@ -15,6 +15,9 @@ import TableDataCell from '../components/TableDataCell'
 import TableTitleCell from '../components/TableTitleCell'
 import TableBodyNodata from '../components/TableBodyNodata'
 import TableDataCellDiff from '../components/TableDataCellDiff'
+
+const NO_DATA_SYMBOL = '-'
+
 export default function Weekly({ data, data2 }) {
   const { fontSize } = useFontSize()
 
@@ -38,25 +41,41 @@ export default function Weekly({ data, data2 }) {
           <TableDataCell value="預定累計" />
           <TableDataCell
             value={
-              <NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.EXP_PERCENT1)} />
+              data.EXP_PERCENT1 ? (
+                <NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.EXP_PERCENT1)} />
+              ) : (
+                NO_DATA_SYMBOL
+              )
             }
             textAlign="right"
           />
           <TableDataCell
             value={
-              <NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.EXP_PERCENT2)} />
+              data.EXP_PERCENT2 ? (
+                <NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.EXP_PERCENT2)} />
+              ) : (
+                NO_DATA_SYMBOL
+              )
             }
             textAlign="right"
           />
           <TableDataCell
             value={
-              <NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.EXP_PERCENT3)} />
+              data.EXP_PERCENT3 ? (
+                <NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.EXP_PERCENT3)} />
+              ) : (
+                NO_DATA_SYMBOL
+              )
             }
             textAlign="right"
           />
           <TableDataCell
             value={
-              <NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.EXP_PERCENT4)} />
+              data.EXP_PERCENT4 ? (
+                <NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.EXP_PERCENT4)} />
+              ) : (
+                NO_DATA_SYMBOL
+              )
             }
             textAlign="right"
             isChanged={'true'}
@@ -66,19 +85,43 @@ export default function Weekly({ data, data2 }) {
         <TableRow>
           <TableDataCell value="實際累計" />
           <TableDataCell
-            value={<NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.ACT_SUM1)} />}
+            value={
+              data.ACT_SUM1 ? (
+                <NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.ACT_SUM1)} />
+              ) : (
+                NO_DATA_SYMBOL
+              )
+            }
             textAlign="right"
           />
           <TableDataCell
-            value={<NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.ACT_SUM2)} />}
+            value={
+              data.ACT_SUM2 ? (
+                <NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.ACT_SUM2)} />
+              ) : (
+                NO_DATA_SYMBOL
+              )
+            }
             textAlign="right"
           />
           <TableDataCell
-            value={<NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.ACT_SUM3)} />}
+            value={
+              data.ACT_SUM3 ? (
+                <NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.ACT_SUM3)} />
+              ) : (
+                NO_DATA_SYMBOL
+              )
+            }
             textAlign="right"
           />
           <TableDataCell
-            value={<NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.ACT_SUM4)} />}
+            value={
+              data.ACT_SUM4 ? (
+                <NumberFlow format={{ minimumFractionDigits: 2 }} value={fm2(data.ACT_SUM4)} />
+              ) : (
+                NO_DATA_SYMBOL
+              )
+            }
             textAlign="right"
             isChanged={'true'}
             borderRight={false}
@@ -88,40 +131,56 @@ export default function Weekly({ data, data2 }) {
           <TableDataCell value="差異" />
           <TableDataCell
             value={
-              <NumberFlow
-                format={{ minimumFractionDigits: 2 }}
-                value={fm2(data.ACT_SUM1 - data.EXP_PERCENT1)}
-              />
+              data.ACT_SUM1 - data.EXP_PERCENT1 ? (
+                <NumberFlow
+                  format={{ minimumFractionDigits: 2 }}
+                  value={fm2(data.ACT_SUM1 - data.EXP_PERCENT1)}
+                />
+              ) : (
+                NO_DATA_SYMBOL
+              )
             }
             textAlign="right"
             sx={{ color: data.ACT_SUM1 - data.EXP_PERCENT1 < 0 && COLOR.ALERTRED }}
           />
           <TableDataCell
             value={
-              <NumberFlow
-                format={{ minimumFractionDigits: 2 }}
-                value={fm2(data.ACT_SUM2 - data.EXP_PERCENT2)}
-              />
+              data.ACT_SUM2 - data.EXP_PERCENT2 ? (
+                <NumberFlow
+                  format={{ minimumFractionDigits: 2 }}
+                  value={fm2(data.ACT_SUM2 - data.EXP_PERCENT2)}
+                />
+              ) : (
+                NO_DATA_SYMBOL
+              )
             }
             textAlign="right"
             sx={{ color: data.ACT_SUM2 - data.EXP_PERCENT2 < 0 && COLOR.ALERTRED }}
           />
           <TableDataCell
             value={
-              <NumberFlow
-                format={{ minimumFractionDigits: 2 }}
-                value={fm2(data.ACT_SUM3 - data.EXP_PERCENT3)}
-              />
+              data.ACT_SUM3 - data.EXP_PERCENT3 ? (
+                <NumberFlow
+                  format={{ minimumFractionDigits: 2 }}
+                  value={fm2(data.ACT_SUM3 - data.EXP_PERCENT3)}
+                />
+              ) : (
+                NO_DATA_SYMBOL
+              )
             }
             textAlign="right"
             sx={{ color: data.ACT_SUM3 - data.EXP_PERCENT3 < 0 && COLOR.ALERTRED }}
           />
           <TableDataCell
             value={
-              <NumberFlow
-                format={{ minimumFractionDigits: 2 }}
-                value={fm2(data.ACT_SUM4 - data.EXP_PERCENT4)}
-              />
+              data.ACT_SUM4 - data.EXP_PERCENT4 ? (
+                <NumberFlow
+                  format={{ minimumFractionDigits: 2 }}
+                  value={fm2(data.ACT_SUM4 - data.EXP_PERCENT4)}
+                />
+              ) : (
+                NO_DATA_SYMBOL
+              )
             }
             textAlign="right"
             isChanged={'true'}
