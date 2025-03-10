@@ -229,10 +229,17 @@ export const getCurrentDateWithWeekNumber = wkWeeklyDate => {
   const wkWeeklyDateWithWeekNumberThisWeek = wkWeeklyDateWithWeekNumber.filter(
     date => date.weekNumber === currentDateWithWeekNumber
   )
+
+  // 檢查陣列是否為空
+  if (wkWeeklyDateWithWeekNumberThisWeek.length === 0) {
+    return null // 或是返回其他預設值
+  }
+
   const wkWeeklyDateWithWeekNumberThisWeeklatestDate = wkWeeklyDateWithWeekNumberThisWeek.reduce(
     (prev, current) =>
       new Date(prev.CALENDAR_DATE) > new Date(current.CALENDAR_DATE) ? prev : current
   )
+
   let targetDate = wkWeeklyDateWithWeekNumberThisWeeklatestDate.CALENDAR_DATE
   return targetDate
 }
