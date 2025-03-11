@@ -101,7 +101,7 @@ export const tables = {
         SELECT * 
         FROM FR_WK_MILESTONE
         WHERE ORD_NO = @ordNo
-        ORDER BY MILESTONE_ID
+        ORDER BY MILESTONE_NO, MILESTONE_ID
       `
       return await db.query(query, { ordNo })
     },

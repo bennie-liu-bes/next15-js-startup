@@ -55,7 +55,10 @@ export default function Milestone({ data }) {
                 sx={{ color: COLOR.ALERTCOLOR }}
               />
               <TableDataCell
-                value={toTWDate(item.COMPLETION_DATE)}
+                value={
+                  toTWDate(item.COMPLETION_DATE) +
+                  `${item.COMPLETION_DATE && new Date(item.COMPLETION_DATE) <= new Date() && '\n(已完工)'}`
+                }
                 isChanged={item.COMPLETION_DATE_CHANGE}
                 sx={{ color: COLOR.ALERTCOLOR }}
               />
