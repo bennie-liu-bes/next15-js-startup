@@ -40,7 +40,10 @@ export default function Milestone({ data }) {
               <TableDataCell value={index + 1} rowSpan={3} textAlign="center" />
               <TableDataCell
                 rowSpan={3}
-                value={item.MILESTONE_NO_SUB}
+                value={
+                  item.MILESTONE_NO_SUB +
+                  `${item.COMPLETION_DATE && new Date(item.COMPLETION_DATE) <= new Date() && '\n(已完工)'}`
+                }
                 isChanged={item.MILESTONE_NO_SUB_CHANGE}
                 sx={{ color: COLOR.ALERTCOLOR }}
               />
@@ -55,10 +58,7 @@ export default function Milestone({ data }) {
                 sx={{ color: COLOR.ALERTCOLOR }}
               />
               <TableDataCell
-                value={
-                  toTWDate(item.COMPLETION_DATE) +
-                  `${item.COMPLETION_DATE && new Date(item.COMPLETION_DATE) <= new Date() && '\n(已完工)'}`
-                }
+                value={toTWDate(item.COMPLETION_DATE)}
                 isChanged={item.COMPLETION_DATE_CHANGE}
                 sx={{ color: COLOR.ALERTCOLOR }}
               />
