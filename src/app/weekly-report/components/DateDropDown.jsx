@@ -5,7 +5,6 @@ import { Stack, Select, MenuItem, Typography, FormControl } from '@mui/material'
 
 export default function DateDropDown({ selectedDate, onDateChange, wkWeeklyDate }) {
   if (!wkWeeklyDate || wkWeeklyDate.length === 0) return null
-  console.log(wkWeeklyDate)
 
   const targetDate = getCurrentDateWithWeekNumber(wkWeeklyDate)
 

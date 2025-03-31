@@ -9,7 +9,6 @@ export function useWeeklyReportDate() {
 
   const setDefaultDate = dates => {
     if (dates && dates.length > 0 && !selectedDate) {
-      console.log(dates)
       let targetDate = getCurrentDateWithWeekNumber(dates)
 
       setSelectedDate(targetDate || dates[0].CALENDAR_DATE)
