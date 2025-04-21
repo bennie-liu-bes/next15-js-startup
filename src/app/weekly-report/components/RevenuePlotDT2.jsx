@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { COLOR } from '@/config-global'
 import { fmNoUnit, toTWDate3 } from '@/utils/fm'
 
-import { TableRow, TableHead, TableBody } from '@mui/material'
+import { Stack, TableRow, TableHead, TableBody } from '@mui/material'
 
 import TableWrapper from './TableWrapper'
 import TableDataCell from './TableDataCell'
@@ -20,19 +20,106 @@ export default function RevenuePlotDT({ data }) {
   }
 
   return (
-    <TableWrapper
-      title=""
-      colSpan={5}
-      sx={{
-        '& .MuiTableContainer-root': {
-          scrollBehavior: 'smooth',
-        },
-      }}
-    >
-      {tableHead()}
-      {data ? tableBody() : <TableBodyNodata colSpan={5} />}
-    </TableWrapper>
+    <Stack direction="row" spacing={0}>
+      <TableWrapper
+        title=""
+        colSpan={1}
+        scrollToRight={true}
+        sx={{
+          '& .MuiTableContainer-root': {
+            scrollBehavior: 'smooth',
+          },
+          borderBottomRightRadius: '0px',
+          borderTopRightRadius: '0px',
+          borderRight: 'none',
+          width: 'fit-content',
+          minWidth: 'min-content',
+        }}
+      >
+        {tableFixColumn()}
+      </TableWrapper>
+      <TableWrapper
+        title=""
+        colSpan={4}
+        scrollToRight={false}
+        sx={{
+          '& .MuiTableContainer-root': {
+            scrollBehavior: 'smooth',
+          },
+          borderBottomLeftRadius: '0px',
+          borderTopLeftRadius: '0px',
+          borderLeft: 'none',
+        }}
+      >
+        {tableHead()}
+        {data ? tableBody() : <TableBodyNodata colSpan={4} />}
+      </TableWrapper>
+    </Stack>
   )
+
+  function tableFixColumn() {
+    return (
+      <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}>
+        <TableRow>
+          <TableTitleCell
+            title="項目"
+            textAlign="center"
+            fontColor="#000"
+            minWidth="200px"
+            className="sticky-column header"
+          />
+        </TableRow>
+        <TableRow>
+          <TableTitleCell
+            title="單月預定營收"
+            textAlign="left"
+            fontColor="#000"
+            className="sticky-column"
+          />
+        </TableRow>
+        <TableRow>
+          <TableTitleCell
+            title="單月實際營收"
+            textAlign="left"
+            fontColor="#000"
+            className="sticky-column"
+          />
+        </TableRow>
+        <TableRow sx={{ borderBottom: '2px double #000' }}>
+          <TableTitleCell
+            title="單月營收差異"
+            textAlign="left"
+            fontColor="#000"
+            className="sticky-column"
+          />
+        </TableRow>
+        <TableRow>
+          <TableTitleCell
+            title="年度累計預定營收"
+            textAlign="left"
+            fontColor="#000"
+            className="sticky-column"
+          />
+        </TableRow>
+        <TableRow>
+          <TableTitleCell
+            title="年度累計實際營收"
+            textAlign="left"
+            fontColor="#000"
+            className="sticky-column"
+          />
+        </TableRow>
+        <TableRow>
+          <TableTitleCell
+            title="年度累計營收差異"
+            textAlign="left"
+            fontColor="#000"
+            className="sticky-column"
+          />
+        </TableRow>
+      </TableBody>
+    )
+  }
 
   function tableBody() {
     const sortedData = [...data].sort((a, b) => {
@@ -44,34 +131,16 @@ export default function RevenuePlotDT({ data }) {
     return (
       <TableBody sx={{ '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}>
         <TableRow>
-          <TableTitleCell
-            title="單月預定營收"
-            textAlign="left"
-            fontColor="#000"
-            className="sticky-column"
-          />
           {sortedData.map((item, index) => (
             <TableDataCell key={index} value={fmNoUnit(item.BAGBAMT)} textAlign="right" />
           ))}
         </TableRow>
         <TableRow>
-          <TableTitleCell
-            title="單月實際營收"
-            textAlign="left"
-            fontColor="#000"
-            className="sticky-column"
-          />
           {sortedData.map((item, index) => (
             <TableDataCell key={index} value={fmNoUnit(item.AAGBAMT)} textAlign="right" />
           ))}
         </TableRow>
         <TableRow sx={{ borderBottom: '2px double #000' }}>
-          <TableTitleCell
-            title="單月營收差異"
-            textAlign="left"
-            fontColor="#000"
-            className="sticky-column"
-          />
           {sortedData.map((item, index) => (
             <TableDataCell
               key={index}
@@ -81,34 +150,16 @@ export default function RevenuePlotDT({ data }) {
           ))}
         </TableRow>
         <TableRow>
-          <TableTitleCell
-            title="年度累計預定營收"
-            textAlign="left"
-            fontColor="#000"
-            className="sticky-column"
-          />
           {sortedData.map((item, index) => (
             <TableDataCell key={index} value={fmNoUnit(item.BAYAMT)} textAlign="right" />
           ))}
         </TableRow>
         <TableRow>
-          <TableTitleCell
-            title="年度累計實際營收"
-            textAlign="left"
-            fontColor="#000"
-            className="sticky-column"
-          />
           {sortedData.map((item, index) => (
             <TableDataCell key={index} value={fmNoUnit(item.AAYAMT)} textAlign="right" />
           ))}
         </TableRow>
         <TableRow>
-          <TableTitleCell
-            title="年度累計營收差異"
-            textAlign="left"
-            fontColor="#000"
-            className="sticky-column"
-          />
           {sortedData.map((item, index) => (
             <TableDataCell
               key={index}
@@ -130,13 +181,6 @@ export default function RevenuePlotDT({ data }) {
         }}
       >
         <TableRow>
-          <TableTitleCell
-            title="項目"
-            textAlign="center"
-            fontColor="#000"
-            minWidth="200px"
-            className="sticky-column header"
-          />
           {[...data]
             .sort((a, b) => {
               const dateA = new Date(a.YM.replace(/(\d{4})(\d{2})/, '$1/$2/01'))
