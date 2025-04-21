@@ -31,7 +31,6 @@ export default function WeeklyReportClient() {
   const { selectedDate, handleDateChange, setDefaultDate } = useWeeklyReportDate()
   const is102B1A = ordNo === '102B1A'
   const { data, loading, error } = useDB(ordNo, selectedDate)
-  console.log('data:', data)
 
   useEffect(() => {
     if (data.wkWeeklyDate?.length > 0 && !selectedDate) {

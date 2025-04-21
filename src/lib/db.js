@@ -28,9 +28,7 @@ class Database {
   async connect() {
     try {
       if (!this.pool) {
-        console.log('建立新的資料庫連接...')
         this.pool = await new sql.ConnectionPool(sqlConfig).connect()
-        console.log('資料庫連接成功')
       }
       return this.pool
     } catch (err) {
