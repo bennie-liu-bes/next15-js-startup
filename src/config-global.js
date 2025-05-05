@@ -4,6 +4,7 @@ export const CONFIG = {
   MSSQL_PASSWORD: process.env.MSSQL_PASSWORD,
   MSSQL_DATABASE: process.env.MSSQL_DATABASE,
   MSSQL_SERVER: process.env.MSSQL_SERVER,
+  MSSQL_PORT: Number(process.env.MSSQL_PORT),
 }
 
 export const COLOR = {

@@ -5,6 +5,7 @@ const sqlConfig = {
   user: CONFIG.MSSQL_USER,
   password: CONFIG.MSSQL_PASSWORD,
   database: CONFIG.MSSQL_DATABASE,
+  port: CONFIG.MSSQL_PORT,
   server: CONFIG.MSSQL_SERVER,
   options: {
     encrypt: true,
