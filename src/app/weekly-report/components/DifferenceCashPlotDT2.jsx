@@ -87,7 +87,7 @@ export default function DifferenceCashPlotDT({ data }) {
         </TableRow>
         <TableRow>
           <TableTitleCell
-            title="利率 ‰"
+            title="當月利率 ‰"
             textAlign="left"
             fontColor="#000"
             className="sticky-column"
