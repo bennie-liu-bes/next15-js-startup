@@ -1,7 +1,16 @@
 'use client'
 import Image from 'next/image'
-import { Fragment } from 'react'
+import { X } from 'lucide-react'
+import { Fragment, useState } from 'react'
 import { SIZE, COLOR, OFFSET } from '@/config-global'
+
+import {
+  Dialog,
+  DialogTitle,
+  DialogPortal,
+  DialogContent,
+  DialogOverlay,
+} from '@/components/ui/dialog'
 
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -17,12 +26,55 @@ export default function File({ data, is102B1A = false }) {
   const theme = useTheme()
   const isXs = useMediaQuery(theme.breakpoints.down('sm'))
   const { fontSize } = useFontSize()
+
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [selectedImage, setSelectedImage] = useState(null)
+
+  const handleImageClick = imageData => {
+    setSelectedImage(imageData)
+    setLightboxOpen(true)
+  }
+
   return (
     <>
       <div id="file-section" style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }} />
       <TableWrapper title={is102B1A ? '肆、施工現況' : '伍-2、施工現況'} colSpan={6}>
         {data.length > 0 ? tableBody() : <TableBodyNodata />}
       </TableWrapper>
+
+      <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
+        <DialogPortal>
+          <DialogOverlay className="z-[9999] bg-black/90 backdrop-blur-sm" />
+          <DialogContent
+            className="z-[9999] flex h-screen max-h-none w-screen max-w-none items-center justify-center border-none bg-transparent p-0"
+            onPointerDownOutside={() => setLightboxOpen(false)}
+          >
+            <button
+              onClick={() => setLightboxOpen(false)}
+              className="absolute right-4 top-4 z-[10000] rounded-full bg-white/10 p-2 transition-colors hover:bg-white/20"
+            >
+              <X className="size-6 text-white" />
+            </button>
+
+            <DialogTitle className="sr-only">
+              {selectedImage ? `圖片：${selectedImage.PIC_TYPE_CH}` : '圖片檢視器'}
+            </DialogTitle>
+
+            {selectedImage && (
+              <div className="relative flex size-full items-center justify-center p-8">
+                <Image
+                  src={selectedImage.FILE_URL}
+                  alt={selectedImage.PIC_TYPE_CH}
+                  fill
+                  className="object-contain"
+                  sizes="100vw"
+                  priority
+                />
+              </div>
+            )}
+          </DialogContent>
+        </DialogPortal>
+      </Dialog>
     </>
   )
 
@@ -61,18 +113,23 @@ export default function File({ data, is102B1A = false }) {
               <TableRow sx={{ bgcolor: COLOR.BGCOLOR }}>
                 {item.FILE_TYPE === 'jpg' || item.FILE_TYPE === 'png' ? (
                   <TableCell>
-                    <Image
-                      src={item.FILE_URL}
-                      alt={item.PIC_TYPE_CH}
-                      width={2400}
-                      height={1600}
-                      style={{
-                        objectFit: 'contain',
-                        border: '1px solid #e0e0e0', // 加入淺灰色邊框
-                        borderRadius: '8px',
-                      }}
-                      className="w-full object-contain"
-                    />
+                    <div
+                      onClick={() => handleImageClick(item)}
+                      className="cursor-pointer transition-opacity hover:opacity-90"
+                    >
+                      <Image
+                        src={item.FILE_URL}
+                        alt={item.PIC_TYPE_CH}
+                        width={2400}
+                        height={1600}
+                        style={{
+                          objectFit: 'contain',
+                          border: '1px solid #e0e0e0',
+                          borderRadius: '8px',
+                        }}
+                        className="w-full object-contain"
+                      />
+                    </div>
                   </TableCell>
                 ) : item.FILE_TYPE === 'txt' ? (
                   <TableDataCell value={item.FILE_TEXT} />
