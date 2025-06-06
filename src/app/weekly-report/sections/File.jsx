@@ -72,7 +72,7 @@ export default function File({ data, is102B1A = false }) {
                         borderRadius: '8px',
                       }}
                       className="w-full object-contain"
-                    />{' '}
+                    />
                   </TableCell>
                 ) : item.FILE_TYPE === 'txt' ? (
                   <TableDataCell value={item.FILE_TEXT} />
