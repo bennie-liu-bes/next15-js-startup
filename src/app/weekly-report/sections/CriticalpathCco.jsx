@@ -19,6 +19,10 @@ import TableBodyNodata from '../components/TableBodyNodata'
 import TableDataCellDiff from '../components/TableDataCellDiff'
 
 export default function CriticalpathCco({ data }) {
+  // 如果只有一筆資料，且CCO_NO為空，則不顯示
+  if (data.length === 1 && data[0].CCO_NO === '') {
+    data = []
+  }
   const { fontSize } = useFontSize()
 
   return (
@@ -116,7 +120,7 @@ export default function CriticalpathCco({ data }) {
         sx={{ bgcolor: COLOR.HEADER, '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}
       >
         <TableRow>
-          <TableTitleCell title="項次" width="80px" rowSpan={3} textAlign="center" />
+          <TableTitleCell title="項次" minWidth="80px" rowSpan={3} textAlign="center" />
           <TableTitleCell title="契約變更編號" minWidth="170px" />
           <TableTitleCell title="事由" minWidth="200px" />
           <TableTitleCell title="案件金額" minWidth="120px" />

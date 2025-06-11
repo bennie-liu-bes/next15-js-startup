@@ -66,7 +66,7 @@ export default function TodoB({ data }) {
         sx={{ bgcolor: COLOR.HEADER, '& .MuiTypography-root': { fontSize: `${fontSize}rem` } }}
       >
         <TableRow>
-          <TableTitleCell title="項次" width="80px" rowSpan={2} textAlign="center" />
+          <TableTitleCell title="項次" minWidth="80px" rowSpan={2} textAlign="center" />
           <TableTitleCell title="編號" width="80px" minWidth="80px" />
           <TableTitleCell title="項目" minWidth="100px" />
           <TableTitleCell title="預訂提送時間" minWidth="180px" />
