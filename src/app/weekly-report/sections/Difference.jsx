@@ -24,7 +24,7 @@ export default function Difference({ data }) {
         id="difference-section"
         style={{ position: 'relative', top: OFFSET, visibility: 'hidden' }}
       />
-      <TableWrapper title="參-1、會計報表現金差異" colSpan={2}>
+      <TableWrapper title="參-1、會計報表現金差異（含稅）" colSpan={2}>
         {data ? tableBody() : <TableBodyNodata colSpan={2} />}
       </TableWrapper>
     </>
