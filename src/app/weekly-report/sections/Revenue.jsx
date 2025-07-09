@@ -31,7 +31,10 @@ export default function Revenue({ data, frProjectIncome, showPlot = true, is102B
           // marginTop: is102B1A && '-16px',
         }}
       />
-      <TableWrapper title={is102B1A ? '貳、營收管控(含物調)' : '肆、營收管控(含物調)'} colSpan={6}>
+      <TableWrapper
+        title={is102B1A ? '貳、營收管控(含物調，未稅)' : '肆、營收管控(含物調，未稅)'}
+        colSpan={6}
+      >
         {data && tableHead()}
         {data ? tableBody() : <TableBodyNodata colSpan={6} />}
       </TableWrapper>
