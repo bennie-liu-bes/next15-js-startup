@@ -10,7 +10,7 @@ export function useTokenValidation(token) {
   useEffect(() => {
     if (!token) {
       setIsValid(false)
-      setError('Token 參數不存在')
+      setError(null) // 不設置錯誤，由上層組件處理
       setDebugInfo(null)
       return
     }

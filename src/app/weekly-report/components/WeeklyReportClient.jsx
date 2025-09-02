@@ -47,9 +47,8 @@ export default function WeeklyReportClient() {
   const is102B1A = finalOrdNo === '102B1A'
 
   // 決定是否需要進行資料查詢
-  // 1. 如果沒有 token，直接使用 finalOrdNo（向後兼容）
-  // 2. 如果有 token，必須等待驗證通過
-  const shouldFetchData = token ? tokenIsValid : true
+  // 現在強制要求必須有 token 且驗證通過才能查詢資料
+  const shouldFetchData = token && tokenIsValid
   const { data, loading, error } = useDB(shouldFetchData ? finalOrdNo : null, selectedDate)
 
   useEffect(() => {
@@ -58,17 +57,20 @@ export default function WeeklyReportClient() {
     }
   }, [data.wkWeeklyDate, selectedDate, setDefaultDate])
 
-  // 只有在有 token 時才檢查 token 相關狀態
-  if (token) {
-    // Token 驗證載入中
-    if (tokenLoading) {
-      return <Loading />
-    }
+  // 強制要求 token 驗證
+  // 沒有 token 參數
+  if (!token) {
+    return <Error message="存取被拒絕：缺少必要的驗證 token" debugInfo={null} />
+  }
 
-    // Token 驗證失敗
-    if (tokenError || tokenIsValid === false) {
-      return <Error message={tokenError || 'Token 驗證失敗'} debugInfo={tokenDebugInfo} />
-    }
+  // Token 驗證載入中
+  if (tokenLoading) {
+    return <Loading />
+  }
+
+  // Token 驗證失敗
+  if (tokenError || tokenIsValid === false) {
+    return <Error message={tokenError || 'Token 驗證失敗'} debugInfo={tokenDebugInfo} />
   }
 
   // 資料載入中
