@@ -17,3 +17,22 @@ export function useGetOrdNo() {
     return error.message
   }
 }
+
+export function useGetUrlParams() {
+  const searchParams = useSearchParams()
+  try {
+    const token = searchParams.get('token')
+    const ordNo = searchParams.get('ORD_NO')
+    
+    return {
+      token: token ? decodeURIComponent(token) : null,
+      ordNo: ordNo ? decodeURIComponent(ordNo) : null,
+    }
+  } catch (error) {
+    return {
+      token: null,
+      ordNo: null,
+      error: error.message
+    }
+  }
+}

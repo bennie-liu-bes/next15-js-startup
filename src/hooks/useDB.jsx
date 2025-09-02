@@ -35,6 +35,10 @@ export function useDB(ordNo, selectedDate) {
   useEffect(() => {
     async function fetchData() {
       if (!ordNo || ordNo.startsWith('error:')) {
+        if (ordNo === null) {
+          // token 驗證尚未完成，不設置錯誤
+          return
+        }
         setError(ordNo)
         return
       }

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo -H 10.21.81.44 -p 6230",
+    "dev": "next dev --turbo -H 10.21.81.151 -p 6230",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -60,6 +60,7 @@
     "echarts": "^5.5.1",
     "echarts-for-react": "^3.0.2",
     "embla-carousel-react": "^8.3.1",
+    "encoding": "^0.1.13",
     "eslint-config-next": "^15.0.3",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-cypress": "^4.1.0",

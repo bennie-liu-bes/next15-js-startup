@@ -3,7 +3,8 @@ import { useEffect } from 'react'
 import { Box, Stack } from '@mui/material'
 import { useWeeklyReportDate } from '@/hooks/useWeeklyReportDate'
 import { useDB } from '@/hooks/useDB'
-import { useGetOrdNo } from '@/hooks/useGetOrdNo'
+import { useGetOrdNo, useGetUrlParams } from '@/hooks/useGetOrdNo'
+import { useTokenValidation } from '@/hooks/useTokenValidation'
 
 import Error from '../Error'
 import Main from '../sections/Main'
@@ -27,10 +28,29 @@ import CriticalpathCco from '../sections/CriticalpathCco'
 import ControversialCases from '../sections/ControversialCases'
 
 export default function WeeklyReportClient() {
-  const ordNo = useGetOrdNo()
+  // 獲取 URL 參數
+  const { token, ordNo: urlOrdNo } = useGetUrlParams()
+  const ordNo = useGetOrdNo() // 保持原有邏輯兼容性
+
+  // 使用 URL 參數中的 ordNo 或回退到原有的 ordNo
+  const finalOrdNo = urlOrdNo || ordNo
+
+  // Token 驗證（只有在有 token 參數時才進行驗證）
+  const {
+    isValid: tokenIsValid,
+    loading: tokenLoading,
+    error: tokenError,
+    debugInfo: tokenDebugInfo,
+  } = useTokenValidation(token)
+
   const { selectedDate, handleDateChange, setDefaultDate } = useWeeklyReportDate()
-  const is102B1A = ordNo === '102B1A'
-  const { data, loading, error } = useDB(ordNo, selectedDate)
+  const is102B1A = finalOrdNo === '102B1A'
+
+  // 決定是否需要進行資料查詢
+  // 1. 如果沒有 token，直接使用 finalOrdNo（向後兼容）
+  // 2. 如果有 token，必須等待驗證通過
+  const shouldFetchData = token ? tokenIsValid : true
+  const { data, loading, error } = useDB(shouldFetchData ? finalOrdNo : null, selectedDate)
 
   useEffect(() => {
     if (data.wkWeeklyDate?.length > 0 && !selectedDate) {
@@ -38,10 +58,25 @@ export default function WeeklyReportClient() {
     }
   }, [data.wkWeeklyDate, selectedDate, setDefaultDate])
 
+  // 只有在有 token 時才檢查 token 相關狀態
+  if (token) {
+    // Token 驗證載入中
+    if (tokenLoading) {
+      return <Loading />
+    }
+
+    // Token 驗證失敗
+    if (tokenError || tokenIsValid === false) {
+      return <Error message={tokenError || 'Token 驗證失敗'} debugInfo={tokenDebugInfo} />
+    }
+  }
+
+  // 資料載入中
   if (loading) {
     return <Loading />
   }
 
+  // 資料查詢錯誤
   if (error) {
     return <Error message={error} />
   }

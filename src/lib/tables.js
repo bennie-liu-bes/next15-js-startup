@@ -1,4 +1,62 @@
+import sql from 'mssql'
+import { CONFIG } from '@/config-global'
+
 import db from './db'
+
+// 專門用於 STAGE 資料庫的連接配置
+const stageDbConfig = {
+  user: CONFIG.MSSQL_USER,
+  password: CONFIG.MSSQL_PASSWORD,
+  database: 'STAGE',
+  port: CONFIG.MSSQL_PORT,
+  server: CONFIG.MSSQL_SERVER,
+  options: {
+    encrypt: true,
+    trustServerCertificate: true,
+  },
+  pool: {
+    max: 10,
+    min: 0,
+    idleTimeoutMillis: 30000,
+  },
+  requestTimeout: 30000,
+  connectionTimeout: 30000,
+}
+
+class StageDatabase {
+  constructor() {
+    this.pool = null
+  }
+
+  async connect() {
+    try {
+      if (!this.pool) {
+        this.pool = await new sql.ConnectionPool(stageDbConfig).connect()
+      }
+      return this.pool
+    } catch (err) {
+      throw new Error(`STAGE 資料庫連接失敗: ${err.message}`)
+    }
+  }
+
+  async query(queryString, params = {}) {
+    try {
+      const pool = await this.connect()
+      const request = pool.request()
+
+      Object.entries(params).forEach(([key, value]) => {
+        request.input(key, value)
+      })
+
+      const result = await request.query(queryString)
+      return result.recordset
+    } catch (err) {
+      throw new Error(`STAGE 資料庫查詢失敗: ${err.message}`)
+    }
+  }
+}
+
+const stageDb = new StageDatabase()
 
 export const tables = {
   wkWeeklyDate: {
@@ -216,5 +274,19 @@ export const tables = {
       const query = `SELECT * FROM FR_PROJECT_INCOME WHERE GBMCU = @ordNo ORDER BY YM`
       return await db.query(query, { ordNo })
     },
+  },
+  // STAGE 資料庫查詢 - Token 驗證
+  sysAccessToken: {
+    validateToken: async token => {
+      const query = `
+        SELECT TOKEN, EXPIRES_AT
+        FROM SYS_ACCESS_TOKEN
+        WHERE TOKEN = @token
+        AND DATEADD(HOUR, 8, GETUTCDATE()) < EXPIRES_AT
+      `
+      return await stageDb.query(query, { token })
+    },
+    // 暴露 stageDb 以供其他查詢使用
+    stageDb: stageDb,
   },
 }
