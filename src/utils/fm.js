@@ -190,6 +190,20 @@ export const formatNumber = value => {
   return value.toString()
 }
 
+export const formatNumber2 = value => {
+  const absValue = Math.abs(value)
+  if (absValue >= 100000000) {
+    return (value / 100000000).toFixed(1) + '億'
+  } else if (absValue >= 10000000) {
+    return (value / 10000000).toFixed(1) + '千萬'
+  } else if (absValue >= 1000000) {
+    return (value / 1000000).toFixed(1) + '百萬'
+  } else if (absValue >= 10000) {
+    return (value / 10000).toFixed(1) + '萬'
+  }
+  return value.toString()
+}
+
 export const getDateWeek = date => {
   // 如果傳入的date是物件，則直接使用，否則創建一個新的日期物件
   const currentDate = typeof date === 'object' ? date : new Date()

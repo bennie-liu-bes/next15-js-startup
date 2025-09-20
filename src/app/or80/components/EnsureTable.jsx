@@ -5,7 +5,9 @@ import { useMemo, useState } from 'react'
 
 import { red } from '@mui/material/colors'
 import { DataGrid } from '@mui/x-data-grid'
-import { Box, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
+import { Box, Stack, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
+
+import MetricCards from './MetricCards'
 import EnsureTypeChip from './EnsureTypeChip'
 export default function EnsureTable({ data = [] }) {
   // 篩選狀態
@@ -196,28 +198,38 @@ export default function EnsureTable({ data = [] }) {
   ]
 
   return (
-    <>
-      <Box sx={{ p: 1 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-          <FormControl size="small" sx={{ minWidth: 200 }}>
-            <InputLabel>篩選工務所</InputLabel>
-            <Select
-              value={siteFilter}
-              label="篩選工務所"
-              onChange={e => setSiteFilter(e.target.value)}
-            >
-              <MenuItem value="">
-                <em>全部</em>
+    <Stack direction="column" gap={2}>
+      {/* 指標卡片區域 */}
+      <MetricCards data={data} siteFilter={siteFilter} />
+      {/* 下拉選單 */}
+      <Box>
+        <FormControl size="small" sx={{ minWidth: 'fit-content' }}>
+          <InputLabel>篩選工務所</InputLabel>
+          <Select
+            value={siteFilter}
+            label="篩選工務所"
+            onChange={e => setSiteFilter(e.target.value)}
+            sx={{
+              minWidth: 120,
+              width: 'auto',
+              '& .MuiSelect-select': {
+                whiteSpace: 'nowrap',
+                overflow: 'visible',
+              },
+            }}
+          >
+            <MenuItem value="">
+              <em>全部</em>
+            </MenuItem>
+            {uniqueSites.map(site => (
+              <MenuItem key={site} value={site}>
+                {site}
               </MenuItem>
-              {uniqueSites.map(site => (
-                <MenuItem key={site} value={site}>
-                  {site}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Box>
+            ))}
+          </Select>
+        </FormControl>
       </Box>
+      {/* 表格 */}
       <DataGrid
         rows={filteredData || []}
         columns={columns}
@@ -263,7 +275,7 @@ export default function EnsureTable({ data = [] }) {
           },
         }}
         density="compact"
-        showToolbar
+        // showToolbar
         pageSizeOptions={[100]}
         getRowId={row => {
           if (row && row.ENSURE_ID != null && row.ENSURE_ID !== '') return row.ENSURE_ID
@@ -275,11 +287,11 @@ export default function EnsureTable({ data = [] }) {
           if (composite && composite !== '---') return composite
           try {
             return JSON.stringify(row)
-          } catch {
+          } catch (error) {
             return String(Math.random())
           }
         }}
       />
-    </>
+    </Stack>
   )
 }
