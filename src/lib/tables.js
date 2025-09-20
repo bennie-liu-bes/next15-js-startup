@@ -289,4 +289,10 @@ export const tables = {
     // 暴露 stageDb 以供其他查詢使用
     stageDb: stageDb,
   },
+  wkEnsure: {
+    getData: async () => {
+      const query = `SELECT * FROM FR_WK_ENSURE ORDER BY DEFAULT_EXPAND_EDATE DESC, ORD_NO, ITEM_NO`
+      return await db.query(query)
+    },
+  },
 }

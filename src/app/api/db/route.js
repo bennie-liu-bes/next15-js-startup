@@ -31,6 +31,7 @@ export async function GET(request) {
     let wkMonthlyPlot1ExtraData = []
     let wkDifferenceCashPlotData = []
     let frProjectIncomeData = []
+    let wkEnsureData = []
     try {
       wkWeeklyDateData = await tables.wkWeeklyDate.getData(ordNo)
       wkMainData = await tables.wkMain.getData(ordNo)
@@ -54,6 +55,7 @@ export async function GET(request) {
       wkMonthlyPlot1ExtraData = await tables.wkMonthlyPlot1Extra.getData(ordNo)
       wkDifferenceCashPlotData = await tables.wkDifferenceCashPlot.getData(ordNo)
       frProjectIncomeData = await tables.frProjectIncome.getData(ordNo)
+      wkEnsureData = await tables.wkEnsure.getData()
     } catch (err) {
       console.error(err)
     }
@@ -80,7 +82,8 @@ export async function GET(request) {
       !wkMonthlyPlot1Data.length &&
       !wkMonthlyPlot1ExtraData.length &&
       !wkDifferenceCashPlotData.length &&
-      !frProjectIncomeData.length
+      !frProjectIncomeData.length &&
+      !wkEnsureData.length
     ) {
       return Response.json({
         message: '沒有找到相關資料',
@@ -106,6 +109,7 @@ export async function GET(request) {
         wkMonthlyPlot1Extra: [],
         wkDifferenceCashPlot: [],
         frProjectIncome: [],
+        wkEnsure: [],
       })
     }
 
@@ -132,6 +136,7 @@ export async function GET(request) {
       wkMonthlyPlot1Extra: wkMonthlyPlot1ExtraData,
       wkDifferenceCashPlot: wkDifferenceCashPlotData,
       frProjectIncome: frProjectIncomeData,
+      wkEnsure: wkEnsureData,
     })
   } catch (error) {
     console.error('API錯誤:', error)
