@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import { ICCC_URL } from '@/config-global'
 
 import Stack from '@mui/material/Stack'
@@ -9,7 +10,22 @@ import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 
-export default function NavBar() {
+// 使用 dynamic import 並設定 ssr: false 來避免 hydration 問題
+const NavBarContent = dynamic(() => Promise.resolve(NavBarContentComponent), {
+  ssr: false,
+  loading: () => (
+    <AppBar position="sticky" color="default">
+      <Toolbar variant="dense" sx={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ width: 40, height: 40, backgroundColor: '#f0f0f0', borderRadius: 4 }} />
+        <div style={{ marginLeft: 16, flexGrow: 1 }}>
+          <div style={{ width: 200, height: 20, backgroundColor: '#f0f0f0', borderRadius: 4 }} />
+        </div>
+      </Toolbar>
+    </AppBar>
+  ),
+})
+
+function NavBarContentComponent() {
   return (
     <AppBar position="sticky" color="default">
       <Toolbar variant="dense" sx={{ display: 'flex', alignItems: 'center' }}>
@@ -48,4 +64,8 @@ export default function NavBar() {
       </Toolbar>
     </AppBar>
   )
+}
+
+export default function NavBar() {
+  return <NavBarContent />
 }

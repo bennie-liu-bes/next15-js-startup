@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { Chip } from '@mui/material'
 import {
   Security as SecurityIcon,
@@ -44,6 +45,12 @@ const ENSURE_TYPE_CONFIG = {
  * @param {Object} props.sx - 額外的樣式
  */
 export default function EnsureTypeChip({ type, size = 'small', sx = {} }) {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   // 如果沒有提供類型或類型不在配置中，顯示預設樣式
   if (!type || !ENSURE_TYPE_CONFIG[type]) {
     return (
@@ -51,6 +58,7 @@ export default function EnsureTypeChip({ type, size = 'small', sx = {} }) {
         label={type || '未知'}
         size={size}
         variant="outlined"
+        suppressHydrationWarning
         sx={{
           fontSize: '12px',
           height: '24px',
@@ -64,6 +72,35 @@ export default function EnsureTypeChip({ type, size = 'small', sx = {} }) {
   }
 
   const config = ENSURE_TYPE_CONFIG[type]
+
+  if (!mounted) {
+    return (
+      <Chip
+        icon={config.icon}
+        label={type}
+        size={size}
+        variant="outlined"
+        suppressHydrationWarning
+        sx={{
+          fontSize: '12px',
+          height: '24px',
+          color: config.color,
+          backgroundColor: config.backgroundColor,
+          borderColor: config.borderColor,
+          '& .MuiChip-icon': {
+            color: config.color,
+            marginLeft: '4px',
+          },
+          '& .MuiChip-label': {
+            paddingLeft: '4px',
+            paddingRight: '8px',
+            fontWeight: 500,
+          },
+          ...sx,
+        }}
+      />
+    )
+  }
 
   return (
     <Chip

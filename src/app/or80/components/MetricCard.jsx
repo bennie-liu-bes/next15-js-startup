@@ -1,6 +1,7 @@
 'use client'
 
 import { formatNumber2 } from '@/utils/fm'
+import { useState, useEffect } from 'react'
 
 import { Box, Card, Chip, Typography, CardContent } from '@mui/material'
 import {
@@ -59,6 +60,12 @@ export default function MetricCard({
   showIcon = false,
   sx = {},
 }) {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   // 獲取顏色配置
   const getColors = () => {
     if (ensureType && ENSURE_TYPE_CONFIG[ensureType]) {
@@ -79,6 +86,221 @@ export default function MetricCard({
     return formatNumber2(value)
   }
 
+  if (!mounted) {
+    return (
+      <Card
+        elevation={2}
+        suppressHydrationWarning
+        sx={{
+          borderRadius: '12px',
+          background: colors.backgroundColor || colors.secondary,
+          border: `1px solid ${colors.color || colors.primary}20`,
+          transition: 'all 0.2s ease-in-out',
+          position: 'relative',
+          ...sx,
+        }}
+      >
+        <CardContent sx={{ p: 2, pb: 2 }}>
+          {/* 頂部區域 */}
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: showIcon ? 'flex-start' : 'space-between',
+              alignItems: showIcon ? 'center' : 'flex-start',
+              mb: 1,
+              gap: showIcon ? 1 : 0,
+            }}
+          >
+            {/* 保固種類 Chip (左上角) - 只有保固金種類顯示 */}
+            {ensureType && (
+              <Chip
+                icon={colors.icon}
+                label={ensureType}
+                variant="outlined"
+                size="small"
+                sx={{
+                  borderColor: colors.color,
+                  color: colors.color,
+                  backgroundColor: 'rgba(255,255,255,0.8)',
+                  fontSize: '11px',
+                  height: '20px',
+                  '& .MuiChip-icon': {
+                    color: colors.color,
+                    fontSize: '14px !important',
+                  },
+                  '& .MuiChip-label': {
+                    px: 0.5,
+                    fontWeight: 600,
+                  },
+                }}
+              />
+            )}
+
+            {/* 圖標和標題 - 整體保固狀況水平排列 */}
+            {showIcon && (
+              <>
+                <Box
+                  sx={{
+                    width: 32,
+                    height: 32,
+                    borderRadius: '8px',
+                    backgroundColor: colors.color || colors.primary,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                    flexShrink: 0,
+                    '& svg': { fontSize: '18px' },
+                  }}
+                >
+                  <FunctionsIcon />
+                </Box>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    fontWeight: 600,
+                    color: colors.color || colors.primary,
+                    fontSize: '13px',
+                    lineHeight: 1.2,
+                  }}
+                >
+                  {title}
+                </Typography>
+              </>
+            )}
+          </Box>
+
+          {/* 標題 - 只有保固金種類顯示 */}
+          {!showIcon && title && (
+            <Typography
+              variant="body2"
+              sx={{
+                fontWeight: 600,
+                color: colors.color || colors.primary,
+                fontSize: '13px',
+              }}
+            >
+              {title}
+            </Typography>
+          )}
+
+          {/* 主要數值顯示 - 兩行資料 */}
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
+            {/* 第一行：筆數資料 */}
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'baseline',
+                gap: 0.5,
+                flexDirection: 'column',
+              }}
+            >
+              <Typography
+                variant="body2"
+                sx={{
+                  color: colors.color || colors.primary,
+                  opacity: 0.8,
+                  fontWeight: 600,
+                  fontSize: '11px',
+                  minWidth: 'fit-content',
+                }}
+              >
+                過保筆數 / 總計筆數
+              </Typography>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'baseline',
+                  width: '100%',
+                  justifyContent: 'center',
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: 700,
+                    color: colors.color || colors.primary,
+                    lineHeight: 1.2,
+                    fontSize: '16px',
+                  }}
+                >
+                  {formatCount(countData.expired)}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: colors.color || colors.primary,
+                    opacity: 0.7,
+                    fontWeight: 600,
+                    fontSize: '12px',
+                    ml: 0.5,
+                  }}
+                >
+                  / {formatCount(countData.total)}
+                </Typography>
+              </Box>
+            </Box>
+
+            {/* 第二行：金額資料 */}
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'baseline',
+                gap: 0.5,
+                flexDirection: 'column',
+              }}
+            >
+              <Typography
+                variant="body2"
+                sx={{
+                  color: colors.color || colors.primary,
+                  opacity: 0.8,
+                  fontWeight: 600,
+                  fontSize: '11px',
+                  minWidth: 'fit-content',
+                }}
+              >
+                過保金額 / 總保固金
+              </Typography>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'baseline',
+                  width: '100%',
+                  justifyContent: 'center',
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: 700,
+                    color: colors.color || colors.primary,
+                    lineHeight: 1.2,
+                    fontSize: '16px',
+                  }}
+                >
+                  {formatAmount(amountData.expired)}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: colors.color || colors.primary,
+                    opacity: 0.7,
+                    fontWeight: 600,
+                    fontSize: '12px',
+                    ml: 0.5,
+                  }}
+                >
+                  / {formatAmount(amountData.total)}
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+        </CardContent>
+      </Card>
+    )
+  }
+
   return (
     <Card
       elevation={2}
@@ -88,19 +310,17 @@ export default function MetricCard({
         border: `1px solid ${colors.color || colors.primary}20`,
         transition: 'all 0.2s ease-in-out',
         position: 'relative',
-        minHeight: 100,
-        minWidth: 200,
         ...sx,
       }}
     >
-      <CardContent sx={{ p: 2 }}>
+      <CardContent sx={{ p: 2, pb: 2 }}>
         {/* 頂部區域 */}
         <Box
           sx={{
             display: 'flex',
             justifyContent: showIcon ? 'flex-start' : 'space-between',
             alignItems: showIcon ? 'center' : 'flex-start',
-            mb: 2,
+            mb: 1,
             gap: showIcon ? 1 : 0,
           }}
         >
@@ -171,7 +391,6 @@ export default function MetricCard({
               fontWeight: 600,
               color: colors.color || colors.primary,
               fontSize: '13px',
-              mb: 1,
             }}
           >
             {title}
@@ -186,6 +405,7 @@ export default function MetricCard({
               display: 'flex',
               alignItems: 'baseline',
               gap: 0.5,
+              flexDirection: 'column',
             }}
           >
             <Typography
@@ -198,30 +418,40 @@ export default function MetricCard({
                 minWidth: 'fit-content',
               }}
             >
-              過保筆數 / 總筆數:
+              過保筆數 / 總計筆數
             </Typography>
-            <Typography
-              variant="h6"
+            <Box
               sx={{
-                fontWeight: 700,
-                color: colors.color || colors.primary,
-                lineHeight: 1.2,
-                fontSize: '16px',
+                display: 'flex',
+                alignItems: 'baseline',
+                width: '100%',
+                justifyContent: 'center',
               }}
             >
-              {formatCount(countData.expired)}
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{
-                color: colors.color || colors.primary,
-                opacity: 0.7,
-                fontWeight: 600,
-                fontSize: '12px',
-              }}
-            >
-              / {formatCount(countData.total)}
-            </Typography>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 700,
+                  color: colors.color || colors.primary,
+                  lineHeight: 1.2,
+                  fontSize: '16px',
+                }}
+              >
+                {formatCount(countData.expired)}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{
+                  color: colors.color || colors.primary,
+                  opacity: 0.7,
+                  fontWeight: 600,
+                  fontSize: '12px',
+                  ml: 0.5,
+                }}
+              >
+                / {formatCount(countData.total)}
+              </Typography>
+            </Box>
           </Box>
 
           {/* 第二行：金額資料 */}
@@ -230,6 +460,7 @@ export default function MetricCard({
               display: 'flex',
               alignItems: 'baseline',
               gap: 0.5,
+              flexDirection: 'column',
             }}
           >
             <Typography
@@ -242,30 +473,40 @@ export default function MetricCard({
                 minWidth: 'fit-content',
               }}
             >
-              過保金額 / 總保固金:
+              過保金額 / 總保固金
             </Typography>
-            <Typography
-              variant="h6"
+            <Box
               sx={{
-                fontWeight: 700,
-                color: colors.color || colors.primary,
-                lineHeight: 1.2,
-                fontSize: '16px',
+                display: 'flex',
+                alignItems: 'baseline',
+                width: '100%',
+                justifyContent: 'center',
               }}
             >
-              {formatAmount(amountData.expired)}
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{
-                color: colors.color || colors.primary,
-                opacity: 0.7,
-                fontWeight: 600,
-                fontSize: '12px',
-              }}
-            >
-              / {formatAmount(amountData.total)}
-            </Typography>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 700,
+                  color: colors.color || colors.primary,
+                  lineHeight: 1.2,
+                  fontSize: '16px',
+                }}
+              >
+                {formatAmount(amountData.expired)}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{
+                  color: colors.color || colors.primary,
+                  opacity: 0.7,
+                  fontWeight: 600,
+                  fontSize: '12px',
+                  ml: 0.5,
+                }}
+              >
+                / {formatAmount(amountData.total)}
+              </Typography>
+            </Box>
           </Box>
         </Box>
       </CardContent>

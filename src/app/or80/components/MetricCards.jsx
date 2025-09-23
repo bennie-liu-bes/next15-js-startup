@@ -1,8 +1,8 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 
-import { Box, Grid2 } from '@mui/material'
+import { Box, Grid } from '@mui/material'
 
 import MetricCard from './MetricCard'
 
@@ -13,6 +13,12 @@ import MetricCard from './MetricCard'
  * @param {string} props.siteFilter - 當前的工務所篩選條件
  */
 export default function MetricCards({ data = [], siteFilter = '' }) {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   // 根據篩選條件過濾數據
   const filteredData = useMemo(() => {
     if (!siteFilter) return data
@@ -70,12 +76,45 @@ export default function MetricCards({ data = [], siteFilter = '' }) {
     })
   }, [filteredData])
 
+  if (!mounted) {
+    return (
+      <Box sx={{ mb: 2 }} suppressHydrationWarning>
+        {/* 指標卡片網格 - 響應式設計 */}
+        <Grid container spacing={2} sx={{ width: '100%' }}>
+          {/* 第一張卡片：總體統計 */}
+          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 2.4 }}>
+            <MetricCard
+              title="整體保固狀況"
+              countData={overallStats.count}
+              amountData={overallStats.amount}
+              showIcon={true}
+              sx={{ height: '100%', width: '100%' }}
+            />
+          </Grid>
+
+          {/* 第二到五張卡片：各保固金種類 */}
+          {ensureTypeStats.map(stat => (
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 2.4 }} key={stat.type}>
+              <MetricCard
+                title={null}
+                countData={stat.count}
+                amountData={stat.amount}
+                ensureType={stat.type}
+                sx={{ height: '100%', width: '100%' }}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+    )
+  }
+
   return (
     <Box sx={{ mb: 2 }}>
       {/* 指標卡片網格 - 響應式設計 */}
-      <Grid2 container spacing={2}>
+      <Grid container spacing={2} sx={{ width: '100%' }}>
         {/* 第一張卡片：總體統計 */}
-        <Grid2 xs={12} sm={6} md={4} lg={2.4} xl={2.4}>
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 2.4 }}>
           <MetricCard
             title="整體保固狀況"
             countData={overallStats.count}
@@ -83,11 +122,11 @@ export default function MetricCards({ data = [], siteFilter = '' }) {
             showIcon={true}
             sx={{ height: '100%', width: '100%' }}
           />
-        </Grid2>
+        </Grid>
 
         {/* 第二到五張卡片：各保固金種類 */}
         {ensureTypeStats.map(stat => (
-          <Grid2 xs={12} sm={6} md={4} lg={2.4} xl={2.4} key={stat.type}>
+          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 2.4 }} key={stat.type}>
             <MetricCard
               title={null}
               countData={stat.count}
@@ -95,9 +134,9 @@ export default function MetricCards({ data = [], siteFilter = '' }) {
               ensureType={stat.type}
               sx={{ height: '100%', width: '100%' }}
             />
-          </Grid2>
+          </Grid>
         ))}
-      </Grid2>
+      </Grid>
     </Box>
   )
 }

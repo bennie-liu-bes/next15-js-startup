@@ -1,7 +1,7 @@
 'use client'
 
 import { fmNoUnit } from '@/utils/fm'
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 
 import { red } from '@mui/material/colors'
 import { DataGrid } from '@mui/x-data-grid'
@@ -12,6 +12,11 @@ import EnsureTypeChip from './EnsureTypeChip'
 export default function EnsureTable({ data = [] }) {
   // 篩選狀態
   const [siteFilter, setSiteFilter] = useState('')
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // 獲取所有不重複的工務所名稱
   const uniqueSites = useMemo(() => {
@@ -50,7 +55,7 @@ export default function EnsureTable({ data = [] }) {
       field: 'BI_PROJECT_NAME',
       headerName: '工務所',
       minWidth: 80,
-      resizable: false,
+
       disableColumnMenu: true,
     },
     { field: 'ORD_CH', headerName: '工程名稱', minWidth: 140, disableColumnMenu: true },
@@ -197,6 +202,109 @@ export default function EnsureTable({ data = [] }) {
     },
   ]
 
+  if (!mounted) {
+    return (
+      <Stack direction="column" gap={2}>
+        {/* 指標卡片區域 */}
+        <MetricCards data={data} siteFilter={siteFilter} />
+        {/* 下拉選單 */}
+        <Box>
+          <FormControl size="small" sx={{ minWidth: 'fit-content' }}>
+            <InputLabel>篩選工務所</InputLabel>
+            <Select
+              value={siteFilter}
+              label="篩選工務所"
+              onChange={e => setSiteFilter(e.target.value)}
+              sx={{
+                minWidth: 120,
+                width: 'auto',
+                '& .MuiSelect-select': {
+                  whiteSpace: 'nowrap',
+                  overflow: 'visible',
+                },
+              }}
+            >
+              <MenuItem value="">
+                <em>全部</em>
+              </MenuItem>
+              {uniqueSites.map(site => (
+                <MenuItem key={site} value={site}>
+                  {site}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Box>
+        {/* 表格 */}
+        <DataGrid
+          suppressHydrationWarning
+          rows={filteredData || []}
+          columns={columns}
+          getRowClassName={params => {
+            return params.row.IS_EXPIRED === 'Y' ? 'expired-row' : ''
+          }}
+          sx={{
+            '& .MuiDataGrid-columnHeaders': {
+              backgroundColor: '#f5f5f5',
+            },
+            '& .MuiDataGrid-columnHeader': {
+              backgroundColor: '#f5f5f5',
+            },
+            '& .expired-row': {
+              backgroundColor: red[100],
+            },
+          }}
+          initialState={{
+            columns: {
+              columnVisibilityModel: {
+                // 預設隱藏的欄位
+                ENSURE_ID: false,
+                MNG: false,
+                MNG_CNAME: false,
+                ENSURE_KND: false,
+                CLOSE_AMOUNT: false,
+                EST_ENSURE_AMOUNT: false,
+                ENSURE_START_DATE: false,
+                STOP_ENSURE_DATE: false,
+                PROJECT_ID: false,
+                ORD_NO: false,
+                DIV: false,
+                SITE_CNAME: false,
+                IS_EXPIRED: false,
+                // 項次欄位預設顯示
+                rowNumber: true,
+              },
+            },
+            pagination: {
+              paginationModel: {
+                pageSize: 100,
+              },
+            },
+          }}
+          density="compact"
+          // showToolbar
+          pageSizeOptions={[100]}
+          getRowId={row => {
+            if (row && row.ENSURE_ID != null && row.ENSURE_ID !== '') return row.ENSURE_ID
+            const a = row && row.PROJECT_ID != null ? String(row.PROJECT_ID) : ''
+            const b = row && row.ITEM_NO != null ? String(row.ITEM_NO) : ''
+            const c = row && row.ORD_NO != null ? String(row.ORD_NO) : ''
+            const d = row && row.ENSURE_KND != null ? String(row.ENSURE_KND) : ''
+            const composite = `${a}-${b}-${c}-${d}`
+            if (composite && composite !== '---') return composite
+            try {
+              return JSON.stringify(row)
+            } catch (error) {
+              // 使用穩定的 ID 生成，避免 hydration 錯誤
+              const fallbackId = `row-${a}-${b}-${c}-${d}`
+              return fallbackId || 'fallback-row'
+            }
+          }}
+        />
+      </Stack>
+    )
+  }
+
   return (
     <Stack direction="column" gap={2}>
       {/* 指標卡片區域 */}
@@ -288,7 +396,9 @@ export default function EnsureTable({ data = [] }) {
           try {
             return JSON.stringify(row)
           } catch (error) {
-            return String(Math.random())
+            // 使用穩定的 ID 生成，避免 hydration 錯誤
+            const fallbackId = `row-${a}-${b}-${c}-${d}`
+            return fallbackId || 'fallback-row'
           }
         }}
       />
