@@ -9,7 +9,7 @@ import { Box, Stack, Select, MenuItem, InputLabel, FormControl } from '@mui/mate
 
 import MetricCards from './MetricCards'
 import EnsureTypeChip from './EnsureTypeChip'
-export default function EnsureTable({ data = [] }) {
+export default function EnsureTable({ data = [], descData = [] }) {
   // 篩選狀態
   const [siteFilter, setSiteFilter] = useState('')
   const [mounted, setMounted] = useState(false)
@@ -36,6 +36,14 @@ export default function EnsureTable({ data = [] }) {
       rowNumber: index + 1,
     }))
   }, [data, siteFilter])
+
+  // 篩選 descData 中符合當前選擇工務所的數據
+  const filteredDescData = useMemo(() => {
+    if (!siteFilter || !descData || descData.length === 0) {
+      return []
+    }
+    return descData.filter(row => row.BI_PROJECT_NAME === siteFilter)
+  }, [descData, siteFilter])
 
   // 欄位定義（依照提供的 schema 順序）
   const columns = [
@@ -208,7 +216,7 @@ export default function EnsureTable({ data = [] }) {
         {/* 指標卡片區域 */}
         <MetricCards data={data} siteFilter={siteFilter} />
         {/* 下拉選單 */}
-        <Box>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
           <FormControl size="small" sx={{ minWidth: 'fit-content' }}>
             <InputLabel>篩選工務所</InputLabel>
             <Select
@@ -234,6 +242,25 @@ export default function EnsureTable({ data = [] }) {
               ))}
             </Select>
           </FormControl>
+          {/* ORD_CH 按鈕區域 */}
+          {/* {filteredDescData.length > 0 && (
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+              {filteredDescData.map((item, index) => (
+                <Button
+                  key={index}
+                  variant="outlined"
+                  size="small"
+                  sx={{
+                    textTransform: 'none',
+                    minWidth: 'auto',
+                    fontSize: '0.75rem',
+                  }}
+                >
+                  {item.ORD_CH || '無名稱'}
+                </Button>
+              ))}
+            </Box>
+          )} */}
         </Box>
         {/* 表格 */}
         <DataGrid
@@ -310,7 +337,7 @@ export default function EnsureTable({ data = [] }) {
       {/* 指標卡片區域 */}
       <MetricCards data={data} siteFilter={siteFilter} />
       {/* 下拉選單 */}
-      <Box>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
         <FormControl size="small" sx={{ minWidth: 'fit-content' }}>
           <InputLabel>篩選工務所</InputLabel>
           <Select
@@ -336,6 +363,32 @@ export default function EnsureTable({ data = [] }) {
             ))}
           </Select>
         </FormControl>
+        {/* ORD_CH 按鈕區域 */}
+        {/* {filteredDescData.length > 0 && (
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+            {filteredDescData.map((item, index) => (
+              <Tooltip
+                key={index}
+                title={
+                  item.WARRANTY_PERIOD ? `保固期間: ${item.WARRANTY_PERIOD}` : '無保固期間資訊'
+                }
+                arrow
+              >
+                <Button
+                  variant="outlined"
+                  size="small"
+                  sx={{
+                    textTransform: 'none',
+                    minWidth: 'auto',
+                    fontSize: '0.75rem',
+                  }}
+                >
+                  {item.ORD_CH || '無名稱'}
+                </Button>
+              </Tooltip>
+            ))}
+          </Box>
+        )} */}
       </Box>
       {/* 表格 */}
       <DataGrid

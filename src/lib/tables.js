@@ -295,4 +295,10 @@ export const tables = {
       return await db.query(query)
     },
   },
+  wkEnsureDesc: {
+    getData: async () => {
+      const query = `SELECT * FROM FR_WK_ENSURE_DESC`
+      return await db.query(query)
+    },
+  },
 }
